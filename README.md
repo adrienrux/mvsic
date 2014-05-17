@@ -17,11 +17,15 @@ bundle install
 
 3) Setup Postgres
 
-Download install [Postgres.app](http://postgresapp.com/)
+Download and install [Postgres.app](http://postgresapp.com/)
 
 Add `export PGHOST=localhost` to `~/.bash_profile` then `source ~/.bash_profile`
 
-4) Create & migrate databases
+4) Setup Postgres role
+
+In terminal, open up psql: `psql` then run `create role mvsic with createdb login password 'password'
+
+5) Create & migrate databases
 
 `bundle exec rake db:create`
 

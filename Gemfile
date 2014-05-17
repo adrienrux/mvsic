@@ -9,8 +9,8 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.3'
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'spring', group: :development
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
