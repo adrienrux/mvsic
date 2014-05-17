@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  namespace :data do
-    get :festivals
+  namespace :api do
+    resources :festivals, only: [:index, :show]
   end
 
 end
