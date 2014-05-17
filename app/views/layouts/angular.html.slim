@@ -1,0 +1,11 @@
+DOCTYPE html
+html#ng-app ng-app="mvsic" ng-controller="ApplicationController"
+  head
+    title Mvsic
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  body
+    div#content.selected.container ng-view="" autoscroll="true"

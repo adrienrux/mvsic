@@ -1,0 +1,1 @@
+mvsic.controller 'ApplicationController', ($scope) ->
