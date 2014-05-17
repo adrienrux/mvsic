@@ -5,6 +5,16 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
+  <% if (username = ENV['DATABASE_USERNAME']) %>
+  username: <%= username %>
+  <% end %>
+  <% if (password = ENV['DATABASE_PASSWORD']) %>
+  password: <%= password %>
+  <% end %>
+  <% if (host = ENV['DATABASE_HOST']) %>
+  host: <%= host %>
+  <% end %>
+
 development:
   <<: *default
   database: mvsic_development
