@@ -4,6 +4,7 @@ ruby '2.0.0'
 
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'pg'
