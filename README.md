@@ -23,7 +23,7 @@ Add `export PGHOST=localhost` to `~/.bash_profile` then `source ~/.bash_profile`
 
 4) Setup Postgres role
 
-In terminal, open up psql: `psql` then run `create role mvsic with createdb login password 'password'
+In terminal, open up psql: `psql` then run `create role mvsic with createdb login password 'password'`
 
 5) Create & migrate databases
 
