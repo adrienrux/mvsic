@@ -31,6 +31,11 @@ In terminal, open up psql: `psql` then run `create role mvsic with createdb logi
 
 `bundle exec rake db:migrate`
 
-5) Start server
+6) Start server
 
-`rails s`
+`bundle exec rails s`
+
+7) Run tests
+
+`bundle exec rspec spec`
+
