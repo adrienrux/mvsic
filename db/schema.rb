@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 20140515035856) do
   create_table "events", force: true do |t|
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "venues_id"
-    t.integer  "artists_id"
+    t.integer  "venue_id"
+    t.integer  "artist_id"
   end
 
-  add_index "events", ["artists_id"], name: "index_events_on_artists_id", using: :btree
-  add_index "events", ["venues_id"], name: "index_events_on_venues_id", using: :btree
+  add_index "events", ["artist_id"], name: "index_events_on_artist_id", using: :btree
+  add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
 
   create_table "festivals", force: true do |t|
     t.string   "name"
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(version: 20140515035856) do
 
   create_table "venues", force: true do |t|
     t.string  "name"
-    t.integer "festivals_id"
+    t.integer "festival_id"
   end
 
-  add_index "venues", ["festivals_id"], name: "index_venues_on_festivals_id", using: :btree
+  add_index "venues", ["festival_id"], name: "index_venues_on_festival_id", using: :btree
 
 end
