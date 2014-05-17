@@ -25,6 +25,10 @@ gem 'will_paginate', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :development, :test do
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'pry', '~> 0.9.12.6'
+  gem 'rspec-rails', '~> 2.14.2'
+  gem 'shoulda-matchers', '~> 2.6.1'
+end
 
