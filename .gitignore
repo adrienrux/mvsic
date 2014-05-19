@@ -2,6 +2,7 @@
 capybara-*.html
 .env
 .rspec
+.DS_Store
 /log
 /tmp
 /db/*.sqlite3

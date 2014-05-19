@@ -8,4 +8,5 @@ html
     = csrf_meta_tags
 
   body#mvsic-app ng-app="app"
-    div#content.selected.container ng-view="" autoscroll="true"
+    = render partial: 'common/top_nav'
+    div ng-view=""
