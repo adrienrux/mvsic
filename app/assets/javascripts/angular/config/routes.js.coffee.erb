@@ -1,0 +1,18 @@
+#= depend_on_asset "festival/index.html"
+
+app.config ($routeProvider, $logProvider, $locationProvider, $httpProvider) ->
+  # Use History API to push new URLs
+  $locationProvider.html5Mode true
+  $logProvider.debugEnabled(false)
+
+  authToken = $("meta[name=\"csrf-token\"]").attr("content")
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+
+  $routeProvider
+    .when '/',
+      controller: 'FestivalsController'
+      templateUrl: '<%= asset_path("festival/index.html") %>'
+    .when '/festivals/:festival_id/',
+      controller: 'FestivalController'
+      templateUrl: '<%= asset_path("festival/show.html") %>'
+    .otherwise redirectTo: '/'

@@ -1,0 +1,11 @@
+div
+  | Hello World
+div ng-repeat="festival in festivalList"
+  a ng-href="/festivals/{{festival.id}}"
+    | {{ festival.name }}
+  p
+    | {{ festival.location }}
+  p
+    | {{ festival.description }}
+  p
+    | {{ festival.start_date }} - {{ festival.end_date }}

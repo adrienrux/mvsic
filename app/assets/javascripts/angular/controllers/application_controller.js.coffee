@@ -1,1 +1,1 @@
-mvsic.controller 'ApplicationController', ($scope) ->
+app.controller 'ApplicationController', ($scope) ->

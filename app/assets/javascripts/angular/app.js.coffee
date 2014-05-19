@@ -1,4 +1,4 @@
-window.mvsic = angular.module('mvsic', [
+window.app = angular.module('app', [
   'ngResource',
   'ngRoute'
 ])
