@@ -11,7 +11,7 @@ gem 'pg'
 gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'slim-rails'
+gem 'slim', '~> 2.0.2'
 gem 'spring', group: :development
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'

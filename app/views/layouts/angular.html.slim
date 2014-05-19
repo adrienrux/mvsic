@@ -1,5 +1,5 @@
 DOCTYPE html
-html#ng-app ng-app="app" ng-controller="ApplicationController"
+html
   head
     title Mvsic
     = favicon_link_tag 'favicon.ico'
@@ -7,5 +7,5 @@ html#ng-app ng-app="app" ng-controller="ApplicationController"
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
-  body
+  body#mvsic-app ng-app="app"
     div#content.selected.container ng-view="" autoscroll="true"
