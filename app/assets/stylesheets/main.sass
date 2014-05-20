@@ -8,6 +8,33 @@ body
 
 #mvsic-app
 
+
+// NAV BAR
 nav.top-nav
+  margin: 0
+  padding: 1.5rem 3rem
+  width: 100%
+
+  background-color: $green-opaque
+  color: $white
   .logo
-  .links
+    display: inline-block
+    .home
+      @include link
+      font-weight: 600
+  ul.links
+    display: inline-block
+    float: right
+    margin: 0
+    padding: 0
+    li
+      display: inline-block
+      padding: 0 3rem
+      &.social
+        a
+          margin: 0
+          padding: 1rem
+      a
+        font-size: 1.4rem
+        @include link
+

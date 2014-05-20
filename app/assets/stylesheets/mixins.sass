@@ -1,0 +1,24 @@
+@mixin link
+  color: inherit
+  letter-spacing: 1px
+  text-decoration: none
+  text-transform: uppercase
+  &:hover
+    text-decoration: underline
+
+
+@mixin button($color, $background)
+  margin: 0 0.4rem
+  padding: 0.4rem 1.2rem
+
+  border: 1px solid $color
+  border-radius: 0.4rem
+
+  color: $color
+  background: $background
+
+  font-size: 1.6rem
+  font-weight: 400
+  letter-spacing: 1px
+  &:hover
+    border-color: $background

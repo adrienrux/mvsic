@@ -2,26 +2,20 @@
 
 mysteryland = Festival.where(name: 'Mysteryland', location: 'Bethel, NY', description: 'Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui.', start_date:  Date.new(2014, 05, 23), end_date: Date.new(2014, 05, 26)).first_or_create
 
+holyground_opening_party = Venue.where(name: 'Holyground Opening Party', festival: mysteryland).first_or_create
 main_stage = Venue.where(name: 'Main Stage', festival: mysteryland).first_or_create
 the_boat = Venue.where(name: 'The Boat', festival: mysteryland).first_or_create
 healing_garden = Venue.where(name: 'Healing Garden', festival: mysteryland).first_or_create
 
-sick_individuals = Artist.where(name: 'Sick Individuals').first_or_create
-fedde_le_grande = Artist.where(name: 'Fedde Le Grande').first_or_create
-nicky_romero = Artist.where(name: 'Nicky Romero').first_or_create
-sound_remedy = Artist.where(name: 'Sound Remedy').first_or_create
-big_gigantic = Artist.where(name: 'Big Gigantic').first_or_create
-marcel_dettmann = Artist.where(name: 'Marcel Dettmann').first_or_create
-jesse_rose = Artist.where(name: 'Jesse Rose').first_or_create
-jamie_jones = Artist.where(name: 'Jamie Jones').first_or_create
-sasha = Artist.where(name: 'Sasha').first_or_create
+michael_calfan = Artist.where(name: 'Michael Calfan').first_or_create
+vicetone = Artist.where(name: 'Vicetone').first_or_create
+john_dahlback = Artist.where(name: 'John Dahlback').first_or_create
+don_diablo = Artist.where(name: 'Don Diablo').first_or_create
+surprise_guest = Artist.where(name: 'Surprise Guest').first_or_create
+tritonal = Artist.where(name: 'Tritonal').first_or_create
 
-Event.where(venue: main_stage, artist: sick_individuals, start_time: DateTime.new(2014, 05, 23, 13, 00), end_time: DateTime.new(2014, 05, 23, 14, 30)).first_or_create
-Event.where(venue: main_stage, artist: fedde_le_grande, start_time: DateTime.new(2014, 05, 23, 14, 30), end_time: DateTime.new(2014, 05, 23, 15, 30)).first_or_create
-Event.where(venue: main_stage, artist: nicky_romero, start_time: DateTime.new(2014, 05, 23, 15, 30), end_time: DateTime.new(2014, 05, 23, 17, 30)).first_or_create
-Event.where(venue: the_boat, artist: sound_remedy, start_time: DateTime.new(2014, 05, 23, 13, 00), end_time: DateTime.new(2014, 05, 23, 14, 30)).first_or_create
-Event.where(venue: the_boat, artist: big_gigantic, start_time: DateTime.new(2014, 05, 23, 14, 30), end_time: DateTime.new(2014, 05, 23, 15, 30)).first_or_create
-Event.where(venue: the_boat, artist: marcel_dettmann, start_time: DateTime.new(2014, 05, 23, 15, 30), end_time: DateTime.new(2014, 05, 23, 17, 30)).first_or_create
-Event.where(venue: healing_garden, artist: jesse_rose, start_time: DateTime.new(2014, 05, 23, 13, 00), end_time: DateTime.new(2014, 05, 23, 14, 30)).first_or_create
-Event.where(venue: healing_garden, artist: jamie_jones, start_time: DateTime.new(2014, 05, 23, 14, 30), end_time: DateTime.new(2014, 05, 23, 15, 30)).first_or_create
-Event.where(venue: healing_garden, artist: sasha, start_time: DateTime.new(2014, 05, 23, 15, 30), end_time: DateTime.new(2014, 05, 23, 17, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 19, 00), end_time: DateTime.new(2014, 05, 23, 20, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: john_dahlback, start_time: DateTime.new(2014, 05, 23, 20, 00), end_time: DateTime.new(2014, 05, 23, 21, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: don_diablo, start_time: DateTime.new(2014, 05, 23, 21, 30), end_time: DateTime.new(2014, 05, 23, 23, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 23, 00), end_time: DateTime.new(2014, 05, 24, 00, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: tritonal, start_time: DateTime.new(2014, 05, 24, 00, 30), end_time: DateTime.new(2014, 05, 24, 02, 00)).first_or_create

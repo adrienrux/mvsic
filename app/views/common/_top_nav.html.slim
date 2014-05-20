@@ -1,3 +1,16 @@
 nav.top-nav
   .logo
-  .links Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper.
+    = link_to 'mvsic', '/', class: 'home'
+  ul.links
+    li
+      = link_to 'festivals', '/festivals'
+    li
+      = link_to 'blog', '/blog'
+    li
+      = link_to 'about', '/about'
+    li.social
+      = link_to '', 'https://twitter.com', class: 'social-icon twitter'
+    li.social
+      = link_to '', 'https://facebook.com', class: 'social-icon facebook'
+    li.social
+      = link_to '', 'https://soundcloud.com', class: 'social-icon soundcloud'
