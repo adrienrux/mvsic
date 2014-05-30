@@ -1,3 +1,7 @@
+@mixin border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
 @mixin link
   color: inherit
   letter-spacing: 1px
@@ -5,7 +9,6 @@
   text-transform: uppercase
   &:hover
     text-decoration: underline
-
 
 @mixin button($color, $background)
   margin: 0 0.4rem
@@ -22,3 +25,9 @@
   letter-spacing: 1px
   &:hover
     border-color: $background
+
+@mixin transition($time)
+  -webkit-transition: $time
+  -moz-transition: $time
+  -o-transition: $time
+  transition: $time

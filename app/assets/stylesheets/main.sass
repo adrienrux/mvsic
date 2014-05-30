@@ -3,38 +3,55 @@ html
   font-size: 62.5%
   font-weight: 400
 
+*
+  @include border-box
+
 body
   font-size: 1.6rem
 
 #mvsic-app
-
+  background-image: url('lights.jpg')
+  background-size: cover
 
 // NAV BAR
 nav.top-nav
+  @include transition(0.5s)
+  position: fixed
+  top: 0
+  left: 0
   margin: 0
   padding: 1.5rem 3rem
   width: 100%
 
   background-color: $green-opaque
   color: $white
+  text-align: right
+  &.dark
+    background-color: transparent
+    color: $green
   .logo
-    display: inline-block
+    position: absolute
+    top: 1.5rem
+    left: 3rem
     .home
       @include link
       font-weight: 600
   ul.links
     display: inline-block
-    float: right
     margin: 0
     padding: 0
     li
       display: inline-block
+      margin: 0
       padding: 0 3rem
       &.social
-        a
-          margin: 0
-          padding: 1rem
+        padding: 0 1rem
       a
-        font-size: 1.4rem
         @include link
+        font-size: 1.4rem
 
+
+// CONTENT
+#content
+  margin: 5rem 0 0 0
+  padding: 0
