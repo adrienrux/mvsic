@@ -10,8 +10,15 @@ body
   font-size: 1.6rem
 
 #mvsic-app
-  background-image: url('lights.jpg')
-  background-size: cover
+
+#dim
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: $black-opaque
+  z-index: -10
 
 // NAV BAR
 nav.top-nav
@@ -22,8 +29,9 @@ nav.top-nav
   margin: 0
   padding: 1.5rem 3rem
   width: 100%
+  z-index: 100
 
-  background-color: $green-opaque
+  background-color: $green
   color: $white
   text-align: right
   &.dark
@@ -50,8 +58,13 @@ nav.top-nav
         @include link
         font-size: 1.4rem
 
-
 // CONTENT
 #content
   margin: 5rem 0 0 0
   padding: 0
+
+
+a.button
+  @include transition(0.3s)
+  @include button($white, $green-opaque)
+  text-transform: uppercase

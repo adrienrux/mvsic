@@ -17,3 +17,4 @@
 //= require angular-route
 //= require turbolinks
 //= require_tree ./angular
+//= require_tree ./internal

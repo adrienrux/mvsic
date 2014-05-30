@@ -1,4 +1,4 @@
-div ng-repeat="festival in festivalList"
+div ng-repeat="festival in festivalList" style="display:none;"
   a ng-href="/festivals/{{festival.id}}"
     | {{ festival.name }}
   p
@@ -7,3 +7,27 @@ div ng-repeat="festival in festivalList"
     | {{ festival.description }}
   p
     | {{ festival.start_date }} - {{ festival.end_date }}
+
+.pane
+  form#search-festivals
+    input type="text" autofocus="true" placeholder="Search for a festival..."
+    a#go.button Go
+
+    div#or &mdash;or&mdash;
+
+    a#see-all.button See all festivals
+
+
+.pane
+  #list
+    h2 Just 3 steps to a better festival experience
+    ul
+      li 1. See the schedule and lineup
+      li 2. Listen to curated samples for each artist
+      li 3. Pick who you like and create your schedule
+
+.pane
+  #message
+    .mini-pane
+      .text We are passionate about music and want to help you figure out who you want to see at your next festival. Please reach out if you want to say hello.
+      .signature &mdash;MVSIC team
