@@ -27,6 +27,12 @@
   cursor: pointer
   &:hover
     background: $background
+  &.saved
+    background: $green
+  &.saving
+    background: $concrete
+  &.error
+    background: $pomegranate
 
 @mixin transition($time)
   -webkit-transition: $time

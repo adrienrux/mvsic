@@ -5,6 +5,8 @@ class BetaController < ApplicationController
   # POST /beta/signup
   def signup
     @mailchimp.subscribe(params[:email])
+
+    render json: { success: true }
   end
 
   private
