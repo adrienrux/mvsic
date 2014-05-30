@@ -9,13 +9,15 @@ div ng-repeat="festival in festivalList" style="display:none;"
     | {{ festival.start_date }} - {{ festival.end_date }}
 
 .pane
-  form#search-festivals
-    input type="text" autofocus="true" placeholder="Search for a festival..."
+  form#search-festivals method="post"
+    div#beta.text Interested in beta testing?
+
+    input type="text" autofocus="true" placeholder="Your email..."
     a#go.button Go
 
-    div#or &mdash;or&mdash;
+    div#or.text &mdash;or&mdash;
 
-    a#see-all.button See all festivals
+    a#learn-more.button Learn more
 
 
 .pane
