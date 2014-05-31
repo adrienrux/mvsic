@@ -1,0 +1,8 @@
+div#new-schedule
+  div timetable="" festival="festival" style="width: 80%; float: left"
+  div style="width: 20%; float: left"
+    div ng-repeat="event in scheduleList | orderBy:'venue_name'"
+      div
+        | {{event.artist.name}} @ {{event.venue_name}}
+      div
+        | {{event.start_time}}

@@ -15,4 +15,7 @@ app.config ($routeProvider, $logProvider, $locationProvider, $httpProvider) ->
     .when '/festivals/:festival_id/',
       controller: 'FestivalController'
       templateUrl: '<%= asset_path("festival/show.html") %>'
+    .when '/festivals/:festival_id/schedules/new',
+      controller: 'ScheduleCreateController'
+      templateUrl: '<%= asset_path("schedule/new.html") %>'
     .otherwise redirectTo: '/'

@@ -15,7 +15,23 @@ surprise_guest = Artist.where(name: 'Surprise Guest').first_or_create
 tritonal = Artist.where(name: 'Tritonal').first_or_create
 
 Event.where(venue: holyground_opening_party, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 19, 00), end_time: DateTime.new(2014, 05, 23, 20, 00)).first_or_create
-Event.where(venue: holyground_opening_party, artist: john_dahlback, start_time: DateTime.new(2014, 05, 23, 20, 00), end_time: DateTime.new(2014, 05, 23, 21, 30)).first_or_create
-Event.where(venue: holyground_opening_party, artist: don_diablo, start_time: DateTime.new(2014, 05, 23, 21, 30), end_time: DateTime.new(2014, 05, 23, 23, 00)).first_or_create
-Event.where(venue: holyground_opening_party, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 23, 00), end_time: DateTime.new(2014, 05, 24, 00, 30)).first_or_create
-Event.where(venue: holyground_opening_party, artist: tritonal, start_time: DateTime.new(2014, 05, 24, 00, 30), end_time: DateTime.new(2014, 05, 24, 02, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: john_dahlback, start_time: DateTime.new(2014, 05, 23, 21, 00), end_time: DateTime.new(2014, 05, 23, 22, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: don_diablo, start_time: DateTime.new(2014, 05, 23, 22, 30), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 23, 45), end_time: DateTime.new(2014, 05, 24, 01, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: tritonal, start_time: DateTime.new(2014, 05, 24, 01, 30), end_time: DateTime.new(2014, 05, 24, 02, 45)).first_or_create
+
+Event.where(venue: main_stage, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 19, 00), end_time: DateTime.new(2014, 05, 23, 20, 00)).first_or_create
+Event.where(venue: main_stage, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 20, 00), end_time: DateTime.new(2014, 05, 23, 22, 15)).first_or_create
+Event.where(venue: main_stage, artist: tritonal, start_time: DateTime.new(2014, 05, 23, 22, 30), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
+Event.where(venue: main_stage, artist: john_dahlback, start_time: DateTime.new(2014, 05, 24, 00, 00), end_time: DateTime.new(2014, 05, 24, 01, 00)).first_or_create
+Event.where(venue: main_stage, artist: don_diablo, start_time: DateTime.new(2014, 05, 24, 01, 15), end_time: DateTime.new(2014, 05, 24, 02, 00)).first_or_create
+
+Event.where(venue: the_boat, artist: tritonal, start_time: DateTime.new(2014, 05, 23, 19, 00), end_time: DateTime.new(2014, 05, 23, 20, 15)).first_or_create
+Event.where(venue: the_boat, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 20, 45), end_time: DateTime.new(2014, 05, 23, 21, 45)).first_or_create
+Event.where(venue: the_boat, artist: john_dahlback, start_time: DateTime.new(2014, 05, 23, 22, 00), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
+Event.where(venue: the_boat, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 23, 30), end_time: DateTime.new(2014, 05, 24, 01, 00)).first_or_create
+
+Event.where(venue: healing_garden, artist: don_diablo, start_time: DateTime.new(2014, 05, 23, 20, 00), end_time: DateTime.new(2014, 05, 23, 21, 15)).first_or_create
+Event.where(venue: healing_garden, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 22, 15), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
+Event.where(venue: healing_garden, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 23, 30), end_time: DateTime.new(2014, 05, 24, 00, 30)).first_or_create
+Event.where(venue: healing_garden, artist: john_dahlback, start_time: DateTime.new(2014, 05, 24, 00, 45), end_time: DateTime.new(2014, 05, 24, 01, 45)).first_or_create
