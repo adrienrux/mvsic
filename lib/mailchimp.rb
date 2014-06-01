@@ -19,13 +19,20 @@ class Mailchimp
 
   # Subscribe a member to a list
   # Defaults to the prelaunch list
-  def subscribe(list_id = prelaunch_id, email)
+  def subscribe(list_id = prelaunch_id, user)
+    email = user[:email]
+    first_name = user[:first_name]
+    last_name = user[:last_name]
+
     @gb.lists.subscribe(
       id: list_id,
       email: {
         email: email
       },
-      merge_vars: {},
+      merge_vars: {
+        FNAME: first_name,
+        LNAME: last_name
+        },
       double_optin: false
     )
   end

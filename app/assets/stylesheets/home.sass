@@ -6,12 +6,11 @@
   width: 100%
   text-align: center
 
-  font-family: $serif
-  font-size: 2.4rem
-  font-style: italic
-  line-height: 3rem
+  font-family: $sans-serif
+  font-size: 2rem
+  line-height: 2.4rem
   text-align: center
-  color: $white
+  color: $black
 
 #sign-up
   display: table-cell
@@ -20,72 +19,75 @@
 
   background-image: url('lights.jpg')
   background-size: cover
-  padding: 12rem 0
-  input
-    @include transition(0.3s)
-    display: inline-block
-    margin: 2rem
-    padding: 0 0.4rem
+
+  color: $white
+  font-weight: 400
+
+  #heading
+    margin: 0 auto
+    padding: 0 1rem
+
+    font-size: 2.6rem
+    line-height: 3rem
+
+  #subheading
+    margin: 4rem auto
+    padding: 0 1rem
     width: 40rem
 
-    outline: none
-    border: none
-    border-bottom: 2px solid $white
+    font-size: 1.8rem
 
-    font-size: 3.2rem
-    line-height: 4.6rem
+    #learn-more
+      @include link
 
-    color: $white
-    background: transparent
 
-    &:invalid
-      border-bottom-color: $pomegranate
+  #beta
+    margin: 4rem auto
+    width: 30rem
 
-    &:valid
-      border-bottom-color: $white
+    font-size: 1.8rem
+    line-height: 2.2rem
 
-  ::-webkit-input-placeholder
-    color: $white
-  :-moz-placeholder
-    font-weight: 400
-    color: $white
-  ::-moz-placeholder
-    font-weight: 400
-    color: $white
-  :-ms-input-placeholder
-    font-weight: 400
-    color: $white
+    color: $black
 
-  a.button
-    padding: 0.8rem 3rem
-    border-width: 0.2rem
-    border-radius: 1rem
+    .col
+      position: relative
+      &.half
+        display: inline-block
+        width: 15rem
+      &.full
 
-    font-size: 2.4rem
-    line-height: 3rem
-    &#go
-      display: inline-block
-      width: 20rem
+    input
+      @include transition(0.3s)
+      outline: none
+      border: none
+      &#email
+        width: 29rem
+      &#confirm
+        width: 29rem
+        height: 6rem
 
-  .text
-    margin: 6rem 0
-    &#beta
-      margin-top: 0
+    input[type="text"], input[type="email"]
+      @include input-colors($green, $pomegranate, $concrete)
+      margin: 0 0 1rem 0
+      padding: 15px 1rem 0 1rem
+      width: 14rem
+      height: 6rem
 
-#list
-  display: table-cell
-  vertical-align: middle
-  position: relative
+      border: 0.2rem solid #dfe2e6
+      border-radius: 0.4rem
 
-  background-image: url('cloud.jpg')
-  background-size: cover
-  border: 2rem solid $green
-  padding: 12rem 0
+    input[type="submit"]
+      @include button($white, $green-opaque)
 
-  ul
-    list-style-type: none
-    li
-      padding: 2rem
+    label[for]
+      @include transition(0.3s)
+      position: absolute
+      top: 0.2rem
+      left: 1.5rem
+
+      font-size: 1.2rem
+      color: $concrete
 
 #message
   display: table-cell
@@ -96,12 +98,17 @@
   background-size: cover
   padding: 12rem 0
 
+  border: 2rem solid $green
+  color: $white
+
   .mini-pane
     padding: 2rem
     width: 70rem
     margin: 0 auto
     text-align: left
     background: $green-opaque
+    .text
+      margin: 2rem 0
     .signature
       padding-top: 2rem
       text-align: right

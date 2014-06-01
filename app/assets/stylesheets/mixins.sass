@@ -3,18 +3,30 @@
   box-sizing: border-box
 
 @mixin link
-  color: inherit
+  @include transition(0.3s)
+  cursor: pointer
+  color: $river
+  border: none
+  text-decoration: underline
+  &:hover
+    color: $sea
+
+
+@mixin white-link
+  @include link
+  color: $white
+  border-bottom: 2px solid transparent
   letter-spacing: 1px
   text-decoration: none
-  text-transform: uppercase
   &:hover
-    text-decoration: underline
+    color: $white
+    border-bottom-color: $white
 
 @mixin button($color, $background)
   margin: 0 0.4rem
   padding: 0.4rem 1.2rem
 
-  border: 1px solid $color
+  border: 2px solid $color
   border-radius: 0.4rem
 
   color: $color
@@ -35,7 +47,26 @@
     background: $pomegranate
 
 @mixin transition($time)
-  -webkit-transition: $time
-  -moz-transition: $time
-  -o-transition: $time
-  transition: $time
+  -webkit-transition: $time ease-in-out
+  -moz-transition: $time ease-in-out
+  -o-transition: $time ease-in-out
+  transition: $time ease-in-out
+
+@mixin input-colors($focus, $invalid, $placeholder)
+  ::-webkit-input-placeholder
+    color: $placeholder
+  :-moz-placeholder
+    color: $placeholder
+  ::-moz-placeholder
+    color: $placeholder
+  :-ms-input-placeholder
+    color: $placeholder
+  &:focus
+    border-color: $focus
+    + label
+      color: $green
+  &:invalid
+    border-color: $invalid
+    + label
+      color: $invalid
+

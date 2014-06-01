@@ -1,36 +1,33 @@
-div ng-repeat="festival in festivalList" style="display:none;"
-  a ng-href="/festivals/{{festival.id}}"
-    | {{ festival.name }}
-  p
-    | {{ festival.location }}
-  p
-    | {{ festival.description }}
-  p
-    | {{ festival.start_date }} - {{ festival.end_date }}
-  a ng-href="/festivals/{{festival.id}}/schedules/new"
-    | Create a Schedule
-
 .pane
-  form#sign-up
-    div#beta.text Interested in beta testing?
+  #sign-up
 
-    input type="email" autofocus="true" placeholder="Your email..."
-    a#go.button Submit
+    h1#heading Discover amazing artists for your next festival.
 
-    div#or.text &mdash;or&mdash;
+    #subheading
+      ' View lineups, listen to curated sets, and create your personalized schedule.
+      a#learn-more href="#" Learn more
+      |  .
 
-    a#learn-more.button Learn more
+    form#beta
 
-.pane
-  #list
-    h2 Just 3 steps to a better festival experience
-    ul
-      li 1. See the schedule and lineup
-      li 2. Listen to curated samples for each artist
-      li 3. Pick who you like and create your schedule
+      .col.half
+        input#first-name type="text" autofocus="true" placeholder="Jono" size="30"
+        label for="first-name" First name
+
+      .col.half
+        input#last-name type="text" autofocus="true" placeholder="Grant"
+        label for="last-name" Last name
+
+      .col
+        input#email type="email" autofocus="true" placeholder="jono@icloud.com"
+        label for="email" Email address
+
+      .col
+        input#confirm.button type="submit" value="Sign up for beta"
 
 .pane
   #message
     .mini-pane
-      .text We are passionate about music and want to help you figure out who you want to see at your next festival. Please reach out if you want to say hello.
+      .text MVSIC is about discovering amazing artists and figuring out who to see at your next music festival. We're building something that lets you see the artist lineup for a festival and listen to a curated sample of their music right inside the app. Add the ones you love to your schedule and share with your friends and festival-goers.
+      .text We are passionate about music and want to know you if you are too. Please reach out if you want to say hello.
       .signature &mdash;MVSIC team

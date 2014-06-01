@@ -31,19 +31,19 @@ nav.top-nav
   height: 5rem
   z-index: 100
 
-  background-color: $green
+  background-color: transparent
   color: $white
   text-align: right
-  &.dark
-    background-color: transparent
-    color: $green
+
   .logo
     position: absolute
     top: 1.5rem
     left: 3rem
     .home
-      @include link
+      @include white-link
+      text-transform: uppercase
       font-weight: 600
+
   ul.links
     display: inline-block
     margin: 0
@@ -55,12 +55,12 @@ nav.top-nav
       &.social
         padding: 0 1rem
       a
-        @include link
+        @include white-link
         font-size: 1.4rem
 
 // CONTENT
 #content
-  margin: 5rem 0 0 0
+  margin: 0
   padding: 0
 
 

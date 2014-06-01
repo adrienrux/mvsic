@@ -7,24 +7,35 @@ $(document).ready ->
 
   # Beta signup
   setTimeout ->
-    $('#sign-up #go').click (event) ->
-      $button = $(event.target or event.srcElement)
-      email = $('#sign-up input').val()
+    $('#beta').submit (event) ->
+      $button = $('#beta #confirm')
+      firstName = $('#beta #first-name').val()
+      lastName = $('#beta #last-name').val()
+      email = $('#beta #email').val()
 
-      if re.test($('#sign-up input').val())
-        $button.text('Working...').removeClass('error saved').addClass('saving')
+      if re.test(email)
+        $button.val('Working...').removeClass('error saved').addClass('saving')
 
         $.ajax(
           url: '/beta/signup'
           type: 'POST'
           data:
+            first_name: firstName
+            last_name: lastName
             email: email
           success: (response) ->
-            $button.text('Saved :)').removeClass('error saving').addClass('saved')
+            $button.val('Signed up :)').removeClass('error saving').addClass('saved')
           error: (response) ->
-            $button.text('Error :(').removeClass('saved saving').addClass('error')
+            $button.val('Error :(').removeClass('saved saving').addClass('error')
         )
       else
         alert('Please use a valid email address')
-  , 5000
+
+    $('#learn-more').click (event) ->
+      $('html, body').animate(
+        scrollTop: $('#message').offset().top
+      , 500)
+
+  , 2000
+
 
