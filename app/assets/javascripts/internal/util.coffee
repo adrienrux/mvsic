@@ -36,6 +36,11 @@ $(document).ready ->
         scrollTop: $('#message').offset().top
       , 500)
 
+    $('#beta-link').click (event) ->
+      $('html, body').animate(
+        scrollTop: $('#sign-up').offset().top
+      , 500)
+
   , 2000
 
 

@@ -52,17 +52,19 @@
 
     .col
       position: relative
+
       &.half
         display: inline-block
         width: 15rem
-      &.full
 
     input
       @include transition(0.3s)
       outline: none
       border: none
+
       &#email
         width: 29rem
+
       &#confirm
         width: 29rem
         height: 6rem
@@ -107,8 +109,13 @@
     margin: 0 auto
     text-align: left
     background: $green-opaque
+
     .text
       margin: 2rem 0
+
     .signature
       padding-top: 2rem
       text-align: right
+
+    #beta-link
+      @include link
