@@ -52,6 +52,12 @@
   -o-transition: $time ease-in-out
   transition: $time ease-in-out
 
+@mixin animation-delay($time)
+  -webkit-animation-delay: $time
+  -moz-animation-delay: $time
+  -o-animation-delay: $time
+  animation-delay: $time
+
 @mixin input-colors($focus, $invalid, $placeholder)
   ::-webkit-input-placeholder
     color: $placeholder
