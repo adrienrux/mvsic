@@ -105,7 +105,7 @@
 
   .mini-pane
     padding: 2rem
-    width: 70rem
+    max-width: 60rem
     margin: 0 auto
     text-align: left
     background: $green-opaque
@@ -118,3 +118,9 @@
 
     #beta-link
       @include link
+
+@media screen and (max-width: 64rem)
+  #message
+    .mini-pane
+      width: 32rem
+      margin: 0 auto
