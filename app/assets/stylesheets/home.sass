@@ -28,6 +28,7 @@
     padding: 0 1rem
 
     font-size: 2.6rem
+    font-weight: 600
     line-height: 3rem
 
   #subheading
@@ -57,6 +58,9 @@
         display: inline-block
         width: 15rem
 
+    .loader
+      visibility: hidden
+
     input
       @include transition(0.3s)
       outline: none
@@ -69,11 +73,13 @@
         width: 29rem
         height: 6rem
         font-weight: 600
+        &.saving
+          color: transparent
 
     input[type="text"], input[type="email"]
       @include input-colors($green, $pomegranate, $concrete)
       margin: 0 0 1rem 0
-      padding: 15px 1rem 0 1rem
+      padding: 1.5rem 1rem 0 1rem
       width: 14rem
       height: 6rem
 
@@ -105,13 +111,21 @@
 
   .mini-pane
     padding: 2rem
-    max-width: 60rem
     margin: 0 auto
+    max-width: 60rem
+
     text-align: left
+    border-radius: 0.4rem
     background: $green-opaque
 
+    .heading
+      font-size: 2.6rem
+      font-weight: 600
+      line-height: 3rem
+
     .text
-      margin-bottom: 2rem
+      margin-top: 2rem
+      font-size: 1.8rem
 
     .signature
       text-align: right

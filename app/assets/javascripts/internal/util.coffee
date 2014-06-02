@@ -14,7 +14,8 @@ $(document).ready ->
       email = $('#beta #email').val()
 
       if re.test(email)
-        $button.val('Working...').removeClass('error saved').addClass('saving')
+        $button.removeClass('error saved').addClass('saving')
+        $('#beta-loader').css(visibility: 'visible')
 
         $.ajax(
           url: '/beta/signup'
@@ -24,8 +25,10 @@ $(document).ready ->
             last_name: lastName
             email: email
           success: (response) ->
+            $('#beta-loader').css(visibility: 'hidden')
             $button.val('Signed up :)').removeClass('error saving').addClass('saved')
           error: (response) ->
+            $('#beta-loader').css(visibility: 'hidden')
             $button.val('Error :(').removeClass('saved saving').addClass('error')
         )
       else

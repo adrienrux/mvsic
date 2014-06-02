@@ -1,0 +1,36 @@
+.loader
+  position: relative
+  bottom: 5.5rem
+  margin: 1rem auto
+  font-size: 1rem
+  text-indent: -9999rem
+  border-top: 0.3rem solid $white-opaque
+  border-right: 0.3rem solid $white-opaque
+  border-bottom: 0.3rem solid $white-opaque
+  border-left: 0.3rem solid $white
+  -webkit-animation: load 1s infinite ease-in-out
+  animation: load 1s infinite ease-in-out
+
+.loader,
+.loader:after
+  border-radius: 50%
+  width: 3em
+  height: 3em
+
+@-webkit-keyframes load
+  0%
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
+
+  100%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)
+
+@keyframes load
+  0%
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
+
+  100%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)

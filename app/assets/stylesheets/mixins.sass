@@ -23,6 +23,7 @@
     border-bottom-color: $white
 
 @mixin button($color, $background)
+  @include transition(0.3s)
   margin: 0 0.4rem
   padding: 0.4rem 1.2rem
 
@@ -42,7 +43,7 @@
   &.saved
     background: $green
   &.saving
-    background: $concrete
+    background: transparent
   &.error
     background: $pomegranate
 
