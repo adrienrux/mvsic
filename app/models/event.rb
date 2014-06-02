@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   validate :end_time_is_after_start_time
   belongs_to :venue
   belongs_to :artist
+  has_many :schedule_events, dependent: :destroy
+  has_many :schedules, through: :schedule_events
 
   private
 

@@ -14,6 +14,57 @@ don_diablo = Artist.where(name: 'Don Diablo').first_or_create
 surprise_guest = Artist.where(name: 'Surprise Guest').first_or_create
 tritonal = Artist.where(name: 'Tritonal').first_or_create
 
+pitchfork_music_festival = Festival.where(name: 'Pitchfork Music Festival', location: 'Chicago, IL', description: 'Whatever', start_date:  Date.new(2014, 07, 18), end_date: Date.new(2014, 07, 20)).first_or_create
+
+green_stage = Venue.where(name: 'Green Stage', festival: pitchfork_music_festival).first_or_create
+blue_stage = Venue.where(name: 'Blue Stage', festival: pitchfork_music_festival).first_or_create
+red_stage = Venue.where(name: 'Red Stage', festival: pitchfork_music_festival).first_or_create
+
+beck = Artist.where(name: 'Beck').first_or_create
+neutral_milk_hotel = Artist.where(name: 'Neutral Milk Hotel').first_or_create
+kendrick_lamar = Artist.where(name: 'Kendrick Lamar').first_or_create
+giorgio_moroder = Artist.where(name: 'Giorgio Moroder').first_or_create
+fka_twigs = Artist.where(name: 'Fka Twigs').first_or_create
+hudson_mohawke = Artist.where(name: 'Hudson Mohawke').first_or_create
+avey_tares_slasher_flicks = Artist.where(name: 'Avey Tares Slasher Flicks').first_or_create
+st_vincent = Artist.where(name: 'St Vincent').first_or_create
+grimes = Artist.where(name: 'Grimes').first_or_create
+sun_kil_moon = Artist.where(name: 'Sun Kil Moon').first_or_create
+the_field = Artist.where(name: 'The Field').first_or_create
+dj_spinn = Artist.where(name: 'DJ Spinn').first_or_create
+sza = Artist.where(name: 'SZA').first_or_create
+danny_brown = Artist.where(name: 'Danny Brown').first_or_create
+slowdive = Artist.where(name: 'Slowdive').first_or_create
+sharon_van_etten = Artist.where(name: 'Sharon Van Etten').first_or_create
+kelela = Artist.where(name: 'Kelela').first_or_create
+majical_cloudz = Artist.where(name: 'Majical Cloudz').first_or_create
+the_haxan_cloak = Artist.where(name: 'The Haxan Cloak').first_or_create
+tune_yards = Artist.where(name: 'Tune-Yards').first_or_create
+real_estate = Artist.where(name: 'Real Estate').first_or_create
+neneh_cherry_with_rocketnumbernine = Artist.where(name: 'Neneh Cherry With Rocketnumbernine').first_or_create
+the_range = Artist.where(name: 'The Range').first_or_create
+jon_hopkins = Artist.where(name: 'Jon Hopkins').first_or_create
+factory_floor = Artist.where(name: 'Factory Floor').first_or_create
+pusha_t = Artist.where(name: 'Pu$ha T').first_or_create
+schoolboy_q = Artist.where(name: 'Schoolboy Q').first_or_create
+death_grips = Artist.where(name: 'Death Grips').first_or_create
+mas_ysa = Artist.where(name: 'MAS YSA').first_or_create
+dum_dum_girls = Artist.where(name: 'DUM DUM Girls').first_or_create
+hundred_waters = Artist.where(name: 'Hundred Waters').first_or_create
+cloud_nothings = Artist.where(name: 'Cloud Nothings').first_or_create
+earl_sweatshirt = Artist.where(name: 'Earl Sweatshirt').first_or_create
+empress_of = Artist.where(name: 'Empress Of').first_or_create
+isaiah_rashad = Artist.where(name: 'ISAIAH RASHAD').first_or_create
+wild_bests = Artist.where(name: 'WILD BESTS').first_or_create
+deafheaven = Artist.where(name: 'Deafheaven').first_or_create
+circulatory_system = Artist.where(name: 'circulatory system').first_or_create
+perfect_pussy = Artist.where(name: 'perfect pussy').first_or_create
+diiv = Artist.where(name: 'DIIV').first_or_create
+ka = Artist.where(name: 'KA').first_or_create
+twin_peaks = Artist.where(name: 'Twin Peaks').first_or_create
+mutual_benefit = Artist.where(name: 'Mutual Benefit').first_or_create
+speedy_ortiz = Artist.where(name: 'SPEEDY ORTIZ').first_or_create
+
 Event.where(venue: holyground_opening_party, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 19, 00), end_time: DateTime.new(2014, 05, 23, 20, 00)).first_or_create
 Event.where(venue: holyground_opening_party, artist: john_dahlback, start_time: DateTime.new(2014, 05, 23, 21, 00), end_time: DateTime.new(2014, 05, 23, 22, 30)).first_or_create
 Event.where(venue: holyground_opening_party, artist: don_diablo, start_time: DateTime.new(2014, 05, 23, 22, 30), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
@@ -35,3 +86,70 @@ Event.where(venue: healing_garden, artist: don_diablo, start_time: DateTime.new(
 Event.where(venue: healing_garden, artist: vicetone, start_time: DateTime.new(2014, 05, 23, 22, 15), end_time: DateTime.new(2014, 05, 23, 23, 30)).first_or_create
 Event.where(venue: healing_garden, artist: surprise_guest, start_time: DateTime.new(2014, 05, 23, 23, 30), end_time: DateTime.new(2014, 05, 24, 00, 30)).first_or_create
 Event.where(venue: healing_garden, artist: john_dahlback, start_time: DateTime.new(2014, 05, 24, 00, 45), end_time: DateTime.new(2014, 05, 24, 01, 45)).first_or_create
+
+Event.where(venue: holyground_opening_party, artist: vicetone, start_time: DateTime.new(2014, 05, 24, 19, 00), end_time: DateTime.new(2014, 05, 24, 20, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: john_dahlback, start_time: DateTime.new(2014, 05, 24, 21, 00), end_time: DateTime.new(2014, 05, 24, 22, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: don_diablo, start_time: DateTime.new(2014, 05, 24, 22, 30), end_time: DateTime.new(2014, 05, 24, 23, 30)).first_or_create
+Event.where(venue: holyground_opening_party, artist: surprise_guest, start_time: DateTime.new(2014, 05, 24, 23, 45), end_time: DateTime.new(2014, 05, 25, 01, 00)).first_or_create
+Event.where(venue: holyground_opening_party, artist: tritonal, start_time: DateTime.new(2014, 05, 25, 01, 30), end_time: DateTime.new(2014, 05, 25, 02, 45)).first_or_create
+
+Event.where(venue: main_stage, artist: surprise_guest, start_time: DateTime.new(2014, 05, 24, 19, 00), end_time: DateTime.new(2014, 05, 24, 20, 00)).first_or_create
+Event.where(venue: main_stage, artist: vicetone, start_time: DateTime.new(2014, 05, 24, 20, 00), end_time: DateTime.new(2014, 05, 24, 22, 15)).first_or_create
+Event.where(venue: main_stage, artist: tritonal, start_time: DateTime.new(2014, 05, 24, 22, 30), end_time: DateTime.new(2014, 05, 24, 23, 30)).first_or_create
+Event.where(venue: main_stage, artist: john_dahlback, start_time: DateTime.new(2014, 05, 25, 00, 00), end_time: DateTime.new(2014, 05, 25, 01, 00)).first_or_create
+Event.where(venue: main_stage, artist: don_diablo, start_time: DateTime.new(2014, 05, 25, 01, 15), end_time: DateTime.new(2014, 05, 25, 02, 00)).first_or_create
+
+Event.where(venue: the_boat, artist: tritonal, start_time: DateTime.new(2014, 05, 24, 19, 00), end_time: DateTime.new(2014, 05, 24, 20, 15)).first_or_create
+Event.where(venue: the_boat, artist: surprise_guest, start_time: DateTime.new(2014, 05, 24, 20, 45), end_time: DateTime.new(2014, 05, 24, 21, 45)).first_or_create
+Event.where(venue: the_boat, artist: john_dahlback, start_time: DateTime.new(2014, 05, 24, 22, 00), end_time: DateTime.new(2014, 05, 24, 23, 30)).first_or_create
+Event.where(venue: the_boat, artist: vicetone, start_time: DateTime.new(2014, 05, 24, 23, 30), end_time: DateTime.new(2014, 05, 25, 01, 00)).first_or_create
+
+Event.where(venue: healing_garden, artist: don_diablo, start_time: DateTime.new(2014, 05, 24, 20, 00), end_time: DateTime.new(2014, 05, 24, 21, 15)).first_or_create
+Event.where(venue: healing_garden, artist: vicetone, start_time: DateTime.new(2014, 05, 24, 22, 15), end_time: DateTime.new(2014, 05, 24, 23, 30)).first_or_create
+Event.where(venue: healing_garden, artist: surprise_guest, start_time: DateTime.new(2014, 05, 24, 23, 30), end_time: DateTime.new(2014, 05, 25, 00, 30)).first_or_create
+Event.where(venue: healing_garden, artist: john_dahlback, start_time: DateTime.new(2014, 05, 25, 00, 45), end_time: DateTime.new(2014, 05, 25, 01, 45)).first_or_create
+
+Event.where(venue: blue_stage, artist: hundred_waters, start_time: DateTime.new(2014, 07, 18, 15, 20), end_time: DateTime.new(2014, 07, 18, 16, 15)).first_or_create
+Event.where(venue: red_stage, artist: death_grips, start_time: DateTime.new(2014, 07, 18, 15, 30), end_time: DateTime.new(2014, 07, 18, 16, 30)).first_or_create
+Event.where(venue: blue_stage, artist: factory_floor, start_time: DateTime.new(2014, 07, 18, 16, 15), end_time: DateTime.new(2014, 07, 18, 17, 15)).first_or_create
+Event.where(venue: green_stage, artist: neneh_cherry_with_rocketnumbernine, start_time: DateTime.new(2014, 07, 18, 16, 35), end_time: DateTime.new(2014, 07, 18, 17, 35)).first_or_create
+Event.where(venue: blue_stage, artist: the_haxan_cloak, start_time: DateTime.new(2014, 07, 18, 17, 15), end_time: DateTime.new(2014, 07, 18, 18, 15)).first_or_create
+Event.where(venue: red_stage, artist: sharon_van_etten, start_time: DateTime.new(2014, 07, 18, 17, 30), end_time: DateTime.new(2014, 07, 18, 18, 30)).first_or_create
+Event.where(venue: blue_stage, artist: sza, start_time: DateTime.new(2014, 07, 18, 18, 15), end_time: DateTime.new(2014, 07, 18, 19, 15)).first_or_create
+Event.where(venue: green_stage, artist: sun_kil_moon, start_time: DateTime.new(2014, 07, 18, 18, 25), end_time: DateTime.new(2014, 07, 18, 19, 25)).first_or_create
+Event.where(venue: blue_stage, artist: avey_tares_slasher_flicks, start_time: DateTime.new(2014, 07, 18, 19, 15), end_time: DateTime.new(2014, 07, 18, 20, 15)).first_or_create
+Event.where(venue: red_stage, artist: giorgio_moroder, start_time: DateTime.new(2014, 07, 18, 19, 20), end_time: DateTime.new(2014, 07, 18, 20, 20)).first_or_create
+Event.where(venue: green_stage, artist: beck, start_time: DateTime.new(2014, 07, 18, 20, 30), end_time: DateTime.new(2014, 07, 18, 21, 30)).first_or_create
+Event.where(venue: green_stage, artist: twin_peaks, start_time: DateTime.new(2014, 07, 19, 13, 00), end_time: DateTime.new(2014, 07, 19, 14, 00)).first_or_create
+Event.where(venue: red_stage, artist: ka, start_time: DateTime.new(2014, 07, 19, 13, 45), end_time: DateTime.new(2014, 07, 19, 14, 45)).first_or_create
+Event.where(venue: blue_stage, artist: circulatory_system, start_time: DateTime.new(2014, 07, 19, 13, 55), end_time: DateTime.new(2014, 07, 19, 14, 50)).first_or_create
+Event.where(venue: green_stage, artist: wild_bests, start_time: DateTime.new(2014, 07, 19, 14, 30), end_time: DateTime.new(2014, 07, 19, 15, 30)).first_or_create
+Event.where(venue: blue_stage, artist: empress_of, start_time: DateTime.new(2014, 07, 19, 14, 50), end_time: DateTime.new(2014, 07, 19, 15, 45)).first_or_create
+Event.where(venue: red_stage, artist: cloud_nothings, start_time: DateTime.new(2014, 07, 19, 15, 20), end_time: DateTime.new(2014, 07, 19, 16, 20)).first_or_create
+Event.where(venue: blue_stage, artist: mas_ysa, start_time: DateTime.new(2014, 07, 19, 15, 45), end_time: DateTime.new(2014, 07, 19, 16, 45)).first_or_create
+Event.where(venue: green_stage, artist: pusha_t, start_time: DateTime.new(2014, 07, 19, 16, 15), end_time: DateTime.new(2014, 07, 19, 17, 15)).first_or_create
+Event.where(venue: blue_stage, artist: the_range, start_time: DateTime.new(2014, 07, 19, 16, 45), end_time: DateTime.new(2014, 07, 19, 17, 45)).first_or_create
+Event.where(venue: red_stage, artist: tune_yards, start_time: DateTime.new(2014, 07, 19, 17, 15), end_time: DateTime.new(2014, 07, 19, 18, 15)).first_or_create
+Event.where(venue: blue_stage, artist: kelela, start_time: DateTime.new(2014, 07, 19, 17, 45), end_time: DateTime.new(2014, 07, 19, 18, 45)).first_or_create
+Event.where(venue: green_stage, artist: danny_brown, start_time: DateTime.new(2014, 07, 19, 18, 15), end_time: DateTime.new(2014, 07, 19, 19, 15)).first_or_create
+Event.where(venue: blue_stage, artist: the_field, start_time: DateTime.new(2014, 07, 19, 18, 45), end_time: DateTime.new(2014, 07, 19, 19, 45)).first_or_create
+Event.where(venue: red_stage, artist: st_vincent, start_time: DateTime.new(2014, 07, 19, 19, 25), end_time: DateTime.new(2014, 07, 19, 20, 25)).first_or_create
+Event.where(venue: blue_stage, artist: fka_twigs, start_time: DateTime.new(2014, 07, 19, 19, 45), end_time: DateTime.new(2014, 07, 19, 20, 45)).first_or_create
+Event.where(venue: green_stage, artist: neutral_milk_hotel, start_time: DateTime.new(2014, 07, 19, 20, 30), end_time: DateTime.new(2014, 07, 19, 21, 30)).first_or_create
+Event.where(venue: blue_stage, artist: speedy_ortiz, start_time: DateTime.new(2014, 07, 20, 13, 00), end_time: DateTime.new(2014, 07, 20, 13, 55)).first_or_create
+Event.where(venue: green_stage, artist: mutual_benefit, start_time: DateTime.new(2014, 07, 20, 13, 00), end_time: DateTime.new(2014, 07, 20, 14, 00)).first_or_create
+Event.where(venue: red_stage, artist: diiv, start_time: DateTime.new(2014, 07, 20, 13, 45), end_time: DateTime.new(2014, 07, 20, 14, 45)).first_or_create
+Event.where(venue: blue_stage, artist: perfect_pussy, start_time: DateTime.new(2014, 07, 20, 13, 55), end_time: DateTime.new(2014, 07, 20, 14, 50)).first_or_create
+Event.where(venue: green_stage, artist: deafheaven, start_time: DateTime.new(2014, 07, 20, 14, 30), end_time: DateTime.new(2014, 07, 20, 15, 30)).first_or_create
+Event.where(venue: blue_stage, artist: isaiah_rashad, start_time: DateTime.new(2014, 07, 20, 14, 50), end_time: DateTime.new(2014, 07, 20, 15, 45)).first_or_create
+Event.where(venue: red_stage, artist: earl_sweatshirt, start_time: DateTime.new(2014, 07, 20, 15, 20), end_time: DateTime.new(2014, 07, 20, 16, 20)).first_or_create
+Event.where(venue: blue_stage, artist: dum_dum_girls, start_time: DateTime.new(2014, 07, 20, 15, 45), end_time: DateTime.new(2014, 07, 20, 16, 45)).first_or_create
+Event.where(venue: green_stage, artist: schoolboy_q, start_time: DateTime.new(2014, 07, 20, 16, 15), end_time: DateTime.new(2014, 07, 20, 17, 15)).first_or_create
+Event.where(venue: blue_stage, artist: jon_hopkins, start_time: DateTime.new(2014, 07, 20, 16, 45), end_time: DateTime.new(2014, 07, 20, 17, 45)).first_or_create
+Event.where(venue: red_stage, artist: real_estate, start_time: DateTime.new(2014, 07, 20, 17, 15), end_time: DateTime.new(2014, 07, 20, 18, 15)).first_or_create
+Event.where(venue: blue_stage, artist: majical_cloudz, start_time: DateTime.new(2014, 07, 20, 17, 45), end_time: DateTime.new(2014, 07, 20, 18, 45)).first_or_create
+Event.where(venue: green_stage, artist: slowdive, start_time: DateTime.new(2014, 07, 20, 18, 15), end_time: DateTime.new(2014, 07, 20, 19, 15)).first_or_create
+Event.where(venue: blue_stage, artist: dj_spinn, start_time: DateTime.new(2014, 07, 20, 18, 45), end_time: DateTime.new(2014, 07, 20, 19, 45)).first_or_create
+Event.where(venue: red_stage, artist: grimes, start_time: DateTime.new(2014, 07, 20, 19, 25), end_time: DateTime.new(2014, 07, 20, 20, 25)).first_or_create
+Event.where(venue: blue_stage, artist: hudson_mohawke, start_time: DateTime.new(2014, 07, 20, 19, 45), end_time: DateTime.new(2014, 07, 20, 20, 45)).first_or_create
+Event.where(venue: green_stage, artist: kendrick_lamar, start_time: DateTime.new(2014, 07, 20, 20, 30), end_time: DateTime.new(2014, 07, 20, 21, 30)).first_or_create

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :festivals, only: [:index, :show]
+    resources :schedules, only: [:create, :show, :update]
   end
 
   namespace :beta do

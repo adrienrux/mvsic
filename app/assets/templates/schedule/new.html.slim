@@ -1,8 +1,29 @@
 div#new-schedule
-  div timetable="" festival="festival" style="width: 80%; float: left"
-  div style="width: 20%; float: left"
-    div ng-repeat="event in scheduleList | orderBy:'venue_name'"
-      div
-        | {{event.artist.name}} @ {{event.venue_name}}
-      div
-        | {{event.start_time}}
+  div#timetable 
+    div#day-toggle
+      div.day ng-repeat="day in days"
+        button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
+          | {{dayDisplay(day)}}
+    div#directive timetable="" festival="festival" day="selectedDay"
+  div#schedule ng-class="{'saved': newSchedule.id}"
+    div.event ng-repeat="event in eventList | orderBy:'start_time' | filter: notDestroyed"
+      div.image
+        |
+      div.details
+        div.name
+          | {{event.artist.name}}
+        div.venue
+          | {{event.venue_name}}
+        div.time
+          | {{timeDisplay(event.start_time)}}
+      button#deselect ng-click="deselectEvent(event)"
+        | X
+  div#save-button ng-class="{'saved': newSchedule.id}"
+    button#save ng-click="clickSave()" ng-class="{'saving': saving}"
+      | {{saveMessage}}
+    #spinner.loader ng-show="saving"
+  #schedule-link ng-if="newSchedule.id"
+    | Click here to access your saved
+    a ng-href="/schedules/{{newSchedule.id}}"
+      |  schedule
+    | .

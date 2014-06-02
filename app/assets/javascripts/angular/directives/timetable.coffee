@@ -1,17 +1,29 @@
-app.directive 'timetable', ($window) ->
-  MARGIN = {top: 50, right: 20, bottom: 50, left: 20}
+app.directive 'timetable', ($window, Time) ->
+  MARGIN = {top: 0, right: 20, bottom: 50, left: 20}
   ROW_HEIGHT = 50
   MILLISECONDS_PER_BLOCK = 900000 # 15 Minutes
+  BOX_H_MARGIN = 2
+  BOX_V_MARGIN = 4
 
   timetable =
     restrict: 'A'
     scope:
       festival: '='
+      day: '='
 
     link: (scope, element, attrs) ->
       scope.$watch 'festival', ->
         if scope.festival
+          scope.events = _(scope.festival.venues).chain().pluck('events').flatten().value()
+
+      scope.$watch 'day', ->
+        if scope.events
           setupTimetable()
+
+      scope.$on 'deselectEvent', (event, data) ->
+        deselectedEvent = _(scope.events).findWhere({id: data.id})
+        deselectedEvent.selected = false
+        d3.select("div.event-wrapper#event-#{data.id}").attr('class', 'event-wrapper')
 
       window = angular.element($window)
       window.bind 'resize', () ->
@@ -21,19 +33,22 @@ app.directive 'timetable', ($window) ->
       xScale = d3.scale.ordinal()
 
       setupTimetable = ->
-        venueNames = _(scope.festival.venues).pluck('name')
-        events = _(scope.festival.venues).chain().pluck('events').flatten().value()
-        minTime = _(events).chain().pluck('start_time').map((t) -> Date.parse(t)).min().value()
-        maxTime = _(events).chain().pluck('end_time').map((t) -> Date.parse(t)).max().value()
+        scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
+        scope.venueNames = _(scope.filteredEvents).chain().pluck('venue_name').uniq().value()
+        minTime = _(scope.filteredEvents).chain().pluck('start_time').map((t) -> Date.parse(t)).min().value()
+        maxTime = _(scope.filteredEvents).chain().pluck('end_time').map((t) -> Date.parse(t)).max().value()
 
         timeslots = calculateTimeslots(minTime, maxTime)
         height = (timeslots.length * ROW_HEIGHT)
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / scope.festival.venues.length
+        eventBoxWidth = (width - 60) / scope.venueNames.length
 
         # Adjust the scales / axis
         yScale.range([0, height]).domain([minTime, maxTime])
-        xScale.domain(venueNames).rangeBands([60, width], 0)
+        xScale.domain(scope.venueNames).rangeBands([60, width], 0)
+
+        d3.select(element[0]).select('div.timetable')
+          .transition().duration(250).style('opacity', 0).remove()
 
         base = d3.select(element[0]).append('div')
           .attr('class', 'timetable')
@@ -51,7 +66,7 @@ app.directive 'timetable', ($window) ->
           .style('padding', '0')
 
         venueTitles = venueList.selectAll('li.venue-title')
-          .data(venueNames)
+          .data(scope.venueNames)
 
         venueTitles.enter().append('li')
           .style('position', 'absolute')
@@ -65,7 +80,7 @@ app.directive 'timetable', ($window) ->
           .style('width', eventBoxWidth + "px")
 
         venueTitles.append('text')
-          .text((v) -> v)
+          .text((v) -> v.id)
           .style('color', 'white')
 
         yAxis = timetableArea.append('ul').attr('class', 'y-axis')
@@ -75,54 +90,66 @@ app.directive 'timetable', ($window) ->
           .data(timeslots, (t) -> t.time)
 
         timeslotList.enter().append('li')
+          .style('opacity', 0)
           .attr('class', 'timeslot')
           .attr('id', (t) -> 'timeslot-' + t)
           .style('list-style-type', 'none')
           .style('height', ROW_HEIGHT + "px")
           .style('left', "0px")
           .style('width', width + "px")
-          .style('border-top', '1px white solid')
+          .style('border-top', '1px white dotted')
+          .transition().duration(250).style('opacity', 1)
 
         timeslotList.append('text')
+          .style('opacity', 0)
           .attr('class', 'time')
           .text((t) -> findTime(t.time))
           .style('color', 'white')
+          .transition().duration(250).style('opacity', 1)
 
         timetableArea.selectAll('path.domain').style("opacity", "0")
 
         # Create events
-        eventBoxes = timetableArea.selectAll('div.eventBox')
-          .data(events, (e) -> e.id)
+        eventBoxes = timetableArea.selectAll('div.event-wrapper')
+          .data(scope.filteredEvents, (e) -> e.id)
 
         eventBoxes.enter().append('div')
-          .attr('class', 'eventBox')
-          .attr('id', (e) -> 'event-' + e.id)
-          .style('position', 'absolute')
-          .style('width', eventBoxWidth + "px")
-          .style('top', (e) -> yScale(Date.parse(e.start_time)) + "px")
-          .style('left', (e) -> xScale(e.venue_name) + "px")
-          .style('border', '1px grey solid')
-          .style('text-align', 'center')
-          .style('background', 'rgba(0,0,0,0.7)')
-          .transition().duration(250)
-          .style('height', (e) -> calculateEventHeight(e) + "px")
-
-        eventBoxes.append('text')
-          .attr('class', 'artist-name')
-          .text((e) -> e.artist.name)
-          .style('color', 'white')
-
-        eventBoxes.append('a')
-          .attr('href', 'javascript:void(0)')
-          .text('Add to Schedule')
-          .on('click', (e) ->
-            addEventToSchedule(e)
+          .style('opacity', 0)
+          .attr('class', (e) ->
+            if _(scope.events).findWhere({id: e.id}).selected
+              'event-wrapper selected'
+            else
+              'event-wrapper'
           )
+          .attr('id', (e) -> 'event-' + e.id)
+          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+          .style('height', (e) -> (calculateEventHeight(e) - BOX_V_MARGIN * 2) + "px")
+          .style('top', (e) -> (yScale(Date.parse(e.start_time)) + BOX_V_MARGIN) + "px")
+          .style('left', (e) -> (xScale(e.venue_name) + BOX_H_MARGIN) + "px")
+          .html((e) ->
+            "
+              <div class='event-box'>
+                <p class='name'>#{e.artist.name}</p>
+                <p class='venue'>#{e.venue_name}</p>
+              </div>
+            "
+          ).on('click', (e) ->
+            box = d3.select(this)
+            originalEvent = _(scope.events).findWhere({id: e.id})
+            if originalEvent.selected
+              removeEventFromSchedule(e)
+              originalEvent.selected = false
+              box.attr('class', 'event-wrapper')
+            else
+              addEventToSchedule(e)
+              originalEvent.selected = true
+              box.attr('class', 'event-wrapper selected')
+          ).transition().duration(250).style('opacity', 1)
 
       resizeTimetable = ->
         # Update all widths and scales dependent on width
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / scope.festival.venues.length
+        eventBoxWidth = (width - 60) / scope.venueNames.length
         xScale.rangeBands([60, width], 0)
 
         # Update the size of the timeslots
@@ -134,15 +161,16 @@ app.directive 'timetable', ($window) ->
           .style('left', (v) -> xScale(v) + "px")
 
         # Update the boxes
-        d3.selectAll('div.eventBox')
-          .style('width', eventBoxWidth + "px")
-          .style('left', (e) -> xScale(e.venue_name) + "px")
+        d3.selectAll('div.event-wrapper')
+          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+          .style('left', (e) -> (xScale(e.venue_name) + BOX_H_MARGIN) + "px")
 
-      addEventToSchedule = (newEvent) -> scope.$emit('addEventToSchedule', newEvent)
+      addEventToSchedule = (newEvent) -> scope.$emit('addEvent', newEvent)
+      removeEventFromSchedule = (oldEvent) -> scope.$emit('removeEvent', oldEvent)
 
   # Helper Methods
   calculateTimeslots = (minTime, maxTime) ->
-    blocks = (maxTime - minTime) / MILLISECONDS_PER_BLOCK
+    blocks = Math.ceil((maxTime - minTime) / MILLISECONDS_PER_BLOCK)
     timeslots = []
     _(blocks).times((i) -> timeslots.push({time: minTime + i * MILLISECONDS_PER_BLOCK}))
     timeslots
@@ -152,9 +180,14 @@ app.directive 'timetable', ($window) ->
     end_time = Date.parse(event.end_time)
     (end_time - start_time) * ROW_HEIGHT / MILLISECONDS_PER_BLOCK
 
+  filterEventsByDay = (events, day) ->
+    dayStart = new Date(new Date(day.setHours(0)).setMinutes(0))
+    dayEnd = new Date(new Date(day.setHours(23)).setMinutes(59))
+    _(events).select (e) ->
+      new Date(e.start_time) <= dayEnd && new Date(e.start_time) >= dayStart
+
   findTime = (time) ->
     time = new Date(time)
-    minutes = (if time.getMinutes() < 10 then '0' else '') + time.getMinutes()
-    "#{time.getHours()}:#{minutes}"
+    Time.format12Hour(time)
 
   timetable

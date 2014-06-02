@@ -16,6 +16,7 @@
 //= require angular-resource
 //= require angular-route
 //= require turbolinks
+//= require underscore-min
 //= require_tree ./angular
 //= require_tree ./vendor
 //= require_tree ./internal

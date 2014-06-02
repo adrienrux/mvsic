@@ -23,4 +23,8 @@ class Api::BaseController < ApplicationController
     objects.order("#{@params[:sort_by]} #{@params[:sort_order]}")
       .page(@params[:page]).limit(@params[:per_page])
   end
+
+  def render_validation_errors(model)
+    render json: { error: model.errors.full_messages }, status: :unprocessable_entity
+  end
 end

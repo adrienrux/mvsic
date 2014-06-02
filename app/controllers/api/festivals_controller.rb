@@ -14,5 +14,4 @@ class Api::FestivalsController < Api::BaseController
     @festival = Festival.find(params[:id])
     render json: @festival
   end
-
 end
