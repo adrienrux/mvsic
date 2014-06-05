@@ -25,17 +25,22 @@ Add `export PGHOST=localhost` to `~/.bash_profile` then `source ~/.bash_profile`
 
 In terminal, open up psql: `psql` then run `create role mvsic with createdb login password 'password'`
 
-5) Create & migrate databases
+5) Create, migrate, and seed databases
 
 `bundle exec rake db:create`
 
 `bundle exec rake db:migrate`
 
-6) Start server
+`bundle exec rake db:seed`
+
+6) Set up `.env` file at root
+
+`touch .env`
+
+Ask James for Mailchimp's API key and add it like so to `.env`:
+
+`MAILCHIMP_API_KEY: '123456'`
+
+7) Start server
 
 `bundle exec rails s`
-
-7) Run tests
-
-`bundle exec rspec spec`
-
