@@ -27,3 +27,6 @@ config/secrets.yml
 
 /public/assets/
 /public/system/
+
+# Ignore application configuration
+/config/application.yml

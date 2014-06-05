@@ -16,7 +16,7 @@ class BetaController < ApplicationController
   private
 
   def mailchimp
-    @mailchimp ||= Mailchimp.new('b26d7c09336dd957ae08c9d716ccd3ed-us8')
+    @mailchimp ||= Mailchimp.new(ENV['MAILCHIMP_API_KEY'])
   end
 
 
