@@ -40,8 +40,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    d3_rails (3.4.8)
-      railties (>= 3.1.0)
     diff-lcs (1.2.5)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
@@ -165,7 +163,6 @@ DEPENDENCIES
   active_model_serializers (~> 0.8.0)
   angularjs-rails (~> 1.2.x)
   coffee-rails (~> 4.0.0)
-  d3_rails
   dotenv-rails
   factory_girl_rails (~> 4.0)
   gibbon (~> 1.1.3)
