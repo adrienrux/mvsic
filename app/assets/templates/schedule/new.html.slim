@@ -1,9 +1,12 @@
-div#new-schedule
+div#new-schedule ng-show="festival"
   div#timetable
-    div#day-toggle.animated.fadeInUp
+    div#view-toggle.animated.fadeInUp
       div.day ng-repeat="day in days"
         button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
           | {{dayDisplay(day)}}
+      div.day
+        button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
+          | All
     div#directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay"
   div#schedule ng-class="{'saved': newSchedule.id}"
     div.event ng-repeat="event in eventList | orderBy:'start_time' | filter: notDestroyed"

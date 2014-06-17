@@ -23,7 +23,7 @@ app.controller 'ScheduleCreateController', ['$http', '$scope', '$routeParams', '
         new Date(t)
       )
       .value()
-    $scope.selectedDay = $scope.days[0]
+    $scope.selectedDay = $scope.days[0] || 'All'
     _($scope.newSchedule).extend({festival_id: data.id})
 
   $scope.$on 'addEvent', (event, data) ->
@@ -92,8 +92,8 @@ app.controller 'ScheduleCreateController', ['$http', '$scope', '$routeParams', '
           $scope.saveMessage = "Error :("
           $scope.saving = false
 
-  $scope.dayDisplay = (date) ->
-    date.toUTCString().substr(0,3)
+  $scope.dayDisplay = (day) ->
+    dayDisplay = day.toUTCString().substr(0,3)
 
   $scope.timeDisplay = (date) ->
     UTCDate = new Date(date).toUTCString()

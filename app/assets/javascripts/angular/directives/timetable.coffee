@@ -17,8 +17,10 @@ app.directive 'timetable', ($window, Time) ->
           scope.events = _(scope.festival.venues).chain().pluck('events').flatten().value()
 
       scope.$watch 'day', ->
-        if scope.events
+        if scope.events && scope.day != 'All'
           setupTimetable()
+        else if scope.events
+          setupList()
 
       scope.$on 'deselectEvent', (event, data) ->
         deselectedEvent = _(scope.events).findWhere({id: data.id})
@@ -27,7 +29,10 @@ app.directive 'timetable', ($window, Time) ->
 
       window = angular.element($window)
       window.bind 'resize', () ->
-        resizeTimetable()
+        if scope.day != 'All'
+          resizeTimetable()
+        else
+          resizeList()
 
       yScale = d3.time.scale()
       xScale = d3.scale.ordinal()
@@ -105,9 +110,12 @@ app.directive 'timetable', ($window, Time) ->
           .attr('class', 'time')
           .text((t) -> findTime(t.time))
           .style('color', 'white')
+          .style('float', 'left')
           .transition().duration(250).style('opacity', 1)
 
         timetableArea.selectAll('path.domain').style("opacity", "0")
+
+        # debugger
 
         # Create events
         eventBoxes = timetableArea.selectAll('div.event-wrapper')
@@ -147,6 +155,65 @@ app.directive 'timetable', ($window, Time) ->
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
 
+      setupList = ->
+        scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
+        height = (Math.ceil(scope.filteredEvents.length / 3) * ROW_HEIGHT * 4)
+        width = $(element[0]).width() - MARGIN.left - MARGIN.right
+        eventBoxWidth = (width - 60) / 3
+        eventBoxHeight = ROW_HEIGHT * 4
+        d3.select(element[0]).select('div.timetable')
+          .transition().duration(250).style('opacity', 0).remove()
+
+        base = d3.select(element[0]).append('div')
+          .attr('class', 'timetable')
+          .style('position', 'relative')
+          .style('width', width + MARGIN.left + MARGIN.right)
+          .style('height', height + MARGIN.top + MARGIN.bottom)
+
+        timetableArea = base.append('div')
+          .style('position', 'relative')
+          .attr('class', 'timetable-area')
+          .style('left', (MARGIN.left + 60) + "px")
+          .style('top', MARGIN.top + "px")
+
+        # Create events
+        eventBoxes = timetableArea.selectAll('div.event-wrapper')
+          .data(scope.filteredEvents, (e) -> e.id)
+
+        eventBoxes.enter().append('div')
+          .style('opacity', 0)
+          .attr('class', (e) ->
+            if _(scope.events).findWhere({id: e.id}).selected
+              'event-wrapper selected'
+            else
+              'event-wrapper'
+          )
+          .attr('id', (e) -> 'event-' + e.id)
+          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+          .style('height', (e) -> (eventBoxHeight - BOX_V_MARGIN * 2) + "px")
+          .style('position', 'relative')
+          .style('float', 'left')
+          .style('margin', "#{BOX_H_MARGIN}px")
+          .html((e) ->
+            "
+              <div class='event-box'>
+                <p class='name'>#{e.artist.name}</p>
+                <p class='venue'>#{e.venue_name}</p>
+              </div>
+            "
+          ).on('click', (e) ->
+            box = d3.select(this)
+            originalEvent = _(scope.events).findWhere({id: e.id})
+            if originalEvent.selected
+              removeEventFromSchedule(e)
+              originalEvent.selected = false
+              box.attr('class', 'event-wrapper')
+            else
+              addEventToSchedule(e)
+              originalEvent.selected = true
+              box.attr('class', 'event-wrapper selected')
+          ).transition().duration(250).style('opacity', 1)
+
       resizeTimetable = ->
         # Update all widths and scales dependent on width
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
@@ -166,6 +233,17 @@ app.directive 'timetable', ($window, Time) ->
           .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
           .style('left', (e) -> (xScale(e.venue_name) + BOX_H_MARGIN) + "px")
 
+      resizeList = ->
+        height = (Math.ceil(scope.filteredEvents.length / 3) * ROW_HEIGHT * 4)
+        width = $(element[0]).width() - MARGIN.left - MARGIN.right
+        eventBoxWidth = (width - 60) / 3
+
+        d3.select('div.timetable').style('width', width + MARGIN.left + MARGIN.right)
+        d3.select('div.timetable-area').style('width', width)
+
+        d3.selectAll('div.event-wrapper')
+          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+
       addEventToSchedule = (newEvent) -> scope.$emit('addEvent', newEvent)
       removeEventFromSchedule = (oldEvent) -> scope.$emit('removeEvent', oldEvent)
 
@@ -182,10 +260,14 @@ app.directive 'timetable', ($window, Time) ->
     (end_time - start_time) * ROW_HEIGHT / MILLISECONDS_PER_BLOCK
 
   filterEventsByDay = (events, day) ->
-    dayStart = new Date(new Date(day.setHours(0)).setMinutes(0))
-    dayEnd = new Date(new Date(day.setHours(23)).setMinutes(59))
-    _(events).select (e) ->
-      new Date(e.start_time) <= dayEnd && new Date(e.start_time) >= dayStart
+    unless day == 'All'
+      newDay = new Date(day)
+      dayStart = new Date(new Date(newDay.setHours(0)).setMinutes(0))
+      dayEnd = new Date(new Date(newDay.setHours(23)).setMinutes(59))
+      _(events).select (e) ->
+        new Date(e.start_time) <= dayEnd && new Date(e.start_time) >= dayStart
+    else
+      _(events).sortBy((e) -> e.artist.name)
 
   findTime = (time) ->
     time = new Date(time)
