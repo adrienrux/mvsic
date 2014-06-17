@@ -1,167 +1,91 @@
-#new-schedule
+#schedule-show
   background-color: $river
   clear: both
   font-family: $sans-serif
   padding: 6rem 2rem
   width: 100%
+  min-height: 100%
+  position: relative
 
   &:after
     clear: both
     content: ''
     display: table
 
-#timetable
-  float: left
-  width: 80%
+  #festival-name, #festival-location
+    color: white
+    margin: 0.5rem 0.5rem
+    text-align: center
 
-  #directive
-    float: left
-    width: 100%
+  #festival-name
+    @include animation-delay(0.5s)
+    font-size: 2.6rem
+    font-weight: 600
 
-  .event-wrapper
-    @include transition(0.3s)
-    background-color: $white
-    border-radius: 0.5rem
-    color: $white
-    padding: 1rem
-    position: absolute
-    text-align: left
-    z-index: 1
+  #festival-location
+    @include animation-delay(1s)
+    font-size: 1.8rem
+    font-weight: 300
 
-    .event-box
-      @include transition(0.3s)
-      background-color: $river
-      border-radius: 3px
-      content: ""
-      padding: 1rem
-      position: absolute
-      z-index: 0
-
-      bottom: 4px
-      top: 4px
-      right: 4px
-      left: 4px
-
-      p.name, p.venue
-        font-size: 2rem
-        font-weight: 400
-        margin: 0
-
-      p.venue
-        font-size: 1.6rem
-
-    &.selected
-      @include transition(0.3s)
-      border-color: $white
-
-      .event-box
-        @include transition(0.3s)
-        background-color: $white
-        color: $river
-
-#day-toggle
-  clear: both
-  float: right
-  margin: 1rem 0
-  text-align: center
-
-  &:after
-    clear: both
-    content: ''
-    display: table
+  #event-list
+    width: 40%
+    margin: 0 auto
 
   .day
-    float: left
-
-    button
-      @include button($white, $white)
-      background-color: $river
-      border-radius: 50%
-      color: $white
-      height: 4.5rem
-      margin: 0.5rem
-      padding: 0.5rem
-      text-align: center
-      width: 4.5rem
-
-      &.selected
-        background-color: $white
-        color: $river
-
-#schedule
-  padding: 0 1rem
-  margin-right: 1rem
-  position: fixed
-  width: 20%
-  height: 80%
-  right: 0
-  overflow-y: auto
-
-  button#deselect
-    text-align: center
-    @include button($white, $white)
-    font-size: 1rem
-    padding: 0.4rem 0.8rem
-    float: right
-
-  .event
-    background: $green
-    border-radius: 0.5rem
+    @include animation-delay(1.2s)
+    margin: 0.5rem
+    margin-bottom: 2rem
     color: $white
-    margin: 1rem auto
-    padding: 1rem 1rem
-    width: 100%
+    font-size: 1.8rem
 
-    &:after
-      clear: both
-      content: ''
-      display: table
+    .event-wrapper
+      padding: 0.3rem
+      margin: 0.5rem 1rem
+      font-size: 1.6rem
+      background-color: $white
+      border-radius: 0.5rem
 
-    .details
-      float: left
-      width: 80%
-      .name
-        font-size: 1.6rem
-        font-weight: 600
-      .venue, .time
-        font-size: 1.2rem
-        font-weight: 300
+      .event
+        background-color: $river
+        border-radius: 3px
+        padding: 1rem
+        position: relative
 
-div#save-button
-  padding-right: 2rem
-  padding-bottom: 2rem
-  position: fixed
-  right: 0
-  bottom: 0
-  width: 20%
-  height: 10%
+        &:before
+          content: ''
+          display: inline-block
+          height: 100%
+          vertical-align: middle
+          margin-right: -0.25em
 
-  button#save
-    @include transition(0.3s)
-    @include button($white, $green-opaque)
-    font-size: 2rem
-    height: 100%
-    margin: 0
-    text-align: center
-    width: 100%
-    &.saving
-      color: transparent
+        .picture-wrapper, .artist-name, .time-location
+          display: inline-block
+          vertical-align: middle
+          line-height: initial
 
-#schedule-link
-  margin: 0.5rem
-  padding: 0.5rem
-  text-align: center
-  position: fixed
-  height: 10%
-  width: 20%
-  bottom: 0
-  right: 0
+        .picture-wrapper
+          width: 10%
+          .picture
+            background-image: url('lights.jpg')
+            background-repeat: no-repeat
+            background-position: center
+            background-size: cover
+            width: 4rem
+            height: 4rem
+            border-radius: 50%
+            margin: 0 auto
+            padding: 0 auto
 
-.saved
-  &#save-button
-    @include transition(0.3s)
-    bottom: 10%
-  &#schedule
-    @include transition(0.3s)
-    height: 71%
+        .artist-name
+          font-weight: 600
+          width: 60%
 
+        .time-location
+          font-weight: 600
+          width: 30%
+          text-align: right
+
+        &:hover
+          @include transition(0.1s)
+          background-color: $white
+          color: $river

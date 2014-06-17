@@ -33,6 +33,7 @@ class Api::SchedulesController < Api::BaseController
   def permitted_params
     params.require(:schedule).permit(
       :id,
+      :festival_id,
       schedule_events_attributes: [
         '_destroy',
         :event_id,

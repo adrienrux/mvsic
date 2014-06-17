@@ -1,2 +1,16 @@
-div
-  | {{schedule}}
+div#schedule-show
+  #festival-name.animated.fadeInUp
+    | {{schedule.festival.name}}
+  #festival-location.animated.fadeInUp
+    | {{schedule.festival.location}}
+  #event-list
+    .day.animated.fadeInUp ng-repeat="day in eventsByDay"
+      | {{day.date}}
+      .event-wrapper ng-repeat="event in day.events"
+        .event
+          div.picture-wrapper
+            .picture
+          .artist-name
+            | {{event.artist.name}}
+          .time-location
+            | {{event.venue_name}} - {{timeDisplay(event.start_time)}}

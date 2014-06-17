@@ -129,6 +129,7 @@ app.directive 'timetable', ($window, Time) ->
           .html((e) ->
             "
               <div class='event-box'>
+                <div class='picture'></div>
                 <p class='name'>#{e.artist.name}</p>
                 <p class='venue'>#{e.venue_name}</p>
               </div>

@@ -1,10 +1,10 @@
 div#new-schedule
-  div#timetable 
-    div#day-toggle
+  div#timetable
+    div#day-toggle.animated.fadeInUp
       div.day ng-repeat="day in days"
         button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
           | {{dayDisplay(day)}}
-    div#directive timetable="" festival="festival" day="selectedDay"
+    div#directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay"
   div#schedule ng-class="{'saved': newSchedule.id}"
     div.event ng-repeat="event in eventList | orderBy:'start_time' | filter: notDestroyed"
       div.image
@@ -18,7 +18,7 @@ div#new-schedule
           | {{timeDisplay(event.start_time)}}
       button#deselect ng-click="deselectEvent(event)"
         | X
-  div#save-button ng-class="{'saved': newSchedule.id}"
+  div#save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
     button#save ng-click="clickSave()" ng-class="{'saving': saving}"
       | {{saveMessage}}
     #spinner.loader ng-show="saving"

@@ -1,4 +1,5 @@
 class Schedule < ActiveRecord::Base
+  belongs_to :festival
   has_many :events, through: :schedule_events
   has_many :schedule_events, dependent: :destroy, inverse_of: :schedule
 
