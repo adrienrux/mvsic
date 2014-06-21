@@ -1,7 +1,19 @@
 class MvsicFestival
 
+
+  @TEMPLATE = """
+    <div class="name">{{ name }}</div>
+    <div class="location">{{ location }}</div>
+    <div class="startDate">{{ startDate }}</div>
+    <div class="endDate">{{ endDate }}</div>
+    <div class="description">{{ description }}</div>
+    <div class="events"></div>
+  """
+
+
   constructor: (id) ->
     @attrs = id: id
+    @$el = $('#festival')
     @venues = {}
     @events = {}
     @getAttributes()
@@ -12,6 +24,8 @@ class MvsicFestival
       url: "/api/festivals/#{@attrs.id}"
       success: (response) =>
         @loadFestival(response)
+        @renderFestival()
+        @renderEvents()
 
 
   loadFestival: (data) ->
@@ -28,6 +42,20 @@ class MvsicFestival
       for evt in venue.events
         e = new MvsicEvent(@, v, evt)
         @events[e.attrs.id] = e
+
+
+  renderFestival: ->
+    $('#festival').attr('data-festivalid', @attrs.id)
+    $('#festival').append(@_rawHtml())
+
+
+  renderEvents: ->
+    for id, evt of @events
+      evt.renderEvent()
+
+
+  _rawHtml: ->
+    _.template(MvsicFestival.TEMPLATE, @attrs)
 
 
 window.MvsicFestival = MvsicFestival
