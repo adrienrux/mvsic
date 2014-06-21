@@ -1,0 +1,15 @@
+- content_for :head do
+  = javascript_include_tag 'pages/festival/show'
+
+.festival data-festival-id=@festival.id
+  .name
+    = @festival.name
+  .location
+    = @festival.location
+  .description
+    = @festival.description
+  .events
+
+
+javascript:
+  window.festival = new MvsicFestival(#{@festival.id});

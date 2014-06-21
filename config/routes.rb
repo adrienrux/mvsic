@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'angular#index'
+  root to: 'festivals#index'
 
   namespace :api do
     resources :festivals, only: [:index, :show]
@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     post :signup
   end
 
-  get '*path' => 'angular#index'
+  resources :festivals, only: [:index, :show]
 end
