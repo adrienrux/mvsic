@@ -1,2 +1,25 @@
-div
-  | {{ festival.name }}
+#new-schedule ng-show="festival"
+  #festival-info
+    #festival-name.animated.fadeInUp
+      | {{festival.name}}
+    #festival-location.animated.fadeInUp
+      | {{festival.location}}
+  div#timetable
+    div#view-toggle.animated.fadeInUp
+      div.day ng-repeat="day in days"
+        button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
+          | {{dayDisplay(day)}}
+      div.day
+        button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
+          | All
+    div#directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay"
+  div#save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
+    button#save ng-click="clickSave()" ng-class="{'saving': saving}"
+      | {{saveMessage}}
+    #spinner.loader ng-show="saving"
+  #schedule-link ng-if="newSchedule.id"
+    | Click here to access your saved
+    a ng-href="/schedules/{{newSchedule.id}}"
+      |  schedule
+    | .
+#signup-modal modal="" show="showModal"
