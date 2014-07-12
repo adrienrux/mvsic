@@ -6,10 +6,10 @@ html
     link rel="icon" href="/assets/logo.png" type="image/x-icon"
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
-    = yield :head
     = csrf_meta_tags
 
-  body#mvsic-app
+  body#mvsic-app ng-app="app"
     = render partial: 'common/top_nav'
-    div#content
-      = yield
+    div#dim
+    div#content ng-view=""
+    = render partial: 'common/mvsic_player'

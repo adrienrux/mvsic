@@ -18,8 +18,6 @@ class Api::SchedulesController < Api::BaseController
     if @schedule.update_attributes(permitted_params)
       render json: @schedule
     else
-      require 'pry'
-      binding.pry
       render_validation_errors @schedule
     end
   end

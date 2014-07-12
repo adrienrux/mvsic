@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615035856) do
+ActiveRecord::Schema.define(version: 20140715122734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artists", force: true do |t|
     t.string "name"
+    t.string "soundcloud_track_url"
   end
 
   create_table "events", force: true do |t|

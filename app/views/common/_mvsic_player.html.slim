@@ -1,0 +1,14 @@
+#mvsic-player ng-controller="MvsicPlayerController" ng-class="{displayed: currentTrack}"
+  div
+    div ng-if="!currentTrack.error"
+      a ng-href="{{currentTrack.permalink_url}}"
+        | {{currentTrack.title | limitTo: 35}}
+        span ng-show="currentTrack.title.length > 35"
+          | ...
+    div ng-if="currentTrack.error"
+      | {{currentTrack.title}}
+    div
+      | {{currentTrack.artistName | limitTo: 35}}
+      span ng-show="currentTrack.title.length > 35"
+    button ng-click="mvsicPlayer.pause()" ng-class="{play: !currentTrack.sound.playState, pause: currentTrack.sound.playState}"
+      div class="icon"

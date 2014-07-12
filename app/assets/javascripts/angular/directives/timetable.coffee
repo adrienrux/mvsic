@@ -115,8 +115,6 @@ app.directive 'timetable', ($window, Time) ->
 
         timetableArea.selectAll('path.domain').style("opacity", "0")
 
-        # debugger
-
         # Create events
         eventBoxes = timetableArea.selectAll('div.event-wrapper')
           .data(scope.filteredEvents, (e) -> e.id)
@@ -154,6 +152,13 @@ app.directive 'timetable', ($window, Time) ->
               originalEvent.selected = true
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
+
+        eventBoxes.select('div.event-box')
+          .append('button')
+          .on('click', (e) ->
+            scope.$emit('selectArtist', e.artist)
+            d3.event.stopPropagation()
+          ).append('div').attr('class', 'play')
 
       setupList = ->
         scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
@@ -213,6 +218,14 @@ app.directive 'timetable', ($window, Time) ->
               originalEvent.selected = true
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
+        
+        eventBoxes.selectAll('div.event-box')
+          .append('button')
+          .on('click', (e) ->
+            scope.$emit('selectArtist', e.artist)
+            d3.event.stopPropagation()
+          )
+          .append('div').attr('class', 'play')
 
       resizeTimetable = ->
         # Update all widths and scales dependent on width

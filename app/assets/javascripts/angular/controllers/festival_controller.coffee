@@ -1,6 +1,7 @@
-app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Time',
-  ($http, $location, $scope, $routeParams, $timeout, Time) ->
+app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Time', 'MvsicPlayer',
+  ($http, $location, $scope, $routeParams, $timeout, Time, MvsicPlayer) ->
     festival_id = $routeParams.festival_id
+    signedUp = false
     $scope.saving = false
     $scope.saveMessage = 'Save Schedule'
     $scope.eventList = []
@@ -32,6 +33,9 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     $scope.$on 'removeEvent', (event, data) ->
       $scope.$apply($scope.eventList = _($scope.eventList).without(data))
+
+    $scope.$on 'selectArtist', (event, artist) ->
+      MvsicPlayer.load(artist)
 
     $scope.deselectEvent = (deselectedEvent) ->
       $scope.eventList = _($scope.eventList).without(deselectedEvent)
