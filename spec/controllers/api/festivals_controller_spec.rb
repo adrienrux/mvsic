@@ -13,7 +13,7 @@ describe Api::FestivalsController do
       results = JSON.parse(response.body)
       expect(results).to be_a(Array)
       expect(results.size == 3).to be_true
-      expect(results[0].keys).to include('id', 'name', 'location', 'description', 'start_date', 'end_date', 'venues')
+      expect(results[0].keys).to include('id', 'name', 'location', 'description', 'start_date', 'end_date', 'events')
     end
   end
 
@@ -29,7 +29,7 @@ describe Api::FestivalsController do
       expect(results['description']).to eq festival.description
       expect(results['start_date']).to eq festival.start_date.to_s
       expect(results['end_date']).to eq festival.end_date.to_s
-      expect(results['venues']).to eq festival.venues
+      expect(results['events']).to eq festival.events
     end
   end
 

@@ -1,39 +1,24 @@
-.pane
-  #sign-up
-
-    h1#heading.animated.fadeInUp Discover amazing experiences at your next festival.
-
-    #subheading.animated.fadeInUp
-      ' View lineups, listen to curated sets, and create your personalized schedule.
-      a#learn-more href="#" Learn more
-      | .
-
-    form#beta.animated.fadeInUp.delay
-
-      .col.half
-        input#first-name type="text" autofocus="true" placeholder="Jono" size="30"
-        label for="first-name" First name
-
-      .col.half
-        input#last-name type="text" autofocus="true" placeholder="Grant"
-        label for="last-name" Last name
-
-      .col
-        input#email type="email" autofocus="true" placeholder="jono@icloud.com"
-        label for="email" Email address
-
-      .col
-        input#confirm.button type="submit" value="Sign up for beta"
-        #beta-loader.loader
+#dim
+  #wistia_04fh6bpm8q.wistia_embed
 
 .pane
-  #message
-    .mini-pane
-      .heading Our story
-      .text
-        | Here at MVSIC, we love clubs, festivals, and fat drops. Whether your just attended your first rave or are an aficionado of sound, we want to build the tools and community to help you discover new artists, experiences, and take it up to the next level.
-      .text
-        ' It's going to be a long journey and we'd love to hear about what music and community mean to you.
-        a#beta-link Sign up for beta
-        |  and reach out, even if it's just to say hello.
-      .text.signature &mdash;MVSIC team
+  .festival-cards
+    .card ng-repeat="festival in festivalList" ng-click="openCard(festival)" ng-class="{'main': selectedFestival == festival, 'visible': visibleFestival == festival}"
+      .name
+        | {{ festival.name }}
+      .info
+        .location
+          | {{ festival.location.split(',')[0] }}
+        .date
+          | {{ festival.start_date }}
+        a.festival-link ng-href="/festivals/{{festival.id}}" See Lineup
+      .top-artists
+        .label Top Artists
+        .artist ng-repeat="artist in festivals.slice(3)"
+
+javascript:
+  video = Wistia.embed('04fh6bpm8q', {
+    stillUrl: 'https://embed-ssl.wistia.com/deliveries/3550d514d88e9a91e4052f2162b89fcc21490deb.bin',
+    videoFoam: true,
+    volume: 0,
+  });

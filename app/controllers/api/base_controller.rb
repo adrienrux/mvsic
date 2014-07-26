@@ -7,7 +7,7 @@ class Api::BaseController < ApplicationController
     head :bad_request and return if params[:page] && params[:page].match(/\D/)
     head :bad_request and return if params[:per_page] && params[:per_page].match(/\D/)
     head :bad_request and return if params[:sort_order] && !params[:sort_order].match(/^(asc|desc)$/i)
-    head :bad_request and return if params[:sort_by] && !params[:sort_by].match(/^(name|start_time|end_time|)$/i)
+    head :bad_request and return if params[:sort_by] && !params[:sort_by].match(/^(name|start_time|end_time|start_date|end_date)$/i)
   end
 
   def setup_params

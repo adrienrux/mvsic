@@ -6,10 +6,11 @@ html
     link rel="icon" href="/assets/logo.png" type="image/x-icon"
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
+    script charset='ISO-8859-1' src='//fast.wistia.com/assets/external/E-v1.js'
     = csrf_meta_tags
 
   body#mvsic-app ng-app="app"
     = render partial: 'common/top_nav'
-    div#dim
+
     div#content ng-view=""
     = render partial: 'common/mvsic_player'

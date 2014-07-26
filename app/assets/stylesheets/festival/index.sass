@@ -1,0 +1,108 @@
+.festival-cards
+  @include animation-delay(3s)
+  margin: 60px auto
+  width: 1020px
+
+  background-size: cover
+
+  color: $white
+  font-weight: 400
+  text-align: left
+
+  h1, h2
+    font-weight: 300
+
+  .card
+    @include transition(0.3s)
+    display: inline-block
+    position: relative
+    width: 200px
+    height: 160px
+    margin: 2px
+
+    cursor: pointer
+    background-color: $white-opaque
+    border: 2px solid transparent
+    border-radius: 2px
+    text-align: left
+
+    &:hover
+      background-color: $white-opaque-hover
+      border-color: $white
+
+    .name
+      display: inline-block
+      margin: 10px 15px
+      font-size: 18px
+      font-weight: 400
+      line-height: 24px
+
+    .info
+      position: absolute
+      left: 15px
+      bottom: -20px
+
+      font-size: 12px
+      letter-spacing: 1px
+      text-align: left
+      text-transform: uppercase
+
+      .festival-link
+        visibility: hidden
+        position: relative
+        top: 60px
+        padding: 5px 15px
+
+        background-color: $white
+        border-radius: 2px
+        color: $slate
+        cursor: pointer
+        font-size: 11px
+        text-decoration: none
+
+        &:hover
+          background-color: $cloud
+
+    .top-artists
+      visibility: hidden
+      position: relative
+      margin: 20px 15px
+      width: 120px
+
+      color: transparent
+      text-align: left
+
+      .artist
+        cursor: pointer
+        font-size: 16px
+        line-height: 20px
+
+      .label
+        color: $cloud
+        font-size: 12px
+        letter-spacing: 1px
+        text-transform: uppercase
+
+    &.main
+      width: 404px
+      cursor: default
+      background-color: $sea-opaque
+
+      &:hover
+        border-color: transparent
+
+      .info
+        top: 10px
+        right: 15px
+        text-align: right
+
+    &.visible
+      .info
+        color: $white
+
+        .festival-link
+          visibility: visible
+
+      .section
+        color: $white
+        visibility: visible

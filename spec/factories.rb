@@ -4,13 +4,12 @@ FactoryGirl.define do
     name 'Mysteryland'
     location 'Bethel, NY'
     description 'The best festival ever'
-    start_date { Date.today - 1.day }
-    end_date { Date.today }
+    start_date { Date.tomorrow }
+    end_date { Date.tomorrow + 2.days }
   end
 
   factory :venue do
     name 'Main Stage'
-    festival
   end
 
   factory :artist do
@@ -20,7 +19,7 @@ FactoryGirl.define do
   factory :event do
     start_time { Time.now - 1.hour }
     end_time { Time.now }
-    venue
+    festival
     artist
   end
 
