@@ -7,4 +7,8 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'MvsicPlay
     $timeout ->
       $scope.visibleFestival = card
     , 300
+
+
+  $scope.playArtist = (artist) ->
+    $scope.$emit('selectArtist', artist)
 ]
