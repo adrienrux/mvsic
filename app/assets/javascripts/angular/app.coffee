@@ -1,7 +1,8 @@
 window.app = angular.module('app', [
   'ngResource',
-  'ngRoute'
-])
+  'ngRoute',
+  'ui.bootstrap'
+]);
 
 # Makes turbolinks work with Angular
 $(document).on 'page:load', ->

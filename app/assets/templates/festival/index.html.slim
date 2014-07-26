@@ -1,7 +1,19 @@
-#dim
+.pane
+  .slideshow
+    carousel interval="5000"
+      slide.slide ng-repeat="slide in slides" active="slide.active"
+        img ng-src="{{ slide.image }}"
+        div.carousel-caption
+          h1 MVSIC
+          h2
+            | {{ slide.message }}
+
+    .hero
+      | Etiam porta sem malesuada magna mollis euismod.
+
+.pane#dim
   #wistia_04fh6bpm8q.wistia_embed
 
-.pane
   .festival-cards
     .cards-row  ng-repeat="festivalRow in festivalList"
       .card ng-repeat="festival in festivalRow" ng-click="openCard(festival)" ng-class="{'main': selectedFestival == festival, 'visible': visibleFestival == festival}"
@@ -22,4 +34,17 @@ javascript:
     stillUrl: 'https://embed-ssl.wistia.com/deliveries/3550d514d88e9a91e4052f2162b89fcc21490deb.bin',
     videoFoam: true,
     volume: 0,
+  });
+
+  $(document).ready(function(){
+
+    function hero() {
+      $('.slideshow').css({ height: $(window).height() + 'px' });
+    }
+
+    $(window).resize(function(){
+      hero();
+    });
+
+    hero();
   });

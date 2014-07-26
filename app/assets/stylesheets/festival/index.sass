@@ -1,6 +1,67 @@
+.slideshow
+  position: relative
+
+  .hero
+    position: absolute
+    bottom: 0
+    width: 100%
+    padding: 2rem
+    margin: 0 auto
+    text-align: center
+
+    background-color: $white-opaque
+    color: $white
+
+  .carousel, .carousel-inner
+    height: 100%
+
+  .carousel-control
+    @include transition(0.3s)
+    cursor: pointer
+
+    &.left, &.right
+      background-image: none
+      background-repeat: none
+      filter: none
+
+    .icon-next, .icon-prev
+      font-size: 80px
+
+  .carousel-indicators
+    bottom: 60px
+
+    li
+      @include transition(0.3s)
+      margin: 3px
+      height: 14px
+      width: 14px
+      border: 2px solid $white-opaque
+      border-radius: 14px
+      background-color: transparent
+
+      &:hover
+        border-color: transparent
+        background-color: $white-opaque
+
+      &.active
+        margin: 3px
+        height: 14px
+        width: 14px
+        border-color: $white
+        background-color: $white
+
+  .slide
+    img
+    .carousel-caption
+      text-shadow: none
+      top: 20%
+
 .festival-cards
   @include animation-delay(3s)
-  margin: 60px auto
+  position: absolute
+  top: 20%
+  left: 50%
+  margin-left: -510px
   width: 1020px
 
   background-size: cover
