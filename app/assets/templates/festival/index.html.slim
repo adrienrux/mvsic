@@ -3,18 +3,19 @@
 
 .pane
   .festival-cards
-    .card ng-repeat="festival in festivalList" ng-click="openCard(festival)" ng-class="{'main': selectedFestival == festival, 'visible': visibleFestival == festival}"
-      .name
-        | {{ festival.name }}
-      .info
-        .location
-          | {{ festival.location.split(',')[0] }}
-        .date
-          | {{ festival.start_date }}
-        a.festival-link ng-href="/festivals/{{festival.id}}" See Lineup
-      .top-artists
-        .label Top Artists
-        .artist ng-repeat="artist in festival.top_artists" ng-click="playArtist(artist)" {{ artist.name }}
+    .cards-row  ng-repeat="festivalRow in festivalList"
+      .card ng-repeat="festival in festivalRow" ng-click="openCard(festival)" ng-class="{'main': selectedFestival == festival, 'visible': visibleFestival == festival}"
+        .name
+          | {{ festival.name }}
+        .info
+          .location
+            | {{ festival.location.split(',')[0] }}
+          .date
+            | {{ festival.start_date }}
+          a.festival-link ng-href="/festivals/{{festival.id}}" See Lineup
+        .top-artists
+          .label Top Artists
+          .artist ng-repeat="artist in festival.top_artists" ng-click="playArtist(artist)" {{ artist.name }}
 
 javascript:
   video = Wistia.embed('04fh6bpm8q', {

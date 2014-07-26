@@ -38,6 +38,7 @@
       line-height: 24px
 
     .info
+      @include transition(0.3s)
       position: absolute
       left: 15px
       bottom: -20px
@@ -64,6 +65,7 @@
           background-color: $cloud
 
     .top-artists
+      @include transition(0.3s)
       visibility: hidden
       position: relative
       margin: 20px 15px
@@ -75,6 +77,7 @@
         cursor: pointer
         font-size: 14px
         line-height: 20px
+        white-space: nowrap
 
       .label
         color: $cloud
