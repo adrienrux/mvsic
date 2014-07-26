@@ -40,53 +40,33 @@
     font-size: 1.8rem
 
     .event-wrapper
-      padding: 0.3rem
+      padding: 1rem
       margin: 0.5rem 1rem
       font-size: 1.6rem
-      background-color: $white
+      background-color: $white-opaque
       border-radius: 0.5rem
+      border-radius: 1px
 
-      .event
-        background-color: $river
-        border-radius: 3px
-        padding: 1rem
-        position: relative
+      .artist-name, .time-location
+        display: inline-block
+        vertical-align: middle
+        line-height: initial
 
-        &:before
-          content: ''
-          display: inline-block
-          height: 100%
-          vertical-align: middle
-          margin-right: -0.25em
+      .artist-name
+        font-weight: 600
+        width: 60%
+        a
+          color: $white
+          text-decoration: none
 
-        .picture-wrapper, .artist-name, .time-location
-          display: inline-block
-          vertical-align: middle
-          line-height: initial
+      .time-location
+        font-weight: 600
+        width: 40%
+        text-align: right
 
-        .picture-wrapper
-          width: 10%
-          .picture
-            background-image: url('lights.jpg')
-            background-repeat: no-repeat
-            background-position: center
-            background-size: cover
-            width: 4rem
-            height: 4rem
-            border-radius: 50%
-            margin: 0 auto
-            padding: 0 auto
-
-        .artist-name
-          font-weight: 600
-          width: 60%
-
-        .time-location
-          font-weight: 600
-          width: 30%
-          text-align: right
-
-        &:hover
-          @include transition(0.1s)
-          background-color: $white
+      &:hover
+        @include transition(0.1s)
+        background-color: $white
+        color: $river
+        a
           color: $river

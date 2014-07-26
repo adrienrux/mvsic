@@ -1,6 +1,6 @@
 app.directive 'timetable', ($window, Time) ->
   MARGIN = {top: 0, right: 20, bottom: 50, left: 20}
-  ROW_HEIGHT = 50
+  ROW_HEIGHT = 40
   MILLISECONDS_PER_BLOCK = 900000 # 15 Minutes
   BOX_H_MARGIN = 2
   BOX_V_MARGIN = 4
@@ -14,7 +14,7 @@ app.directive 'timetable', ($window, Time) ->
     link: (scope, element, attrs) ->
       scope.$watch 'festival', ->
         if scope.festival
-          scope.events = _(scope.festival.venues).chain().pluck('events').flatten().value()
+          scope.events = scope.festival.events
 
       scope.$watch 'day', ->
         if scope.events && scope.day != 'All'
@@ -39,7 +39,7 @@ app.directive 'timetable', ($window, Time) ->
 
       setupTimetable = ->
         scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
-        scope.venueNames = _(scope.filteredEvents).chain().pluck('venue_name').uniq().value()
+        scope.venueNames = _(scope.filteredEvents).chain().pluck('venue').pluck('name').uniq().value()
         minTime = _(scope.filteredEvents).chain().pluck('start_time').map((t) -> Date.parse(t)).min().value()
         maxTime = _(scope.filteredEvents).chain().pluck('end_time').map((t) -> Date.parse(t)).max().value()
 
@@ -68,12 +68,12 @@ app.directive 'timetable', ($window, Time) ->
           .style('top', MARGIN.top + "px")
 
         venueList = timetableArea.append('ul').attr('class', 'venue-list')
-          .style('padding', '0')
 
         venueTitles = venueList.selectAll('li.venue-title')
           .data(scope.venueNames)
 
         venueTitles.enter().append('li')
+          .style('opacity', 0)
           .style('position', 'absolute')
           .style('text-align', 'center')
           .attr('class', 'venue-title')
@@ -81,11 +81,12 @@ app.directive 'timetable', ($window, Time) ->
           .style('list-style-type', 'none')
           .style('height', ROW_HEIGHT + "px")
           .style('left', (v) -> xScale(v) + "px")
-          .style('top', (-MARGIN.top / 2) + "px")
+          .style('top', "-30px")
           .style('width', eventBoxWidth + "px")
+          .transition().duration(250).style('opacity', 1)
 
         venueTitles.append('text')
-          .text((v) -> v.id)
+          .text((v) -> v)
           .style('color', 'white')
 
         yAxis = timetableArea.append('ul').attr('class', 'y-axis')
@@ -102,7 +103,7 @@ app.directive 'timetable', ($window, Time) ->
           .style('height', ROW_HEIGHT + "px")
           .style('left', "0px")
           .style('width', width + "px")
-          .style('border-top', '1px white dotted')
+          .style('border-top', '1px dotted rgba(255, 255, 255, 0.1)')
           .transition().duration(250).style('opacity', 1)
 
         timeslotList.append('text')
@@ -131,14 +132,12 @@ app.directive 'timetable', ($window, Time) ->
           .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
           .style('height', (e) -> (calculateEventHeight(e) - BOX_V_MARGIN * 2) + "px")
           .style('top', (e) -> (yScale(Date.parse(e.start_time)) + BOX_V_MARGIN) + "px")
-          .style('left', (e) -> (xScale(e.venue_name) + BOX_H_MARGIN) + "px")
+          .style('left', (e) -> (xScale(e.venue.name) + BOX_H_MARGIN) + "px")
           .html((e) ->
+            venue_name = if e.venue then e.venue.name
             "
-              <div class='event-box'>
-                <div class='picture'></div>
-                <p class='name'>#{e.artist.name}</p>
-                <p class='venue'>#{e.venue_name}</p>
-              </div>
+              <p class='name'>#{e.artist.artist.name}</p>
+              <p class='venue'>#{venue_name}</p>
             "
           ).on('click', (e) ->
             box = d3.select(this)
@@ -153,10 +152,10 @@ app.directive 'timetable', ($window, Time) ->
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
 
-        eventBoxes.select('div.event-box')
+        eventBoxes
           .append('button')
           .on('click', (e) ->
-            scope.$emit('selectArtist', e.artist)
+            scope.$emit('selectArtist', e.artist.artist)
             d3.event.stopPropagation()
           ).append('div').attr('class', 'play')
 
@@ -164,8 +163,8 @@ app.directive 'timetable', ($window, Time) ->
         scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
         height = (Math.ceil(scope.filteredEvents.length / 3) * ROW_HEIGHT * 4)
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / 3
-        eventBoxHeight = ROW_HEIGHT * 4
+        eventBoxWidth = "#{100 / 4 - 1}%"
+        eventBoxHeight = ROW_HEIGHT * 3
         d3.select(element[0]).select('div.timetable')
           .transition().duration(250).style('opacity', 0).remove()
 
@@ -178,7 +177,7 @@ app.directive 'timetable', ($window, Time) ->
         timetableArea = base.append('div')
           .style('position', 'relative')
           .attr('class', 'timetable-area')
-          .style('left', (MARGIN.left + 60) + "px")
+          .style('left', MARGIN.left + "px")
           .style('top', MARGIN.top + "px")
 
         # Create events
@@ -194,18 +193,16 @@ app.directive 'timetable', ($window, Time) ->
               'event-wrapper'
           )
           .attr('id', (e) -> 'event-' + e.id)
-          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+          .style('width', eventBoxWidth)
           .style('height', (e) -> (eventBoxHeight - BOX_V_MARGIN * 2) + "px")
           .style('position', 'relative')
           .style('float', 'left')
           .style('margin', "#{BOX_H_MARGIN}px")
           .html((e) ->
+            venue_name = if e.venue then e.venue.name else ''
             "
-              <div class='event-box'>
-                <div class='picture'></div>
-                <p class='name'>#{e.artist.name}</p>
-                <p class='venue'>#{e.venue_name}</p>
-              </div>
+              <p class='name'>#{e.artist.artist.name}</p>
+              <p class='venue'>#{venue_name}</p>
             "
           ).on('click', (e) ->
             box = d3.select(this)
@@ -220,10 +217,10 @@ app.directive 'timetable', ($window, Time) ->
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
         
-        eventBoxes.select('div.event-box')
+        eventBoxes
           .append('button')
           .on('click', (e) ->
-            scope.$emit('selectArtist', e.artist)
+            scope.$emit('selectArtist', e.artist.artist)
             d3.event.stopPropagation()
           )
           .append('div').attr('class', 'play')
@@ -245,18 +242,18 @@ app.directive 'timetable', ($window, Time) ->
         # Update the boxes
         d3.selectAll('div.event-wrapper')
           .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
-          .style('left', (e) -> (xScale(e.venue_name) + BOX_H_MARGIN) + "px")
+          .style('left', (e) -> (xScale(e.venue.name) + BOX_H_MARGIN) + "px")
 
       resizeList = ->
-        height = (Math.ceil(scope.filteredEvents.length / 3) * ROW_HEIGHT * 4)
+        height = (Math.ceil(scope.filteredEvents.length / 4) * ROW_HEIGHT * 4)
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / 3
+        eventBoxWidth = "#{100 / 4 - 1}%"
 
         d3.select('div.timetable').style('width', width + MARGIN.left + MARGIN.right)
         d3.select('div.timetable-area').style('width', width)
 
         d3.selectAll('div.event-wrapper')
-          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
+          .style('width', eventBoxWidth)
 
       addEventToSchedule = (newEvent) -> scope.$emit('addEvent', newEvent)
       removeEventFromSchedule = (oldEvent) -> scope.$emit('removeEvent', oldEvent)
@@ -281,7 +278,7 @@ app.directive 'timetable', ($window, Time) ->
       _(events).select (e) ->
         new Date(e.start_time) <= dayEnd && new Date(e.start_time) >= dayStart
     else
-      _(events).sortBy((e) -> e.artist.name)
+      _(events).sortBy((e) -> e.artist.artist.name)
 
   findTime = (time) ->
     time = new Date(time)

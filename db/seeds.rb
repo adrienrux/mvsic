@@ -6,6 +6,10 @@ bpm = Festival.where(name: 'BPM', location: 'Playa del Carmen, Mexico', descript
 boston_calling = Festival.where(name: 'Boston Calling', location: 'Boston, MA', description: 'Donec ullamcorper nulla non metus auctor fringilla. Nullam quis risus eget urna mollis ornare vel eu leo.', start_date:  Date.new(2014, 9, 5), end_date: Date.new(2014, 9, 7)).first_or_create
 lollapalooza = Festival.where(name: 'Lollapalooza', location: 'Chicago, IL', description: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus.', start_date:  Date.new(2014, 8, 1), end_date: Date.new(2014, 8, 3)).first_or_create
 
+stage_1 = Venue.where(name: 'Stage 1', festival: decibel).first_or_create
+stage_2 = Venue.where(name: 'Stage 2', festival: decibel).first_or_create
+stage_3 = Venue.where(name: 'Stage 3', festival: decibel).first_or_create
+
 alan_fitzpatrick = Artist.where(name: 'Alan Fitzpatrick', soundcloud_track_url: 'https://soundcloud.com/mvsic-io/sets/alan-fitzpatrick').first_or_create
 alesso = Artist.where(name: 'Alesso', soundcloud_track_url: 'https://soundcloud.com/alesso/alesso-bbc-radio1-new-years').first_or_create
 alvin_risk = Artist.where(name: 'Alvin Risk', soundcloud_track_url: 'https://soundcloud.com/alvinrisk/weareyoung').first_or_create
@@ -153,19 +157,19 @@ Event.where(festival: tomorrowworld, artist: cazzette).first_or_create
 Event.where(festival: tomorrowworld, artist: chase_and_status).first_or_create
 Event.where(festival: tomorrowworld, artist: chris_liebing).first_or_create
 Event.where(festival: tomorrowworld, artist: clockwork).first_or_create
-Event.where(festival: decibel, artist: cosmic_gate).first_or_create
-Event.where(festival: decibel, artist: dada_life).first_or_create
-Event.where(festival: decibel, artist: danny_avila).first_or_create
-Event.where(festival: decibel, artist: danny_tenaglia).first_or_create
-Event.where(festival: decibel, artist: dash_berlin).first_or_create
-Event.where(festival: decibel, artist: datsik).first_or_create
-Event.where(festival: decibel, artist: david_guetta).first_or_create
-Event.where(festival: decibel, artist: david_solano).first_or_create
-Event.where(festival: decibel, artist: deniz_koyu).first_or_create
-Event.where(festival: decibel, artist: deorro).first_or_create
-Event.where(festival: decibel, artist: destroid).first_or_create
-Event.where(festival: decibel, artist: dimitri_vegas_and_like_mike).first_or_create
-Event.where(festival: decibel, artist: dirty_south).first_or_create
+Event.where(festival: decibel, artist: cosmic_gate, start_time: DateTime.new(2014, 07, 19, 13, 00), end_time: DateTime.new(2014, 07, 19, 14, 00), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: dada_life, start_time: DateTime.new(2014, 07, 19, 13, 45), end_time: DateTime.new(2014, 07, 19, 14, 45), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: danny_avila, start_time: DateTime.new(2014, 07, 19, 13, 55), end_time: DateTime.new(2014, 07, 19, 14, 50), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: danny_tenaglia, start_time: DateTime.new(2014, 07, 19, 14, 30), end_time: DateTime.new(2014, 07, 19, 15, 30), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: dash_berlin, start_time: DateTime.new(2014, 07, 19, 14, 50), end_time: DateTime.new(2014, 07, 19, 15, 45), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: datsik, start_time: DateTime.new(2014, 07, 19, 15, 20), end_time: DateTime.new(2014, 07, 19, 16, 20), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: david_guetta, start_time: DateTime.new(2014, 07, 19, 15, 45), end_time: DateTime.new(2014, 07, 19, 16, 45), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: david_solano, start_time: DateTime.new(2014, 07, 19, 16, 15), end_time: DateTime.new(2014, 07, 19, 17, 15), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: deniz_koyu, start_time: DateTime.new(2014, 07, 19, 16, 45), end_time: DateTime.new(2014, 07, 19, 17, 45), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: deorro, start_time: DateTime.new(2014, 07, 19, 17, 15), end_time: DateTime.new(2014, 07, 19, 18, 15), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: destroid, start_time: DateTime.new(2014, 07, 19, 17, 45), end_time: DateTime.new(2014, 07, 19, 18, 45), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: dimitri_vegas_and_like_mike, start_time: DateTime.new(2014, 07, 19, 18, 15), end_time: DateTime.new(2014, 07, 19, 19, 15), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: dirty_south, start_time: DateTime.new(2014, 07, 19, 18, 45), end_time: DateTime.new(2014, 07, 19, 19, 45), venue: stage_1).first_or_create
 Event.where(festival: bpm, artist: dirtyphonics).first_or_create
 Event.where(festival: bpm, artist: dubfire).first_or_create
 Event.where(festival: bpm, artist: dvbbs).first_or_create
@@ -238,12 +242,12 @@ Event.where(festival: tomorrowworld, artist: thomas_newson).first_or_create
 Event.where(festival: tomorrowworld, artist: tjr).first_or_create
 Event.where(festival: tomorrowworld, artist: tritonal).first_or_create
 Event.where(festival: tomorrowworld, artist: uz).first_or_create
-Event.where(festival: decibel, artist: vicetone).first_or_create
-Event.where(festival: decibel, artist: victor_calderone).first_or_create
-Event.where(festival: decibel, artist: w_and_w).first_or_create
-Event.where(festival: decibel, artist: what_so_not).first_or_create
-Event.where(festival: decibel, artist: wolfgang_gartner).first_or_create
-Event.where(festival: decibel, artist: wolfpack).first_or_create
-Event.where(festival: decibel, artist: zedd).first_or_create
-Event.where(festival: decibel, artist: zeds_dead).first_or_create
-Event.where(festival: decibel, artist: zomboy).first_or_create
+Event.where(festival: decibel, artist: vicetone, start_time: DateTime.new(2014, 07, 18, 15, 20), end_time: DateTime.new(2014, 07, 18, 16, 15), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: victor_calderone, start_time: DateTime.new(2014, 07, 18, 15, 30), end_time: DateTime.new(2014, 07, 18, 16, 30), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: w_and_w, start_time: DateTime.new(2014, 07, 18, 16, 15), end_time: DateTime.new(2014, 07, 18, 17, 15), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: what_so_not, start_time: DateTime.new(2014, 07, 18, 16, 35), end_time: DateTime.new(2014, 07, 18, 17, 35), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: wolfgang_gartner, start_time: DateTime.new(2014, 07, 18, 17, 15), end_time: DateTime.new(2014, 07, 18, 18, 15), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: wolfpack, start_time: DateTime.new(2014, 07, 18, 17, 30), end_time: DateTime.new(2014, 07, 18, 18, 30), venue: stage_3).first_or_create
+Event.where(festival: decibel, artist: zedd, start_time: DateTime.new(2014, 07, 18, 18, 15), end_time: DateTime.new(2014, 07, 18, 19, 15), venue: stage_1).first_or_create
+Event.where(festival: decibel, artist: zeds_dead, start_time: DateTime.new(2014, 07, 18, 18, 25), end_time: DateTime.new(2014, 07, 18, 19, 25), venue: stage_2).first_or_create
+Event.where(festival: decibel, artist: zomboy, start_time: DateTime.new(2014, 07, 18, 19, 15), end_time: DateTime.new(2014, 07, 18, 20, 15), venue: stage_3).first_or_create

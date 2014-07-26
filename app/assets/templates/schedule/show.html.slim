@@ -7,10 +7,8 @@ div#schedule-show
     .day.animated.fadeInUp ng-repeat="day in eventsByDay"
       | {{day.date}}
       .event-wrapper ng-repeat="event in day.events"
-        .event
-          div.picture-wrapper
-            .picture
-          .artist-name
-            | {{event.artist.name}}
-          .time-location
-            | {{event.venue_name}} - {{timeDisplay(event.start_time)}}
+        .artist-name
+          a href="javascript:void(0)" ng-click="$emit('selectArtist', event.artist.artist)"
+            | {{event.artist.artist.name}}
+        .time-location
+          | {{event.venue.name}} - {{timeDisplay(event.start_time)}}

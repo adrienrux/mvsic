@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :start_time
       t.datetime :end_time
       t.references :festival, index: true
+      t.references :venue, index: true
       t.references :artist, index: true
       t.timestamps
     end

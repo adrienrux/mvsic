@@ -11,9 +11,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     $http.get("/api/festivals/#{festival_id}.json").success (data) ->
       $scope.festival = data
-      $scope.days = _(data.venues).chain()
-        .pluck('events')
-        .flatten()
+      $scope.days = _(data.events).chain()
         .pluck('start_time')
         .compact()
         .map((t) ->
