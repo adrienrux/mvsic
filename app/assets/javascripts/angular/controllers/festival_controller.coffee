@@ -1,5 +1,5 @@
-app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Time', 'MvsicPlayer',
-  ($http, $location, $scope, $routeParams, $timeout, Time, MvsicPlayer) ->
+app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Time',
+  ($http, $location, $scope, $routeParams, $timeout, Time) ->
     festival_id = $routeParams.festival_id
     signedUp = false
     $scope.saving = false
@@ -15,6 +15,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .pluck('events')
         .flatten()
         .pluck('start_time')
+        .compact()
         .map((t) ->
           d = new Date(t)
           d.setHours(0)
@@ -33,9 +34,6 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     $scope.$on 'removeEvent', (event, data) ->
       $scope.$apply($scope.eventList = _($scope.eventList).without(data))
-
-    $scope.$on 'selectArtist', (event, artist) ->
-      MvsicPlayer.load(artist)
 
     $scope.deselectEvent = (deselectedEvent) ->
       $scope.eventList = _($scope.eventList).without(deselectedEvent)

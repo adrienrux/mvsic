@@ -202,6 +202,7 @@ app.directive 'timetable', ($window, Time) ->
           .html((e) ->
             "
               <div class='event-box'>
+                <div class='picture'></div>
                 <p class='name'>#{e.artist.name}</p>
                 <p class='venue'>#{e.venue_name}</p>
               </div>
@@ -219,7 +220,7 @@ app.directive 'timetable', ($window, Time) ->
               box.attr('class', 'event-wrapper selected')
           ).transition().duration(250).style('opacity', 1)
         
-        eventBoxes.selectAll('div.event-box')
+        eventBoxes.select('div.event-box')
           .append('button')
           .on('click', (e) ->
             scope.$emit('selectArtist', e.artist)

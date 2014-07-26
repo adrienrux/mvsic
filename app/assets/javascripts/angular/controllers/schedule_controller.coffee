@@ -12,8 +12,9 @@ app.controller 'ScheduleController', ['$http', '$scope', '$routeParams', 'Time',
       .groupBy((e) -> e.date)
       .pairs()
       .map((day) ->
+        date = if day[0] != 'null' then day[0]
         {
-          date: day[0]
+          date: date
           events: day[1]
         }
       )
