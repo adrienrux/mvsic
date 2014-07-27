@@ -8,7 +8,6 @@ app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
 
   playlist = {}
   currentTrack = {}
-  after = false
 
   getTrack = (artist) ->
     trackUrl = artist.soundcloud_track_url
@@ -61,7 +60,10 @@ app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
         currentTrack.duration
 
     setPosition: (percentage) ->
-      currentTrack.sound.setPosition(percentage / 100 * currentTrack.duration)
+      newPosition = percentage / 100 * currentTrack.duration
+      mvsicPlayer.pause()
+      currentTrack.sound.setPosition(newPosition)
+      mvsicPlayer.play()
 
     load: (artist) ->
       if !_(currentTrack['sound']).isEmpty() && currentTrack['sound'].playState
@@ -82,8 +84,12 @@ app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
 
     play: ->
       currentTrack['sound'].play({whileplaying: ->
-        $rootScope.$broadcast('timeUpdate', this.position)}
-      )
+        $rootScope.$apply()
+      })
+
+    pause: ->
+      currentTrack.sound.pause()
+      currentTrack.sound.playState = 0
 
     togglePause: ->
       if currentTrack.sound.playState
