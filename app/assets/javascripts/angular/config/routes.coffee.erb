@@ -1,6 +1,6 @@
 #= depend_on_asset "festival/index.html"
 
-app.config ($routeProvider, $logProvider, $locationProvider, $httpProvider) ->
+app.config ['$routeProvider', '$logProvider', '$locationProvider', '$httpProvider', ($routeProvider, $logProvider, $locationProvider, $httpProvider) ->
   # Use History API to push new URLs
   $locationProvider.html5Mode true
   $logProvider.debugEnabled(false)
@@ -19,3 +19,4 @@ app.config ($routeProvider, $logProvider, $locationProvider, $httpProvider) ->
       controller: 'ScheduleController'
       templateUrl: '<%= asset_path("schedule/show.html") %>'
     .otherwise redirectTo: '/'
+]
