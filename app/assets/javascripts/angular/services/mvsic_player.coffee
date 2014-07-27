@@ -1,4 +1,4 @@
-app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
+app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http, $timeout, $rootScope, $window) ->
 
   CLIENT_ID = 'c8240aca09f3faa989201f76bcbbd7d0'
 
@@ -102,3 +102,5 @@ app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
     mvsicPlayer.load(artist)
 
   mvsicPlayer
+
+]

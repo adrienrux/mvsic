@@ -1,4 +1,4 @@
-app.directive 'modal', ($http) ->
+app.directive 'modal', ['$http', ($http) ->
   restrict: 'A'
   scope:
     show: '='
@@ -60,3 +60,4 @@ app.directive 'modal', ($http) ->
       </div>
     </div>
   "
+]

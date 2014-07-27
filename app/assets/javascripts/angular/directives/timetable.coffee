@@ -1,4 +1,4 @@
-app.directive 'timetable', ($window, Time) ->
+app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
   MARGIN = {top: 0, right: 20, bottom: 50, left: 20}
   ROW_HEIGHT = 40
   MILLISECONDS_PER_BLOCK = 900000 # 15 Minutes
@@ -285,3 +285,5 @@ app.directive 'timetable', ($window, Time) ->
     Time.format12Hour(time)
 
   timetable
+
+]
