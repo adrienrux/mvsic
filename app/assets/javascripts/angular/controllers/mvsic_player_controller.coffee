@@ -8,6 +8,6 @@ app.controller 'MvsicPlayerController', ['$scope', '$timeout', 'MvsicPlayer',
       $scope.$apply()
 
     $scope.updatePosition = (event) ->
-      position = event.offsetX / 400 * 100
+      position = event.offsetX / 300 * 100
       MvsicPlayer.setPosition(position)
 ]
