@@ -1,20 +1,71 @@
 #mvsic-player
+  display: none
   position: fixed
-  bottom: -8rem
-  left: 3rem
-  background: white
+  bottom: 0
+  left: 0
+  right: 0
   padding: 1rem
-  border-radius: 1.5rem 1.5rem 0 0
+  width: 100%
+  height: 5rem
   font-size: 1.4rem
-  width: 30rem
-  max-height: 8rem
+  background: $white-opaque
+
+  .info
+    position: relative
+    display: inline-block
+    top: 0.4rem
+    margin: 0 2rem
+
+    div
+      display: inline-block
+      margin: 0 1rem
+      color: $white
+
+    .artist, .track
+      letter-spacing: 1px
+      text-transform: uppercase
+
+    .artist
+      &:after
+        color: $slate
+        content: "//"
+        margin-left: 1rem
+
+    .track
+      @include transition(0.3s)
+      color: $white
+      border-bottom: 1px solid transparent
+      &:hover
+        border-bottom-color: $white
+
+  .label
+    color: $cloud
+    font-size: 1.2rem
+    letter-spacing: 1px
+    text-transform: uppercase
+
+  .controls
+    display: inline-block
+
+  .seek
+    display: inline-block
+    position: relative
+    top: 0.2rem
+    height: 0.5rem
+    width: 40rem
+    background: $white-opaque-medium
+    .played
+      background: $white
+      height: 0.5rem
+      width: 10%
+
 
   a
     color: $river
 
   &.displayed
     @include transition(0.3s)
-    bottom: 0
+    display: block
 
   button
     border-radius: 3px
