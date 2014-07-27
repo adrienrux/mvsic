@@ -5,10 +5,9 @@
     a.track ng-href="{{currentTrack.permalink_url}}" target="_blank"
       | {{ currentTrack.title }}
   .controls
-    button ng-click="mvsicPlayer.pause()" ng-class="{play: !currentTrack.sound.playState, pause: currentTrack.sound.playState}"
+    button ng-click="mvsicPlayer.togglePause()" ng-class="{play: !currentTrack.sound.playState, pause: currentTrack.sound.playState}"
       div class="icon"
-  .seek
-    .played
-
+  .seek ng-click="updatePosition($event)"
+    .played ng-style="{width: mvsicPlayer.currentTime() / mvsicPlayer.totalDuration() * 100 + '%'}"
   .label ng-if="currentTrack.error"
     | Sorry, an error occured. Please pick another artist.

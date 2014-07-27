@@ -1,4 +1,4 @@
-app.factory 'MvsicPlayer', ($http, $rootScope) ->
+app.factory 'MvsicPlayer', ($http, $timeout, $rootScope, $window) ->
 
   CLIENT_ID = 'c8240aca09f3faa989201f76bcbbd7d0'
 
@@ -8,6 +8,7 @@ app.factory 'MvsicPlayer', ($http, $rootScope) ->
 
   playlist = {}
   currentTrack = {}
+  after = false
 
   getTrack = (artist) ->
     trackUrl = artist.soundcloud_track_url
@@ -17,19 +18,21 @@ app.factory 'MvsicPlayer', ($http, $rootScope) ->
         SC.stream "#{response.stream_url}", (sound) ->
           unless sound.errors
             playlist["#{artist.id}"] = {
-              sound: sound,
+              duration: response.duration
+              sound: sound
               title: response.title
               permalink_url: response.permalink_url
             }
             currentTrack = {
               artistName: artist.name
+              duration: response.duration
               sound: sound
               title: response.title
               permalink_url: response.permalink_url
               error: false
             }
-            currentTrack['sound'].play()
             $rootScope.$broadcast 'newTrack', currentTrack
+            mvsicPlayer.play()
           else
             broadcastError(artist)
       .error (data) ->
@@ -45,28 +48,49 @@ app.factory 'MvsicPlayer', ($http, $rootScope) ->
     $rootScope.$broadcast 'newTrack', currentTrack
 
   mvsicPlayer =
+    currentTime: ->
+      if currentTrack && currentTrack.sound
+        currentTrack.sound.position
+
+    currentDuration: ->
+      if currentTrack && currentTrack.sound
+        currentTrack.sound.duration
+
+    totalDuration: ->
+      if currentTrack
+        currentTrack.duration
+
+    setPosition: (percentage) ->
+      currentTrack.sound.setPosition(percentage / 100 * currentTrack.duration)
+
     load: (artist) ->
       if !_(currentTrack['sound']).isEmpty() && currentTrack['sound'].playState
         currentTrack['sound'].stop()
       if track = playlist["#{artist.id}"]
         currentTrack = {
           artistName: artist.name
+          duration: track.duration
           sound: track.sound
           title: track.title
           permalink_url: track.permalink_url
           error: false
         }
-        currentTrack['sound'].play()
         $rootScope.$broadcast 'newTrack', currentTrack
+        mvsicPlayer.play()
       else
         getTrack(artist)
 
-    pause: ->
+    play: ->
+      currentTrack['sound'].play({whileplaying: ->
+        $rootScope.$broadcast('timeUpdate', this.position)}
+      )
+
+    togglePause: ->
       if currentTrack.sound.playState
         currentTrack.sound.pause()
         currentTrack.sound.playState = 0
       else if !currentTrack.error
-        currentTrack.sound.play()
+        mvsicPlayer.play()
 
   $rootScope.$on 'selectArtist', (event, artist) ->
     mvsicPlayer.load(artist)

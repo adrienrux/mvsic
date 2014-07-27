@@ -1,7 +1,13 @@
-app.controller 'MvsicPlayerController', ['$scope', 'MvsicPlayer',
-  ($scope, MvsicPlayer) ->
+app.controller 'MvsicPlayerController', ['$scope', '$timeout', 'MvsicPlayer',
+  ($scope, $timeout, MvsicPlayer) ->
     $scope.mvsicPlayer = MvsicPlayer
     $scope.$on 'newTrack', (event, newTrack) ->
       $scope.currentTrack = newTrack
       $scope.$apply()
+    $scope.$on 'timeUpdate', (event, position) ->
+      $scope.$apply()
+
+    $scope.updatePosition = (event) ->
+      position = event.offsetX / 400 * 100
+      MvsicPlayer.setPosition(position)
 ]
