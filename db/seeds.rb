@@ -251,3 +251,7 @@ Event.where(festival: decibel, artist: wolfpack, start_time: DateTime.new(2014, 
 Event.where(festival: decibel, artist: zedd, start_time: DateTime.new(2014, 07, 18, 18, 15), end_time: DateTime.new(2014, 07, 18, 19, 15), venue: stage_1).first_or_create
 Event.where(festival: decibel, artist: zeds_dead, start_time: DateTime.new(2014, 07, 18, 18, 25), end_time: DateTime.new(2014, 07, 18, 19, 25), venue: stage_2).first_or_create
 Event.where(festival: decibel, artist: zomboy, start_time: DateTime.new(2014, 07, 18, 19, 15), end_time: DateTime.new(2014, 07, 18, 20, 15), venue: stage_3).first_or_create
+
+Tracker.where(subject: 'user_play').each do |tracker|
+  tracker.update_attribute :count, rand(10) + rand(100)
+end

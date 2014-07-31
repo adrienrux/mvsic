@@ -23,7 +23,6 @@ class Api::SchedulesController < Api::BaseController
   end
 
   private
-
   def load_schedule
     @schedule ||= Schedule.find(params[:id])
   end

@@ -1,5 +1,6 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :end_time, :date, :id, :start_time, :artist
+  attributes :end_time, :date, :id, :start_time
+  has_one :artist
   has_one :venue
 
   def date

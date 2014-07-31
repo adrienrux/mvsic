@@ -1,7 +1,6 @@
 class Api::BaseController < ApplicationController
 
   private
-
   def verify_params
     head :bad_request and return if params[:id] && params[:id].match(/\D/)
     head :bad_request and return if params[:page] && params[:page].match(/\D/)

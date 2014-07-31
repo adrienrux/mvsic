@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     post :signup
   end
 
+  post 'track', controller: :tracker, action: :update
+
   get '*path' => 'angular#index'
 end
