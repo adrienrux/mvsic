@@ -255,3 +255,7 @@ Event.where(festival: decibel, artist: zomboy, start_time: DateTime.new(2014, 07
 Tracker.where(subject: 'user_play').each do |tracker|
   tracker.update_attribute :count, rand(10) + rand(100)
 end
+
+Tracker.where(subject: 'user_save_to_schedule').each do |tracker|
+  tracker.update_attribute :count, rand(30)
+end

@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  include TrackedModel
+  include HasTracker
 
   validates :name, presence: true
   has_many :events, lambda { order :start_time }

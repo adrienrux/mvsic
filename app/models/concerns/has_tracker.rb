@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module TrackedModel
+module HasTracker
   extend ActiveSupport::Concern
 
   included do
@@ -17,5 +17,10 @@ module TrackedModel
   # Increment the specified subject for this object.
   def increment!(subject)
     Tracker.for(self, subject).try :increment!
+  end
+
+  private
+  def create_trackers
+    raise 'Implement in class that includes HasTracker'
   end
 end
