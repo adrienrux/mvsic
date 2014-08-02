@@ -24,7 +24,7 @@ class Api::SchedulesController < Api::BaseController
 
   private
   def load_schedule
-    @schedule ||= Schedule.find(params[:id])
+    @schedule ||= Schedule.find_by_hashed_id(params[:id])
   end
 
   def permitted_params

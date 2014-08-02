@@ -1,5 +1,5 @@
 class FestivalSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :description, :start_date, :end_date
+  attributes :id, :name, :location, :description, :start_date, :end_date, :slug
   has_many :top_artists
   has_many :events
 

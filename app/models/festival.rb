@@ -6,4 +6,8 @@ class Festival < ActiveRecord::Base
 
   scope :after, -> (time) { where('start_date > ?', time) }
   scope :before, -> (time) { where('start_date < ?', time) }
+
+  def slug
+    "#{name.parameterize}-#{start_date.year}"
+  end
 end

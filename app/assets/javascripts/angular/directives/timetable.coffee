@@ -136,7 +136,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
           .html((e) ->
             venue_name = if e.venue then e.venue.name
             "
-              <p class='name'>#{e.artist.artist.name}</p>
+              <p class='name'>#{e.artist.name}</p>
               <p class='venue'>#{venue_name}</p>
             "
           ).on('click', (e) ->
@@ -155,7 +155,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
         eventBoxes
           .append('button')
           .on('click', (e) ->
-            scope.$emit('selectArtist', e.artist.artist)
+            scope.$emit('selectArtist', e.artist)
             d3.event.stopPropagation()
           ).append('div').attr('class', 'play')
 
@@ -201,7 +201,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
           .html((e) ->
             venue_name = if e.venue then e.venue.name else ''
             "
-              <p class='name'>#{e.artist.artist.name}</p>
+              <p class='name'>#{e.artist.name}</p>
               <p class='venue'>#{venue_name}</p>
             "
           ).on('click', (e) ->
@@ -220,7 +220,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
         eventBoxes
           .append('button')
           .on('click', (e) ->
-            scope.$emit('selectArtist', e.artist.artist)
+            scope.$emit('selectArtist', e.artist)
             d3.event.stopPropagation()
           )
           .append('div').attr('class', 'play')
@@ -278,7 +278,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
       _(events).select (e) ->
         new Date(e.start_time) <= dayEnd && new Date(e.start_time) >= dayStart
     else
-      _(events).sortBy((e) -> e.artist.artist.name)
+      _(events).sortBy((e) -> e.artist.name)
 
   findTime = (time) ->
     time = new Date(time)

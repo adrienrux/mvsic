@@ -12,10 +12,10 @@ app.config ['$routeProvider', '$logProvider', '$locationProvider', '$httpProvide
     .when '/',
       controller: 'FestivalsController'
       templateUrl: '<%= asset_path("festival/index.html") %>'
-    .when '/festivals/:festival_id/',
+    .when '/festivals/:festival_slug/',
       controller: 'FestivalController'
       templateUrl: '<%= asset_path("festival/show.html") %>'
-    .when '/schedules/:schedule_id/',
+    .when '/schedules/:schedule_hashed_id/',
       controller: 'ScheduleController'
       templateUrl: '<%= asset_path("schedule/show.html") %>'
     .otherwise redirectTo: '/'

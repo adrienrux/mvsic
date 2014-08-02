@@ -1,8 +1,8 @@
 app.controller 'ScheduleController', ['$http', '$scope', '$routeParams', 'Time', ($http, $scope, $routeParams, Time) ->
 
-  id = $routeParams.schedule_id
+  hashed_id = $routeParams.schedule_hashed_id
 
-  $http.get("/api/schedules/#{id}.json").success (data) ->
+  $http.get("/api/schedules/#{hashed_id}.json").success (data) ->
     $scope.schedule = data
     $scope.eventsByDay = groupEventsByDay(data)
 

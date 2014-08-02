@@ -1,6 +1,5 @@
-app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Time',
-  ($http, $location, $scope, $routeParams, $timeout, Time) ->
-    festival_id = $routeParams.festival_id
+app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Festivals', 'Time',
+  ($http, $location, $scope, $routeParams, $timeout, Festivals, Time) ->
     signedUp = false
     $scope.saving = false
     $scope.saveMessage = 'Save Schedule'
@@ -8,24 +7,27 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
     $scope.newSchedule = {
       schedule_events_attributes: []
     }
+    $scope.festivalSlug = $routeParams.festival_slug
 
-    $http.get("/api/festivals/#{festival_id}.json").success (data) ->
-      $scope.festival = data
-      $scope.days = _(data.events).chain()
-        .pluck('start_time')
-        .compact()
-        .map((t) ->
-          d = new Date(t)
-          d.setHours(0)
-          d.setMinutes(0)
-        )
-        .uniq()
-        .map((t) ->
-          new Date(t)
-        )
-        .value()
-      $scope.selectedDay = $scope.days[0] || 'All'
-      _($scope.newSchedule).extend({festival_id: data.id})
+    $http.get('/api/festivals.json').success (data) ->
+      $scope.festivalId = _(data).findWhere({slug: $scope.festivalSlug}).id
+      $http.get("/api/festivals/#{$scope.festivalId}.json").success (data) ->
+        $scope.festival = data
+        $scope.days = _(data.events).chain()
+          .pluck('start_time')
+          .compact()
+          .map((t) ->
+            d = new Date(t)
+            d.setHours(0)
+            d.setMinutes(0)
+          )
+          .uniq()
+          .map((t) ->
+            new Date(t)
+          )
+          .value()
+        $scope.selectedDay = $scope.days[0] || 'All'
+        _($scope.newSchedule).extend({festival_id: data.id})
 
     $scope.$on 'addEvent', (event, data) ->
       $scope.$apply($scope.eventList.push(data))
@@ -87,11 +89,11 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       updateScheduleEvents()
       $http.post("/api/schedules.json", schedule: $scope.newSchedule)
         .success (schedule) ->
-          _($scope.newSchedule).extend({id: schedule.id})
+          _($scope.newSchedule).extend({id: schedule.id, hashed_id: schedule.hashed_id})
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
           $scope.saving = false
-          $location.path("/schedules/#{schedule.id}")
+          $location.path("/schedules/#{schedule.hashed_id}")
         .error (error) ->
           $scope.saveMessage = "Error :("
           $scope.saving = false
