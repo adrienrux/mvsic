@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def schedule_email(email, schedule)
     @festival = schedule.festival
-    @url  = "www.mvsic.io/schedules/#{schedule.hashed_id}"
+    @url  = "http://mvsic.io/schedules/#{schedule.hashed_id}"
     @email = email
     subject = "Here's your Schedule for #{schedule.festival.name}!"
     puts 'Hello'
