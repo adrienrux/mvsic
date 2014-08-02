@@ -6,6 +6,7 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals
 
   if Festivals.listEmpty()
     $http.get('/api/festivals.json', params: { sort_by: 'start_date', page: 1 }).success (data) ->
+      $scope.festivalListFull = data
       $scope.festivalList = groupBy(data, 4)
       Festivals.setFestivalList(data)
   else
@@ -32,6 +33,10 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals
 
   $scope.playArtist = (artist) ->
     $scope.$emit('selectArtist', artist)
+
+  $scope.$on 'updateArtistCount', (event, data) ->
+    artists = _($scope.festivalListFull).chain().pluck('top_artists').flatten().where({id: data.artist_id}).value()
+    _(artists).each((artist) -> artist.play_count = data.count)
 
   carousel()
 ]

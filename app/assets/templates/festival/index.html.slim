@@ -25,7 +25,8 @@
           a.festival-link ng-href="/festivals/{{festival.slug}}" See Lineup
         .top-artists
           .label Top Artists
-          .artist ng-repeat="artist in festival.top_artists" ng-click="playArtist(artist)" {{ artist.name }}
+          .artist ng-repeat="artist in festival.top_artists | orderBy:'play_count':true" ng-click="playArtist(artist)"
+            | {{ artist.name }} {{ artist.play_count }}
 
 javascript:
   video = Wistia.embed('04fh6bpm8q', {
