@@ -4,6 +4,6 @@ class FestivalSerializer < ActiveModel::Serializer
   has_many :events
 
   def top_artists
-    object.events.sample(3).map(&:artist)
+    object.events.map(&:artist).sort_by{ |a| a.count :user_play }.reverse.first(3)
   end
 end
