@@ -2,6 +2,7 @@ class Api::SchedulesController < Api::BaseController
   def create
     @schedule = Schedule.new(permitted_params)
     if @schedule.save
+      UserMailer.schedule_email(params[:email], @schedule).deliver
       render json: @schedule
     else
       render_validation_errors @schedule

@@ -23,7 +23,7 @@ app.directive 'modal', ['$http', ($http) ->
           scope.error = false
           scope.saved = true
           scope.buttonValue = 'Signed Up :)'
-          scope.$emit('signUpSuccess')
+          scope.$emit('signUpSuccess', scope.email)
         ).error((response) ->
           $('#beta-loader').css(visibility: 'hidden')
           scope.saving = false

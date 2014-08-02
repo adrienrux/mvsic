@@ -89,13 +89,13 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       else
         updateSchedule()
 
-    $scope.$on 'signUpSuccess', (event, data) ->
+    $scope.$on 'signUpSuccess', (event, email) ->
       signedUp = true
-      saveSchedule()
+      saveSchedule(email)
 
-    saveSchedule = ->
+    saveSchedule = (email) ->
       updateScheduleEvents()
-      $http.post("/api/schedules.json", schedule: $scope.newSchedule)
+      $http.post("/api/schedules.json", schedule: $scope.newSchedule, email: email)
         .success (schedule) ->
           _($scope.newSchedule).extend({id: schedule.id, hashed_id: schedule.hashed_id})
           $scope.newSchedule = schedule
