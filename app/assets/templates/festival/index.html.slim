@@ -1,4 +1,4 @@
-.pane
+.pane.header
   .slideshow
     carousel interval="5000"
       slide.slide ng-repeat="slide in slides" active="slide.active"
@@ -7,9 +7,7 @@
           h1 MVSIC
           h2
             | {{ slide.message }}
-
-    / .hero
-    /   | Etiam porta sem malesuada magna mollis euismod.
+          .button Browse Festival
 
 .pane#dim
   #wistia_04fh6bpm8q.wistia_embed
@@ -34,17 +32,4 @@ javascript:
     stillUrl: 'https://embed-ssl.wistia.com/deliveries/3550d514d88e9a91e4052f2162b89fcc21490deb.bin',
     videoFoam: true,
     volume: 0,
-  });
-
-  $(document).ready(function(){
-
-    function hero() {
-      $('.slideshow').css({ height: $(window).height() + 'px' });
-    }
-
-    $(window).resize(function(){
-      hero();
-    });
-
-    hero();
   });

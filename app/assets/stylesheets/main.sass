@@ -4,13 +4,14 @@
 html
   font-family: $sans-serif
   font-size: 62.5%
-  font-weight: 400
+  font-weight: 300
   height: 100%
 
 *
   @include border-box
 
 body
+  font-family: $sans-serif
   font-size: 1.6rem
   height: 100%
 
@@ -63,13 +64,60 @@ nav.top-nav
       a
         @include white-link
         font-size: 1.4rem
-        font-weight: 600
+        font-weight: 400
+
+#feedback-form
+  display: none
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 100
+  background-color: $river
+
+  form
+    color: $white
+    font-size: 20px
+    padding: 20px 0
+    width: 600px
+    margin: 0 auto
+
+  input[type="text"], input[type="email"], textarea
+    outline: none
+    resize: none
+    background-color: transparent
+    border: 2px solid $white
+    border-radius: 4px
+    margin: 10px 0
+    padding: 10px 20px
+    width: 100%
+    &::-webkit-input-placeholder
+      color: $white-opaque-medium
+    &:-moz-placeholder
+      color: $white-opaque-medium
+    &::-moz-placeholder
+      color: $white-opaque-medium
+    &:-ms-input-placeholder
+      color: $white-opaque-medium
+
+  input[type="submit"], input[type="button"]
+    background-color: transparent
+    border: 2px solid $white
+    border-radius: 4px
+    cursor: pointer
+    outline: none
+    margin-bottom: 10px
+    padding: 5px 15px
+    width: 100%
+
+    &:hover
+      background-color: $white-opaque
 
 // CONTENT
 #content
   margin: 0
   height: 100%
-
 
 a.button
   @include transition(0.3s)

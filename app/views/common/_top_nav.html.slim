@@ -3,6 +3,32 @@ nav.top-nav.animated.fadeInUp
     img src="/assets/logo/logo-large-white.png" alt="MVSIC logo"
   ul.links
     li
+      = link_to 'Feedback', '#', class: 'feedback-link'
+    li
       = link_to 'Blog', 'http://blog.mvsic.io'
     li.social
       = link_to 'Twitter', 'https://twitter.com/mvsicio'
+
+#feedback-form
+  form method='post' action="//forms.brace.io/#{feedback_email_address}"
+    p Hi there! We'd love to hear from you! Please tell us what you like, don't like, want to see more of. Or, just say hello :)
+    p
+      | &mdash;MVSIC team
+    input type='text' name='name' placeholder='Your name (so we can address you like a friend)'
+    input type='email' name='_replyto' placeholder='Your email (so we can get back to you)'
+    textarea name='message' rows='4' placeholder='Your feedback. Thank you!'
+    input type='submit' value='Send'
+    input.cancel-feedback type='button' value='Cancel'
+
+javascript:
+  $(function() {
+    $('.feedback-link').on('click', function(event) {
+      $('#content').hide();
+      $('#feedback-form').show();
+    });
+
+    $('.cancel-feedback').on('click', function(event) {
+      $('#content').show();
+      $('#feedback-form').hide();
+    })
+  });
