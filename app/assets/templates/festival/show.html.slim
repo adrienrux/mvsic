@@ -4,16 +4,32 @@
       | {{festival.name}}
     #festival-location.animated.fadeInUp
       | {{festival.location}}
-  div#timetable
-    div#view-toggle.animated.fadeInUp
-      div.day ng-repeat="day in days"
+  #festival-description
+    div
+      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  #festival-editors-picks
+    .schedule-link
+      a ng-href="/schedules/003d1740"
+        | Han's Schedule
+    .schedule-link
+      a ng-href="/schedules/003d1740"
+        | Han's Schedule
+    .schedule-link
+      a ng-href="/schedules/003d1740"
+        | Han's Schedule
+  #timetable
+    #view-toggle.animated.fadeInUp
+      .day ng-repeat="day in days"
         button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
           | {{dayDisplay(day)}}
-      div.day
+      .day
         button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
           | All
-    div#directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay"
-  div#save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
+    #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="selectedDay != 'All'"
+    #artist-list ng-if="selectedDay == 'All'"
+      div ng-repeat="event in festival.events"
+        | {{event.artist.name}}
+  #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
     button#save ng-click="clickSave()" ng-class="{'saving': saving}"
       | {{saveMessage}}
     #spinner.loader ng-show="saving"
