@@ -25,7 +25,10 @@
       .day
         button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
           | All
-    #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay"
+    #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="selectedDay != 'All'"
+    #artist-list ng-if="selectedDay == 'All'"
+      div ng-repeat="event in festival.events"
+        | {{event.artist.name}}
   #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
     button#save ng-click="clickSave()" ng-class="{'saving': saving}"
       | {{saveMessage}}
