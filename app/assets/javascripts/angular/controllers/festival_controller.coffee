@@ -9,25 +9,33 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
     }
     $scope.festivalSlug = $routeParams.festival_slug
 
-    $http.get('/api/festivals.json').success (data) ->
-      $scope.festivalId = _(data).findWhere({slug: $scope.festivalSlug}).id
-      $http.get("/api/festivals/#{$scope.festivalId}.json").success (data) ->
-        $scope.festival = data
-        $scope.days = _(data.events).chain()
-          .pluck('start_time')
-          .compact()
-          .map((t) ->
-            d = new Date(t)
-            d.setHours(0)
-            d.setMinutes(0)
-          )
-          .uniq()
-          .map((t) ->
-            new Date(t)
-          )
-          .value()
-        $scope.selectedDay = $scope.days[0] || 'All'
-        _($scope.newSchedule).extend({festival_id: data.id})
+    if Festivals.listEmpty()
+      $http.get('/api/festivals.json').success (data) ->
+        $scope.festivalId = _(data).findWhere({slug: $scope.festivalSlug}).id
+        Festivals.setFestivalList(data)
+        $http.get("/api/festivals/#{$scope.festivalId}.json").success (data) ->
+          setupFestival(data)
+    else
+      $http.get("/api/festivals/#{Festivals.findId($scope.festivalSlug)}.json").success (data) ->
+        setupFestival(data)
+
+    setupFestival = (data) ->
+      $scope.festival = data
+      $scope.days = _(data.events).chain()
+        .pluck('start_time')
+        .compact()
+        .map((t) ->
+          d = new Date(t)
+          d.setHours(0)
+          d.setMinutes(0)
+        )
+        .uniq()
+        .map((t) ->
+          new Date(t)
+        )
+        .value()
+      $scope.selectedDay = $scope.days[0] || 'All'
+      _($scope.newSchedule).extend({festival_id: data.id})
 
     $scope.$on 'addEvent', (event, data) ->
       $scope.$apply($scope.eventList.push(data))

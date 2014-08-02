@@ -1,11 +1,15 @@
-app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'MvsicPlayer', ($http, $timeout, $scope, MvsicPlayer) ->
-  $http.get('/api/festivals.json', params: { sort_by: 'start_date', page: 1 }).success (data) ->
-    $scope.festivalList = groupBy(data, 4)
-
+app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals', 'MvsicPlayer', ($http, $timeout, $scope, Festivals, MvsicPlayer) ->
   groupBy = (array, size) ->
     lists = _.chain(array).groupBy((el, i) ->
       Math.floor(i/size)
     ).toArray().value()
+
+  if Festivals.listEmpty()
+    $http.get('/api/festivals.json', params: { sort_by: 'start_date', page: 1 }).success (data) ->
+      $scope.festivalList = groupBy(data, 4)
+      Festivals.setFestivalList(data)
+  else
+    $scope.festivalList = groupBy(Festivals.getFestivalList(), 4)
 
   carousel = ->
     $scope.slides = [
@@ -28,7 +32,6 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'MvsicPlay
 
   $scope.playArtist = (artist) ->
     $scope.$emit('selectArtist', artist)
-
 
   carousel()
 ]
