@@ -16,6 +16,7 @@ class TrackerController < ApplicationController
   end
 
   private
+
   def verify_request
     head :bad_request and return if params[:artist_id] && params[:artist_id].to_s.match(/\D/)
     head :bad_request and return if params[:subject] && !params[:subject].match(/^(user_play|user_save_to_schedule)$/i)
