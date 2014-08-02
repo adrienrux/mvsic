@@ -1,7 +1,8 @@
-app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Festivals', 'Time',
-  ($http, $location, $scope, $routeParams, $timeout, Festivals, Time) ->
+app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Festivals', 'Time', 'MvsicPlayer',
+  ($http, $location, $scope, $routeParams, $timeout, Festivals, Time, MvsicPlayer) ->
     signedUp = false
     $scope.saving = false
+    $scope.sort = 'artist.play_count'
     $scope.saveMessage = 'Save Schedule'
     $scope.eventList = []
     $scope.newSchedule = {
@@ -38,12 +39,17 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       _($scope.newSchedule).extend({festival_id: data.id})
 
     $scope.$on 'addEvent', (event, data) ->
-      $scope.$apply($scope.eventList.push(data))
+      $scope.selectEvent(data)
 
     $scope.$on 'removeEvent', (event, data) ->
       $scope.$apply($scope.eventList = _($scope.eventList).without(data))
 
+    $scope.selectEvent = (selectedEvent)->
+      selectedEvent.selected = true
+      $scope.eventList.push(selectedEvent)
+
     $scope.deselectEvent = (deselectedEvent) ->
+      deselectedEvent.selected = false
       $scope.eventList = _($scope.eventList).without(deselectedEvent)
       $scope.$broadcast('deselectEvent', deselectedEvent)
 
@@ -92,6 +98,13 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
     $scope.$on 'signUpSuccess', (event, email) ->
       signedUp = true
       saveSchedule(email)
+
+    $scope.playArtist = (artist) ->
+      $scope.$emit('selectArtist', artist)
+
+    $scope.$on 'updateArtistCount', (event, data) ->
+      artists = _($scope.festival.events).chain().pluck('artist').flatten().where({id: data.artist_id}).value()
+      _(artists).each((artist) -> artist.play_count = data.count)
 
     saveSchedule = (email) ->
       updateScheduleEvents()

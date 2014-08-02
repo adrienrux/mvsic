@@ -8,7 +8,7 @@ div#schedule-show
       | {{day.date}}
       .event-wrapper ng-repeat="event in day.events"
         .artist-name
-          a href="javascript:void(0)" ng-click="$emit('selectArtist', event.artist)"
+          a href="javascript:void(0)" ng-click="$emit('selectArtist', event.artist.artist)"
             | {{event.artist.name}}
         .time-location
           | {{event.venue.name}} - {{timeDisplay(event.start_time)}}

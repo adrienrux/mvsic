@@ -1,41 +1,49 @@
 #new-schedule ng-show="festival"
-  #festival-info
-    #festival-name.animated.fadeInUp
-      | {{festival.name}}
-    #festival-location.animated.fadeInUp
-      | {{festival.location}}
-  #festival-description
-    div
-      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-  #festival-editors-picks
-    .schedule-link
-      a ng-href="/schedules/003d1740"
-        | Han's Schedule
-    .schedule-link
-      a ng-href="/schedules/003d1740"
-        | Han's Schedule
-    .schedule-link
-      a ng-href="/schedules/003d1740"
-        | Han's Schedule
-  #timetable
-    #view-toggle.animated.fadeInUp
-      .day ng-repeat="day in days"
-        button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
-          | {{dayDisplay(day)}}
-      .day
-        button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
-          | All
-    #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="selectedDay != 'All'"
-    #artist-list ng-if="selectedDay == 'All'"
-      div ng-repeat="event in festival.events"
-        | {{event.artist.name}}
-  #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
-    button#save ng-click="clickSave()" ng-class="{'saving': saving}"
-      | {{saveMessage}}
-    #spinner.loader ng-show="saving"
-  #schedule-link ng-if="newSchedule.id"
-    | Click here to access your saved
-    a ng-href="/schedules/{{newSchedule.id}}"
-      |  schedule
-    | .
+  .festival-wrapper
+    .festival-pane.animated.fadeInUp
+      .festival-name
+        | {{ festival.name }}
+      .festival-info
+        .festival-location
+          | {{ festival.location }}
+        .festival-date
+          | {{ festival.start_date }} - {{ festival.end_date }}
+      .festival-description
+        | Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Maecenas sed diam eget risus varius blandit sit amet non magna. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
+
+  .events-wrapper
+    .events-pane
+      .sort-toggles
+        .label Sort artists by:
+        .toggles
+          .toggle ng-click="sort = 'artist.play_count'" ng-class="{'selected': sort == 'artist.play_count'}" Popularity
+          .toggle ng-click="sort = 'artist.name'" ng-class="{'selected': sort == 'artist.name'}" Name
+          .toggle ng-click="sortArtists('timeSlot')" Timeslot
+      #timetable
+        #view-toggle.animated.fadeInUp
+          .day ng-repeat="day in days"
+            button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
+              | {{dayDisplay(day)}}
+          .day
+            button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
+              | All
+        #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="selectedDay != 'All'"
+        #artist-list ng-if="selectedDay == 'All'"
+          div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}"
+            .button.add ng-click="deselectEvent(event)" ng-if="event.selected" Remove
+            .button.add ng-click="selectEvent(event)" ng-if="!event.selected" Add
+            .button.play ng-click="playArtist(event.artist)" Play
+            .name
+              | {{ event.artist.name }} - {{ MvsicPlayer.getArtist() }}
+            .playcount
+              | {{ event.artist.play_count }} &hearts;
+      #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
+        button#save ng-click="clickSave()" ng-class="{'saving': saving}"
+          | {{saveMessage}}
+        #spinner.loader ng-show="saving"
+      #schedule-link ng-if="newSchedule.id"
+        | Click here to access your saved
+        a ng-href="/schedules/{{newSchedule.id}}"
+          |  schedule
+        | .
 #signup-modal modal="" show="showModal"

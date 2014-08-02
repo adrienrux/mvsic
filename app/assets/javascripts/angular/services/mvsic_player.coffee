@@ -25,6 +25,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
               permalink_url: response.permalink_url
             }
             currentTrack = {
+              artistId: artist.id
               artistName: artist.name
               duration: response.duration
               sound: sound
@@ -72,6 +73,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
         currentTrack['sound'].stop()
       if track = playlist["#{artist.id}"]
         currentTrack = {
+          artistId: artist.id
           artistName: artist.name
           duration: track.duration
           sound: track.sound

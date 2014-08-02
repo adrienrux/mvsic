@@ -2,10 +2,9 @@
 @import "mixins"
 
 #new-schedule
-  background-color: $river
+  background-color: $white
   clear: both
   font-family: $sans-serif
-  padding: 6rem 2rem
   padding-bottom: 3rem
   width: 100%
   min-height: 100%
@@ -15,33 +14,97 @@
     content: ''
     display: table
 
-  #festival-name, #festival-location
-    color: white
-    margin: 0.5rem 0.5rem
-    text-align: center
+  .festival-wrapper
+    padding: 8rem 2rem 2rem 2rem
+    background-color: $sea
 
-  #festival-name
-    @include animation-delay(0.5s)
-    font-size: 2.6rem
-    font-weight: 400
+  .festival-pane
+    position: relative
+    height: 200px
+    color: $white
+    width: 960px
+    margin: 0 auto
 
-  #festival-location
-    @include animation-delay(1s)
-    font-size: 1.8rem
-    font-weight: 300
+    .festival-name
+      @include animation-delay(0.5s)
+      font-size: 4rem
+      font-weight: 400
 
-  #festival-editors-picks, #festival-description
-    color: white
-    background-color: rgba(255, 255, 255, 0.3)
-    padding: 1.5rem
-    margin: 1rem 1%
-    float: left
+    .festival-info
+      position: absolute
+      bottom: 2rem
+      text-align: left
 
-  #festival-editors-picks
-    width: 28%
+      .festival-location
+        @include animation-delay(1s)
+        font-size: 1.8rem
+        font-weight: 300
+        letter-spacing: 1px
+        text-transform: uppercase
 
-  #festival-description
-    width: 68%
+    .festival-description
+      position: absolute
+      top: 1rem
+      right: 2rem
+      max-width: 50rem
+
+  .events-wrapper
+    background-color: $white
+
+  .events-pane
+    width: 960px
+    margin: 0 auto
+
+    .sort-toggles
+      margin: 2rem 0
+      .label
+        display: inline-block
+        color: $concrete
+        letter-spacing: 1px
+        text-transform: uppercase
+      .toggles
+        margin-left: 20px
+        display: inline-block
+        .toggle
+          color: $concrete
+          cursor: pointer
+          display: inline-block
+          margin: 0 20px
+          text-transform: uppercase
+          &.selected
+            color: $slate
+
+    #artist-list
+      margin: 2rem 0
+      .event
+        position: relative
+        margin: 10px 0
+        width: 100%
+        .name, .playcount, .play
+          display: inline-block
+          margin: 0 10px 0 0
+          font-size: 2.4rem
+          line-height: 3rem
+        .playcount
+          color: $pomegranate
+          font-size: 1.6rem
+        .button
+          display: inline-block
+          position: relative
+          bottom: 4px
+          border: 2px solid $sea
+          border-radius: 2px
+          color: $sea
+          cursor: pointer
+          font-size: 1.4rem
+          line-height: 2rem
+          margin-right: 5px
+          padding: 2px 15px
+          text-transform: uppercase
+          &:hover, &.playing
+            background-color: $sea
+            color: $white
+
 
   #timetable
     float: left
