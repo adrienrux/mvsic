@@ -4,14 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @festival.name %></h1>
+    <h1>Welcome to MVSIC!</h1>
     <p>
-      You have successfully signed up to example.com,
-      your username is: <%= @email %>.<br>
+      To checkout your schedule for <%= @festival.name %> follow this link: <%= @url %>.<br>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      Your schedule will be automatically updated with the latest available set times based on the artists selected.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Thanks for joining the MVSIC beta. </p>
   </body>
 </html>
