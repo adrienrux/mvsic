@@ -6,7 +6,6 @@ html
     h1
       = "Your #{@festival.name} lineup"
     p
-      - binding.pry
       ' You created a
       = link_to "lineup for #{@festival.name}", schedule_url(@schedule, host: 'mvsicio.herokuapp.com').gsub(/\/\d*$/, "/#{@schedule.hashed_id}")
       | . You have great taste in music!
