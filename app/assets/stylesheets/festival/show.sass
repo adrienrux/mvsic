@@ -16,7 +16,7 @@
 
   .festival-wrapper
     padding: 8rem 2rem 2rem 2rem
-    background-color: transparent
+    background-color: $pomegranate
 
   .festival-pane
     position: relative
@@ -54,6 +54,7 @@
   .events-pane
     width: 960px
     margin: 0 auto
+    position: relative
 
     .sort-toggles
       margin: 2rem 0
@@ -75,11 +76,28 @@
             color: $white
 
     #artist-list
-      margin: 2rem 0
+      margin: 2rem 0 1rem 0
       .event
         position: relative
         margin: 10px 0
         width: 100%
+        background-color: $white-opaque
+        border-radius: 0.2rem
+        color: $white
+        cursor: pointer
+        padding: 1rem
+        text-align: left
+        border: 2px solid transparent
+        &:hover
+          background-color: transparent
+          border-color: $white
+        &.selected
+          background-color: $white
+          border-color: $white
+          color: $slate
+          .button
+            border-color: $slate
+
         .name, .playcount, .play
           display: inline-block
           margin: 0 10px 0 0
@@ -97,6 +115,7 @@
           margin-right: 5px
           padding: 2px 15px
           background-color: $white
+          border: 2px solid transparent
           border-radius: 2px
           color: $slate
           cursor: pointer
@@ -159,61 +178,60 @@
           @include transition(0.3s)
           background-color: $cloud
 
-      p.name
+      .name
         margin: 0
         font-size: 2rem
         margin: 0
 
-      p.venue
+      .venue
         margin: 0
         font-size: 12px
         letter-spacing: 1px
         text-transform: uppercase
 
-  #view-toggle
-    clear: both
-    float: right
-    margin: 1rem 0
-    text-align: center
+      .playcount
+        color: $pomegranate
+        font-size: 1.6rem
 
-    &:after
-      clear: both
-      content: ''
-      display: table
-
-    .day
-      float: left
-
-      button
-        @include button($white, $white)
-        background-color: $river
-        border-radius: 50%
-        color: $white
-        height: 4.5rem
-        margin: 0.5rem
-        padding: 0.5rem
-        text-align: center
-        width: 4.5rem
-
-        &.selected, &:hover
-          background-color: $white
-          color: $river
+  .view-toggles
+    margin: 0 0 4rem 0
+    .label
+      display: inline-block
+      color: $white
+      letter-spacing: 1px
+      text-transform: uppercase
+    .toggles
+      margin-left: 20px
+      display: inline-block
+      .toggle
+        color: $white-opaque-medium
+        cursor: pointer
+        display: inline-block
+        margin: 0 20px
+        text-transform: uppercase
+        &:hover, &.selected
+          color: $white
 
   div#save-button
-    float: right
-    width: 29rem
-    height: 6rem
+    position: absolute
+    top: 0
+    right: 0
 
     button#save
       @include transition(0.3s)
-      @include button($white, $green-opaque)
-      font-size: 2rem
-      height: 100%
-      margin: 0
+      font-size: 1.4rem
+      padding: 4px 20px
+      background-color: $white
+      border-radius: 2px
+      border: none
+      color: $slate
+      cursor: pointer
+      outline: none
       text-align: center
-      width: 100%
-      &.saving
-        color: transparent
+      text-decoration: none
+      text-transform: uppercase
+      &:hover
+        background-color: $cloud
 
   #schedule-link
     margin: 0.5rem

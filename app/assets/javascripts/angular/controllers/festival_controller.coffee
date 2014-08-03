@@ -43,15 +43,21 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       $scope.selectEvent(data)
 
     $scope.$on 'removeEvent', (event, data) ->
-      $scope.$apply($scope.eventList = _($scope.eventList).without(data))
+      $scope.deselectEvent(data)
+
+    $scope.toggleSelectEvent = (e) ->
+      if e.selected
+        $scope.deselectEvent(e)
+      else
+        $scope.selectEvent(e)
 
     $scope.selectEvent = (selectedEvent)->
       selectedEvent.selected = true
-      $scope.eventList.push(selectedEvent)
+      $scope.$apply($scope.eventList.push(selectedEvent))
 
     $scope.deselectEvent = (deselectedEvent) ->
       deselectedEvent.selected = false
-      $scope.eventList = _($scope.eventList).without(deselectedEvent)
+      $scope.$apply($scope.eventList = _($scope.eventList).without(deselectedEvent))
       $scope.$broadcast('deselectEvent', deselectedEvent)
 
     $scope.selectDay = (day) ->
@@ -81,16 +87,12 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       item._destroy != 1
 
     $scope.clickSave = ->
-      $scope.saving = true
+      $scope.saveMessage = "Saving..."
       $timeout(openModal, 1000)
 
     openModal = ->
-      if _.isEmpty($scope.eventList)
-        $scope.saveMessage = "Add A Show!"
-        $scope.saving = false
-      else if !signedUp
+      if !signedUp
         $scope.showModal = true
-        $scope.saving = false
       else if !$scope.newSchedule.id
         saveSchedule()
       else
@@ -114,11 +116,9 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
           _($scope.newSchedule).extend({id: schedule.id, hashed_id: schedule.hashed_id})
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
-          $scope.saving = false
           $location.path("/schedules/#{schedule.hashed_id}")
         .error (error) ->
           $scope.saveMessage = "Error :("
-          $scope.saving = false
 
     updateSchedule = ->
       updateScheduleEvents()
@@ -126,10 +126,8 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .success (schedule) ->
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
-          $scope.saving = false
         .error (error) ->
           $scope.saveMessage = "Error :("
-          $scope.saving = false
 
     $scope.dayDisplay = (day) ->
       dayDisplay = day.toUTCString().substr(0,3)

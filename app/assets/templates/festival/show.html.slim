@@ -13,7 +13,6 @@
 
   .events-wrapper
     .events-pane
-      h3 Listen to curated tracks for each artist. Save the ones you like to create a schedule.
       .sort-toggles
         .label Sort artists by:
         .toggles
@@ -21,24 +20,22 @@
           .toggle ng-click="sort = 'artist.name'" ng-class="{'selected': sort == 'artist.name'}" Name
           .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="days.length" Set Time
       #timetable
-        #view-toggle.animated.fadeInUp ng-if="sort == 'day'"
-          .day ng-repeat="day in days"
-            button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
-              | {{dayDisplay(day)}}
+        .view-toggles ng-if="sort == 'day'"
+          .label Select Day:
+          .toggles
+            .toggle.day ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}" {{dayDisplay(day)}}
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
         #artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
-          div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}"
-            .button.add ng-click="deselectEvent(event)" ng-if="event.selected" Remove
-            .button.add ng-click="selectEvent(event)" ng-if="!event.selected" Add
+          div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event);$event.stopPropagation()"
             .button.play ng-click="playArtist(event.artist)" Play
             .name
-              | {{ event.artist.name }} - {{ MvsicPlayer.getArtist() }}
+              | {{ event.artist.name }}
             .playcount
               | {{ event.artist.play_count }} &hearts;
-      #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}"
-        button#save ng-click="clickSave()" ng-class="{'saving': saving}"
+      #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
+        button#save ng-click="clickSave()"
           | {{saveMessage}}
-        #spinner.loader ng-show="saving"
+          span ng-if="saving" Saving...
       #schedule-link ng-if="newSchedule.id"
         | Click here to access your saved
         a ng-href="/schedules/{{newSchedule.id}}"

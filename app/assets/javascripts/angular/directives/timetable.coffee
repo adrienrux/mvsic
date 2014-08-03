@@ -132,8 +132,9 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
           .html((e) ->
             venue_name = if e.venue then e.venue.name
             "
-              <p class='name'>#{e.artist.name}</p>
-              <p class='venue'>#{venue_name}</p>
+              <div class='name'>#{e.artist.name}</div>
+              <div class='venue'>#{venue_name}</div>
+              <div class='playcount'>&hearts; #{e.artist.play_count}</div>
             "
           ).on('click', (e) ->
             box = d3.select(this)
