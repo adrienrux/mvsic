@@ -63,54 +63,6 @@ nav.top-nav
         font-size: 1.4rem
         font-weight: 400
 
-#feedback-form
-  display: none
-  position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
-  z-index: 100
-  background-color: $sea
-
-  form
-    color: $white
-    font-size: 20px
-    padding: 20px 0
-    width: 600px
-    margin: 0 auto
-
-  input[type="text"], input[type="email"], textarea
-    outline: none
-    resize: none
-    background-color: transparent
-    border: 2px solid $white
-    border-radius: 4px
-    margin: 10px 0
-    padding: 10px 20px
-    width: 100%
-    &::-webkit-input-placeholder
-      color: $white-opaque-medium
-    &:-moz-placeholder
-      color: $white-opaque-medium
-    &::-moz-placeholder
-      color: $white-opaque-medium
-    &:-ms-input-placeholder
-      color: $white-opaque-medium
-
-  input[type="submit"], input[type="button"]
-    background-color: transparent
-    border: 2px solid $white
-    border-radius: 4px
-    cursor: pointer
-    outline: none
-    margin-bottom: 10px
-    padding: 5px 15px
-    width: 100%
-
-    &:hover
-      background-color: $white-opaque
-
 // CONTENT
 #content
   margin: 0
@@ -125,6 +77,7 @@ a.button
   @include animation-delay(2s)
 
 .modal
+  display: none
   position: fixed
   top: 50%
   left: 50%
@@ -136,6 +89,18 @@ a.button
   -o-animation-delay: 0.3s
   animation-delay: 0.3s
   width: 500px
+
+  &#feedback-form
+    input
+      margin: 0 0 1rem 0
+
+  &#submit-email-modal
+    input[type="text"]
+      width: 232px
+
+    input.user-email
+      border-top: none
+      width: 462px
 
   .container
     position: relative
@@ -162,17 +127,16 @@ a.button
         display: inline-block
         width: 230px
 
-      input
-        outline: none
-        border: 2px solid $slate
-        margin: 0
-        padding: 1rem 2rem
-
-        &.user-email
-          border-top: none
-          width: 463px
+    input[type="email"], input[type="text"], textarea
+      outline: none
+      border: 2px solid $slate
+      margin: 0
+      padding: 1rem
+      width: 100%
+      resize: none
 
     .buttons
+      margin: 1rem 0
       text-align: right
 
       .button
@@ -184,7 +148,7 @@ a.button
         color: $slate
         cursor: pointer
         display: inline-block
-        margin: 2rem 0 0 0
+        margin: 0 0 0 5px
         outline: none
         text-align: center
         text-decoration: none
