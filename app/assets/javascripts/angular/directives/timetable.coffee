@@ -112,7 +112,6 @@ app.directive 'timetable', ['Time', (Time) ->
           .data(scope.filteredEvents, (e) -> e.id)
 
         eventBoxes.enter().append('div')
-          .style('opacity', 0)
           .attr('class', (e) ->
             if _(scope.events).findWhere({id: e.id}).selected
               'event-wrapper selected'
@@ -142,7 +141,7 @@ app.directive 'timetable', ['Time', (Time) ->
               addEventToSchedule(e)
               originalEvent.selected = true
               box.attr('class', 'event-wrapper selected')
-          ).transition().duration(250).style('opacity', 1)
+          )
 
         eventBoxes
           .append('button')

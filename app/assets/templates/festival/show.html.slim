@@ -33,16 +33,10 @@
             .playcount
               | {{ event.artist.play_count }} &hearts;
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
-        button#save ng-click="clickSave()"
+        button#save ng-click="openModal()"
           | {{saveMessage}}
           span ng-if="saving" Saving...
-      #schedule-link ng-if="newSchedule.id"
-        | Click here to access your saved
-        a ng-href="/schedules/{{newSchedule.id}}"
-          |  schedule
-        | .
-#signup-modal modal="" show="showModal"
-#save-schedule-success-modal.modal ng-show="scheduleSavedModal"
+#save-schedule-success-modal.modal ng-show="showSuccessModal"
   .container
     .title Lineup Saved
     p
@@ -56,8 +50,8 @@
     p
       | &mdash; MVSIC team
     .buttons
-      .button.exit Okay
-#submit-email-modal.modal
+      a.button.exit ng-href="/schedules/{{newSchedule.hashed_id}}" Okay
+#submit-email-modal.modal ng-show="showSignUpModal"
   .container
     .title Save your lineup
     p
@@ -68,11 +62,13 @@
     p
       | &mdash; MVSIC team
     .col.half
-      input.user-first-name type='text' placeholder='First name'
+      input.user-first-name type='text' ng-model="firstName" placeholder='First name'
     .col.half
-      input.user-last-name type='text' placeholder='Last name'
+      input.user-last-name type='text' ng-model="lastName" placeholder='Last name'
     .col
-      input.user-email type='email' placeholder='Email address'
+      input.user-email type='email' ng-model="email" placeholder='Email address'
+    p.error
+      | {{ saveError }}
     .buttons
-      .button.exit Save my lineup
-
+      .button.exit ng-click="betaSignup()" Save my lineup
+      .button.exit ng-click="showSignUpModal = false; saveMessage = 'Save Schedule'" Cancel

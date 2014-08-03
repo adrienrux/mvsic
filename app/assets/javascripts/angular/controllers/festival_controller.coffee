@@ -10,6 +10,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       schedule_events_attributes: []
     }
     $scope.festivalSlug = $routeParams.festival_slug
+    window.re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     if Festivals.listEmpty()
       $http.get('/api/festivals.json').success (data) ->
@@ -75,37 +76,27 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       $scope.eventList.length
 
     updateScheduleEvents = ->
-        _($scope.newSchedule.schedule_events_attributes).each((scheduleEvent) ->
-          if !_($scope.eventList).findWhere({id: scheduleEvent.event_id})
-            scheduleEvent._destroy = 1
-        )
-        _($scope.eventList).each((event) ->
-          if !_($scope.newSchedule.schedule_events_attributes).findWhere({event_id: event.id})
-            $scope.newSchedule.schedule_events_attributes.push({event_id: event.id})
-        )
+      _($scope.newSchedule.schedule_events_attributes).each((scheduleEvent) ->
+        if !_($scope.eventList).findWhere({id: scheduleEvent.event_id})
+          scheduleEvent._destroy = 1
+      )
+      _($scope.eventList).each((event) ->
+        if !_($scope.newSchedule.schedule_events_attributes).findWhere({event_id: event.id})
+          $scope.newSchedule.schedule_events_attributes.push({event_id: event.id})
+      )
 
     $scope.notDestroyed = (item) ->
       item._destroy != 1
 
-    $scope.clickSave = ->
+    $scope.openModal = ->
+      $scope.email = localStorageService.get('email')
       $scope.saveMessage = "Saving..."
-      $timeout(openModal, 1000)
-
-    openModal = ->
-      $scope.email = localStorageService.get('email')
       if !$scope.email
-        $scope.showModal = true
+        $scope.showSignUpModal = true
       else if !$scope.newSchedule.id
-        $scope.scheduleSavedModal = true
-        saveSchedule(email)
+        saveSchedule($scope.email)
       else
-        $scope.scheduleSavedModal = true
         updateSchedule()
-
-    $scope.$on 'signUpSuccess', (event, email) ->
-      localStorageService.set('email', email)
-      $scope.email = localStorageService.get('email')
-      saveSchedule(email)
 
     $scope.playArtist = (artist) ->
       $scope.$emit('selectArtist', artist)
@@ -114,14 +105,29 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       artists = _($scope.festival.events).chain().pluck('artist').flatten().where({id: data.artist_id}).value()
       _(artists).each((artist) -> artist.play_count = data.count)
 
+    $scope.betaSignup = ->
+      if re.test($scope.email)
+        $http.post('/beta/signup.json',
+          first_name: $scope.firstName
+          last_name: $scope.lastName
+          email: $scope.email
+        ).success((response) ->
+          localStorageService.set('email', $scope.email)
+          saveSchedule($scope.email)
+          $scope.showSignUpModal = false
+        ).error((response) ->
+          $scope.saveError = 'Error :('
+        )
+      else
+        $scope.saveError = 'Please use a valid email address'
+
     saveSchedule = (email) ->
       updateScheduleEvents()
       $http.post("/api/schedules.json", schedule: $scope.newSchedule, email: email)
         .success (schedule) ->
-          _($scope.newSchedule).extend({id: schedule.id, hashed_id: schedule.hashed_id})
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
-          $location.path("/schedules/#{schedule.hashed_id}")
+          $scope.showSuccessModal = true
         .error (error) ->
           $scope.saveMessage = "Error :("
 
@@ -131,7 +137,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .success (schedule) ->
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
-          $location.path("/schedules/#{schedule.hashed_id}")
+          $scope.showSuccessModal = true
         .error (error) ->
           $scope.saveMessage = "Error :("
 
