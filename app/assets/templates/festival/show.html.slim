@@ -26,8 +26,8 @@
             .toggle.day ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}" {{dayDisplay(day)}}
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
         #artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
-          div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event);$event.stopPropagation()"
-            .button.play ng-click="playArtist(event.artist)" Play
+          div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
+            .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" Play
             .name
               | {{ event.artist.name }}
             .playcount

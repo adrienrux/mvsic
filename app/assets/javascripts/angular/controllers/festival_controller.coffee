@@ -40,10 +40,10 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       _($scope.newSchedule).extend({festival_id: data.id})
 
     $scope.$on 'addEvent', (event, data) ->
-      $scope.selectEvent(data)
+      $scope.$apply($scope.selectEvent(data))
 
     $scope.$on 'removeEvent', (event, data) ->
-      $scope.deselectEvent(data)
+      $scope.$apply($scope.deselectEvent(data))
 
     $scope.toggleSelectEvent = (e) ->
       if e.selected
@@ -53,11 +53,11 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     $scope.selectEvent = (selectedEvent)->
       selectedEvent.selected = true
-      $scope.$apply($scope.eventList.push(selectedEvent))
+      $scope.eventList.push(selectedEvent)
 
     $scope.deselectEvent = (deselectedEvent) ->
       deselectedEvent.selected = false
-      $scope.$apply($scope.eventList = _($scope.eventList).without(deselectedEvent))
+      $scope.eventList = _($scope.eventList).without(deselectedEvent)
       $scope.$broadcast('deselectEvent', deselectedEvent)
 
     $scope.selectDay = (day) ->

@@ -1,4 +1,4 @@
-app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
+app.directive 'timetable', ['Time', (Time) ->
   MARGIN = {top: 0, right: 20, bottom: 50, left: 20}
   ROW_HEIGHT = 40
   MILLISECONDS_PER_BLOCK = 900000 # 15 Minutes
@@ -24,11 +24,6 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
         deselectedEvent = _(scope.events).findWhere({id: data.id})
         deselectedEvent.selected = false
         d3.select("div.event-wrapper#event-#{data.id}").attr('class', 'event-wrapper')
-
-      window = angular.element($window)
-      window.bind 'resize', () ->
-        if scope.day != 'All'
-          resizeTimetable()
 
       yScale = d3.time.scale()
       xScale = d3.scale.ordinal()
@@ -155,25 +150,6 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
             scope.$emit('selectArtist', e.artist)
             d3.event.stopPropagation()
           ).append('div').attr('class', 'play').text('Play')
-
-      resizeTimetable = ->
-        # Update all widths and scales dependent on width
-        width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        width = (200 + MARGIN.left + MARGIN.right) * scope.venueNames.length
-        eventBoxWidth = 200
-
-        # Update the size of the timeslots
-        d3.select('div.timetable').style('width', width + MARGIN.left + MARGIN.right)
-        d3.select('div.timetable-area').style('width', width)
-        d3.select('div.timetable-area').selectAll('li.timeslot').style('width', width + "px")
-        d3.select('div.timetable-area').selectAll('li.venue-title')
-          .style('width', eventBoxWidth + "px")
-          .style('left', (v) -> xScale(v) + "px")
-
-        # Update the boxes
-        d3.selectAll('div.event-wrapper')
-          .style('width', (eventBoxWidth - BOX_H_MARGIN * 2) + "px")
-          .style('left', (e) -> (xScale(e.venue.name) + BOX_H_MARGIN) + "px")
 
       addEventToSchedule = (newEvent) -> scope.$emit('addEvent', newEvent)
       removeEventFromSchedule = (oldEvent) -> scope.$emit('removeEvent', oldEvent)
