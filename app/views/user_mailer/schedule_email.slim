@@ -7,7 +7,7 @@ html
       = "Your #{@festival.name} lineup"
     p
       ' You created a
-      = link_to "lineup for #{@festival.name}", schedule_url(@schedule, host: 'mvsicio.herokuapp.com').gsub(/\/\d*$/, "/#{@schedule.hashed_id}")
+      = link_to "lineup for #{@festival.name}", "http://mvsicio.herokuapp.com/schedules/#{@schedule.hashed_id}/"
       | . You have great taste in music!
     p
       | Thanks for joining the MVSIC beta.

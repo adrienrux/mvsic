@@ -6,8 +6,6 @@ Rails.application.routes.draw do
     resources :schedules, only: [:create, :show, :update]
   end
 
-  resources :schedules, only: :show
-
   namespace :beta do
     post :signup
   end
