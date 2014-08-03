@@ -27,6 +27,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
             currentTrack = {
               artistId: artist.id
               artistName: artist.name
+              artistUrl: artist.soundcloud_url
               duration: response.duration
               sound: sound
               title: response.title
@@ -75,6 +76,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
         currentTrack = {
           artistId: artist.id
           artistName: artist.name
+          artistUrl: artist.soundcloud_url
           duration: track.duration
           sound: track.sound
           title: track.title

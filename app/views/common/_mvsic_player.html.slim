@@ -1,7 +1,9 @@
 #mvsic-player ng-controller="MvsicPlayerController" ng-class="{displayed: currentTrack}"
   .info ng-if="!currentTrack.error"
-    .artist
+    a.artist ng-href="{{currentTrack.artistUrl}}" target="_blank"
       | {{ currentTrack.artistName }}
+    span.separator
+      | //
     a.track ng-href="{{currentTrack.permalink_url}}" target="_blank"
       | {{ currentTrack.title }}
   .controls
