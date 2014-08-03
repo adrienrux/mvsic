@@ -32,6 +32,8 @@
               | {{ event.artist.name }}
             .playcount
               | {{ event.artist.play_count }} &hearts;
+            .helper ng-if="event.helperText"
+              | {{ event.helperText }}
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
         button#save ng-click="openModal()"
           | {{saveMessage}}

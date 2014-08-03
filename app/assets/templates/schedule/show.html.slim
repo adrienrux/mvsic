@@ -27,5 +27,5 @@
             .info
               .location
                 | {{event.venue.name}}
-              .settime
+              .settime ng-show="event.start_time"
                 | {{timeDisplay(event.start_time)}}

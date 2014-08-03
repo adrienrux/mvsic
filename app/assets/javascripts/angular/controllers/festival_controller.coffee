@@ -48,9 +48,14 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       $scope.$apply($scope.deselectEvent(data))
 
     $scope.toggleSelectEvent = (e) ->
+      $timeout ->
+        e.helperText = undefined
+      , 2500
       if e.selected
+        e.helperText = 'Removed from schedule'
         $scope.deselectEvent(e)
       else
+        e.helperText = 'Added to schedule'
         $scope.selectEvent(e)
 
     $scope.selectEvent = (selectedEvent)->
