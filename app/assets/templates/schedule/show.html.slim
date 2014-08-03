@@ -1,14 +1,31 @@
-div#schedule-show
-  #festival-name.animated.fadeInUp
-    | {{schedule.festival.name}}
-  #festival-location.animated.fadeInUp
-    | {{schedule.festival.location}}
-  #event-list
-    .day.animated.fadeInUp ng-repeat="day in eventsByDay"
-      | {{day.date}}
-      .event-wrapper ng-repeat="event in day.events"
-        .artist-name
-          a href="javascript:void(0)" ng-click="$emit('selectArtist', event.artist.artist)"
-            | {{event.artist.name}}
-        .time-location
-          | {{event.venue.name}} - {{timeDisplay(event.start_time)}}
+#schedule-show
+  .festival-wrapper
+    .festival-pane.animated.fadeInUp
+      .festival-name
+        | {{ schedule.festival.name }}
+      .festival-info
+        .festival-location
+          | {{ schedule.festival.location }}
+        .festival-date
+          | {{ schedule.festival.start_date }} - {{ schedule.festival.end_date }}
+      .festival-description
+        | Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Maecenas sed diam eget risus varius blandit sit amet non magna. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
+
+  .events-wrapper
+    .events-pane
+      #event-list
+        .day.animated.fadeInUp ng-repeat="day in eventsByDay"
+          .label
+            | {{day.date}}
+          .event ng-repeat="event in day.events"
+            .artist
+              .button.play ng-click="$emit('selectArtist', event.artist)" play
+              .name
+                | {{ event.artist.name }}
+              .playcount
+                | {{ event.artist.play_count }} &hearts;
+            .info
+              .location
+                | {{event.venue.name}}
+              .settime
+                | {{timeDisplay(event.start_time)}}

@@ -1,11 +1,11 @@
-app.directive 'modal', ['$http', ($http) ->
+app.directive 'modal', ['$http', 'localStorageService', ($http, localStorageService) ->
   restrict: 'A'
   scope:
     show: '='
   replace: true
   link: (scope, element, attrs) ->
     window.re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    scope.buttonValue = 'Sign up for beta'
+    scope.buttonValue = 'Email my schedule'
     scope.hideModal = ->
       scope.show = false
     scope.signup = ->

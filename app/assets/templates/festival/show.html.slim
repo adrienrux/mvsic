@@ -27,7 +27,7 @@
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
         #artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
-            .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" Play
+            .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" play
             .name
               | {{ event.artist.name }}
             .playcount

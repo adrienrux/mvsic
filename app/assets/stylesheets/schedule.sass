@@ -2,74 +2,118 @@
 @import "mixins"
 
 #schedule-show
-  background-color: $river
+  background-color: $sea
   clear: both
   font-family: $sans-serif
-  padding: 6rem 2rem
+  padding-bottom: 3rem
   width: 100%
   min-height: 100%
-  position: relative
 
   &:after
     clear: both
     content: ''
     display: table
 
-  #festival-name, #festival-location
-    color: white
-    margin: 0.5rem 0.5rem
-    text-align: center
+  .festival-wrapper
+    padding: 8rem 2rem 2rem 2rem
+    background-color: $pomegranate
 
-  #festival-name
-    @include animation-delay(0.5s)
-    font-size: 2.6rem
-    font-weight: 400
-
-  #festival-location
-    @include animation-delay(1s)
-    font-size: 1.8rem
-    font-weight: 300
-
-  #event-list
-    width: 40%
-    min-width: 60rem
+  .festival-pane
+    position: relative
+    height: 200px
+    color: $white
+    width: 960px
     margin: 0 auto
 
-  .day
-    @include animation-delay(1.2s)
-    margin: 0.5rem
-    margin-bottom: 2rem
+    .festival-name
+      @include animation-delay(0.5s)
+      font-size: 4rem
+      font-weight: 400
+
+    .festival-info
+      position: absolute
+      bottom: 2rem
+      text-align: left
+
+      .festival-location
+        @include animation-delay(1s)
+        font-size: 1.8rem
+        font-weight: 300
+        letter-spacing: 1px
+        text-transform: uppercase
+
+    .festival-description
+      position: absolute
+      top: 1rem
+      right: 2rem
+      max-width: 50rem
+
+  .events-wrapper
     color: $white
-    font-size: 1.8rem
 
-    .event-wrapper
-      padding: 1rem
-      margin: 0.5rem 1rem
-      font-size: 1.6rem
-      background-color: $white-opaque
-      border-radius: 0.5rem
-      border-radius: 1px
+  .events-pane
+    width: 960px
+    margin: 0 auto
+    position: relative
 
-      .artist-name, .time-location
-        display: inline-block
-        vertical-align: middle
-        line-height: initial
+    .label
+      display: inline-block
+      color: $white
+      letter-spacing: 1px
+      text-transform: uppercase
 
-      .artist-name
-        font-weight: 400
-        width: 60%
-        a
+    #event-list
+      margin: 2rem 0 1rem 0
+
+      .day
+        margin-top: 4rem
+        .event
+          position: relative
+          margin: 10px 0
+          width: 100%
+          background-color: $white-opaque
+          border-radius: 0.2rem
           color: $white
-          text-decoration: none
+          padding: 1rem
+          text-align: left
+          border: 2px solid transparent
 
-      .time-location
-        font-weight: 400
-        width: 40%
-        text-align: right
-
-      &:hover
-        @include transition(0.1s)
-        background-color: $white
-        color: $river
-        a
-          color: $river
+          .name
+            display: inline-block
+            margin: 0 10px
+            font-size: 2.4rem
+            line-height: 3rem
+          .playcount
+            display: inline-block
+            color: $pomegranate
+            font-size: 1.6rem
+          .info
+            position: absolute
+            right: 20px
+            top: 15px
+            .location, .settime
+              display: inline-block
+              margin: 0 20px 0 0
+              font-size: 1.6rem
+              text-transform: uppercase
+            .settime
+              margin: 0
+          .button
+            display: inline-block
+            position: relative
+            bottom: 4px
+            font-size: 1.4rem
+            line-height: 2rem
+            margin-right: 5px
+            padding: 2px 15px
+            background-color: $white
+            border: 2px solid transparent
+            border-radius: 2px
+            color: $slate
+            cursor: pointer
+            font-size: 11px
+            text-align: center
+            text-decoration: none
+            text-transform: uppercase
+            &:hover, &.playing
+              background-color: $cloud
