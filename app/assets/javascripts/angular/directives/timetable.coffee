@@ -153,7 +153,7 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
           .on('click', (e) ->
             scope.$emit('selectArtist', e.artist)
             d3.event.stopPropagation()
-          ).append('div').attr('class', 'play')
+          ).append('div').attr('class', 'play').text('Play')
 
       resizeTimetable = ->
         # Update all widths and scales dependent on width

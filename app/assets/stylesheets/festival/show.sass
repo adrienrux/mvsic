@@ -16,7 +16,7 @@
 
   .festival-wrapper
     padding: 8rem 2rem 2rem 2rem
-    background-color: $sea
+    background-color: transparent
 
   .festival-pane
     position: relative
@@ -49,7 +49,7 @@
       max-width: 50rem
 
   .events-wrapper
-    background-color: $white
+    color: $white
 
   .events-pane
     width: 960px
@@ -59,20 +59,20 @@
       margin: 2rem 0
       .label
         display: inline-block
-        color: $concrete
+        color: $white
         letter-spacing: 1px
         text-transform: uppercase
       .toggles
         margin-left: 20px
         display: inline-block
         .toggle
-          color: $concrete
+          color: $white-opaque-medium
           cursor: pointer
           display: inline-block
           margin: 0 20px
           text-transform: uppercase
-          &.selected
-            color: $slate
+          &:hover, &.selected
+            color: $white
 
     #artist-list
       margin: 2rem 0
@@ -92,19 +92,20 @@
           display: inline-block
           position: relative
           bottom: 4px
-          border: 2px solid $sea
-          border-radius: 2px
-          color: $sea
-          cursor: pointer
           font-size: 1.4rem
           line-height: 2rem
           margin-right: 5px
           padding: 2px 15px
+          background-color: $white
+          border-radius: 2px
+          color: $slate
+          cursor: pointer
+          font-size: 11px
+          text-align: center
+          text-decoration: none
           text-transform: uppercase
           &:hover, &.playing
-            background-color: $sea
-            color: $white
-
+            background-color: $cloud
 
   #timetable
     float: left
@@ -126,66 +127,48 @@
       border: 2px solid transparent
 
       &:hover
-        @include transition(0.3s)
-        background-color: $white-opaque-hover
+        background-color: transparent
         border-color: $white
 
+      &.selected
+        background-color: $white
+        border-color: $white
+        color: $slate
+
+        button
+          border-color: $slate
+
       button
+        @include transition(0.3s)
         position: absolute
         bottom: 8px
         right: 8px
-        @include transition(0.3s)
-        border: white 2px solid
-        background-color: $river
-        border-radius: 1px
+        background-color: $white
+        border: 2px solid transparent
+        border-radius: 2px
+        color: $slate
+        cursor: pointer
+        font-size: 1.4rem
+        outline: none
+        padding: 2px 15px
+        text-align: center
+        text-decoration: none
+        text-transform: uppercase
 
         &:hover
           @include transition(0.3s)
-          background-color: white
-          .play
-            border-left-color: $river
+          background-color: $cloud
 
-        .play
-          @include transition(0.3s)
-          width: 0
-          height: 0
-          border-top: 8px solid transparent
-          border-left: 12px solid white
-          border-bottom: 8px solid transparent
-          margin-left: 2px
-
-      p.name, p.venue
+      p.name
+        margin: 0
         font-size: 2rem
-        font-weight: 300
         margin: 0
 
       p.venue
-        font-size: 1.6rem
-
-      &.selected
-        @include transition(0.3s)
-        color: $river
-        background-color: $white
-        border-color: $white
-
-        &:hover
-          @include transition(0.3s)
-          background-color: $white-opaque-hover-selected
-
-        button
-          @include transition(0.3s)
-          border-color: $river
-          background-color: white
-
-          .play
-            @include transition(0.3s)
-            border-left-color: $river
-
-          &:hover
-            @include transition(0.3s)
-            background-color: $river
-            .play
-              border-left-color: white
+        margin: 0
+        font-size: 12px
+        letter-spacing: 1px
+        text-transform: uppercase
 
   #view-toggle
     clear: both

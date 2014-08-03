@@ -10,8 +10,6 @@
           .button.cta Browse Festivals
 
 .pane#dim
-  #wistia_04fh6bpm8q.wistia_embed
-
   .festival-cards
     h1 Upcoming Festivals
     .cards-row  ng-repeat="festivalRow in festivalList"
@@ -30,12 +28,6 @@
             | {{ artist.name }} {{ artist.play_count }}
 
 javascript:
-  video = Wistia.embed('04fh6bpm8q', {
-    stillUrl: 'https://embed-ssl.wistia.com/deliveries/3550d514d88e9a91e4052f2162b89fcc21490deb.bin',
-    videoFoam: true,
-    volume: 0,
-  });
-
   $(function(){
     setTimeout(function() {
       $('.cta').on('click', function(event) {
