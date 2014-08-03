@@ -123,3 +123,49 @@ a.button
 
 .animated.delay
   @include animation-delay(2s)
+
+.modal
+  position: fixed
+  top: 50%
+  left: 50%
+  margin: 0
+  padding: 0
+  z-index: 30
+  -webkit-animation-delay: 0.3s
+  -moz-animation-delay: 0.3s
+  -o-animation-delay: 0.3s
+  animation-delay: 0.3s
+  .container
+    position: relative
+    top: -50%
+    left: -50%
+    margin-top: -50%
+    padding: 20px
+    border: none
+    border-radius: 5px
+    color: #34495e
+    background-color: #ffffff
+    text-align: left
+
+    h2
+      margin: 0 0 2rem
+
+    .buttons
+      text-align: right
+
+      .button
+        font-size: 1.4rem
+        padding: 4px 20px
+        background-color: $white
+        border-radius: 2px
+        border: 2px solid $slate
+        color: $slate
+        cursor: pointer
+        display: inline-block
+        margin: 2rem 0 0 0
+        outline: none
+        text-align: center
+        text-decoration: none
+        text-transform: uppercase
+        &:hover
+          background-color: $cloud

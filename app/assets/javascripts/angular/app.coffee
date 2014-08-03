@@ -2,7 +2,7 @@ window.app = angular.module('app', [
   'ngResource',
   'ngRoute',
   'ui.bootstrap',
-  'localStorageModule'
+  'LocalStorageModule'
 ]);
 
 # Makes turbolinks work with Angular

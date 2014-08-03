@@ -1,9 +1,10 @@
-app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Festivals', 'Time', 'MvsicPlayer',
-  ($http, $location, $scope, $routeParams, $timeout, Festivals, Time, MvsicPlayer) ->
+app.controller 'FestivalController', ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Festivals', 'Time', 'MvsicPlayer', 'localStorageService',
+  ($http, $location, $scope, $routeParams, $timeout, Festivals, Time, MvsicPlayer, localStorageService) ->
     signedUp = false
     $scope.saving = false
     $scope.sort = 'artist.play_count'
     $scope.saveMessage = 'Save Schedule'
+    $scope.email = localStorageService.get('email')
     $scope.eventList = []
     $scope.newSchedule = {
       schedule_events_attributes: []
@@ -91,15 +92,19 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       $timeout(openModal, 1000)
 
     openModal = ->
-      if !signedUp
+      $scope.email = localStorageService.get('email')
+      if !$scope.email
         $scope.showModal = true
       else if !$scope.newSchedule.id
-        saveSchedule()
+        $scope.scheduleSavedModal = true
+        saveSchedule(email)
       else
+        $scope.scheduleSavedModal = true
         updateSchedule()
 
     $scope.$on 'signUpSuccess', (event, email) ->
-      signedUp = true
+      localStorageService.set('email', email)
+      $scope.email = localStorageService.get('email')
       saveSchedule(email)
 
     $scope.playArtist = (artist) ->
@@ -126,6 +131,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .success (schedule) ->
           $scope.newSchedule = schedule
           $scope.saveMessage = "Saved!"
+          $location.path("/schedules/#{schedule.hashed_id}")
         .error (error) ->
           $scope.saveMessage = "Error :("
 

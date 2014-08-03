@@ -42,3 +42,15 @@
           |  schedule
         | .
 #signup-modal modal="" show="showModal"
+#save-schedule-success-modal.modal ng-show="scheduleSavedModal"
+  .container
+    h2 Schedule Saved
+    | Nice choices! We'll email you the lineup you selected for 
+    span.festival-name
+      | {{ festival.name }}
+    |  at 
+    span#user-email
+      | {{ email }}. 
+    | We hope you stick around and check out some of the other festivals and artists! - MVSIC team
+    .buttons
+      .button.exit Okay

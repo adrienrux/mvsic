@@ -1,4 +1,4 @@
-app.directive 'modal', ['$http', 'localStorageService', ($http, localStorageService) ->
+app.directive 'modal', ['$http', ($http) ->
   restrict: 'A'
   scope:
     show: '='
