@@ -44,13 +44,35 @@
 #signup-modal modal="" show="showModal"
 #save-schedule-success-modal.modal ng-show="scheduleSavedModal"
   .container
-    h2 Schedule Saved
-    | Nice choices! We'll email you the lineup you selected for 
-    span.festival-name
-      | {{ festival.name }}
-    |  at 
-    span#user-email
-      | {{ email }}. 
-    | We hope you stick around and check out some of the other festivals and artists! - MVSIC team
+    .title Lineup Saved
+    p
+      ' Nice choices! We'll email you the lineup you selected for
+      span.festival-name
+        | {{ festival.name }}
+      '  at
+      span#user-email
+        | {{ email }}.
+      |  We hope you stick around and check out some of the other festivals and artists!
+    p
+      | &mdash; MVSIC team
     .buttons
       .button.exit Okay
+#submit-email-modal.modal
+  .container
+    .title Save your lineup
+    p
+      ' To save the lineup you have created for
+      span.festival-name
+        | {{ festival.name }}
+      |  we need your email address. We'll send you the lineup and promise not to do spam you ever.
+    p
+      | &mdash; MVSIC team
+    .col.half
+      input.user-first-name type='text' placeholder='First name'
+    .col.half
+      input.user-last-name type='text' placeholder='Last name'
+    .col
+      input.user-email placeholder='Email address'
+    .buttons
+      .button.exit Save my lineup
+
