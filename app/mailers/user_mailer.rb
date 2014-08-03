@@ -6,7 +6,6 @@ class UserMailer < ActionMailer::Base
     @festival = schedule.festival
     @email = email
     subject = "Here's your Schedule for #{schedule.festival.name}!"
-    puts 'Hello'
     mail(to: email, subject: subject)
   end
 end

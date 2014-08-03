@@ -2,7 +2,6 @@ class Api::SchedulesController < Api::BaseController
   def create
     @schedule = Schedule.new(permitted_params)
     if @schedule.save
-      Rails.logger.info("SAVED")
       UserMailer.schedule_email(params[:email], @schedule).deliver
       render json: @schedule
     else
