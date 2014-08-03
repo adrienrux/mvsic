@@ -35,8 +35,7 @@
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
         button#save ng-click="openModal()"
           | {{saveMessage}}
-          span ng-if="saving" Saving...
-#save-schedule-success-modal.modal ng-show="showSuccessModal"
+#save-schedule-success-modal.modal.animated.fadeInUp ng-class="{'show': showSuccessModal}"
   .container
     .title Lineup Saved
     p
@@ -51,7 +50,7 @@
       | &mdash; MVSIC team
     .buttons
       a.button.exit ng-href="/schedules/{{newSchedule.hashed_id}}" Okay
-#submit-email-modal.modal ng-show="showSignUpModal"
+#submit-email-modal.modal.animated.fadeInUp ng-class="{'show': showSignUpModal}"
   .container
     .title Save your lineup
     p
