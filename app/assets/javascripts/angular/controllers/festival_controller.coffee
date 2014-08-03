@@ -34,8 +34,9 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .map((t) ->
           new Date(t)
         )
+        .sortBy((t) -> t)
         .value()
-      $scope.selectedDay = $scope.days[0] || 'All'
+      $scope.selectedDay = $scope.days[0]
       _($scope.newSchedule).extend({festival_id: data.id})
 
     $scope.$on 'addEvent', (event, data) ->

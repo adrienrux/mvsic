@@ -18,17 +18,14 @@
         .toggles
           .toggle ng-click="sort = 'artist.play_count'" ng-class="{'selected': sort == 'artist.play_count'}" Popularity
           .toggle ng-click="sort = 'artist.name'" ng-class="{'selected': sort == 'artist.name'}" Name
-          .toggle ng-click="sortArtists('timeSlot')" Timeslot
+          .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="days.length" Set Time
       #timetable
-        #view-toggle.animated.fadeInUp
+        #view-toggle.animated.fadeInUp ng-if="sort == 'day'"
           .day ng-repeat="day in days"
             button ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}"
               | {{dayDisplay(day)}}
-          .day
-            button ng-click="selectDay('All')" ng-class="{'selected': selectedDay == 'All'}"
-              | All
-        #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="selectedDay != 'All'"
-        #artist-list ng-if="selectedDay == 'All'"
+        #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
+        #artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}"
             .button.add ng-click="deselectEvent(event)" ng-if="event.selected" Remove
             .button.add ng-click="selectEvent(event)" ng-if="!event.selected" Add

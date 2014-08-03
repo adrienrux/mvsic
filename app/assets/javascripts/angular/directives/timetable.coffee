@@ -41,8 +41,8 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
 
         timeslots = calculateTimeslots(minTime, maxTime)
         height = (timeslots.length * ROW_HEIGHT)
-        width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / scope.venueNames.length
+        width = (200 + MARGIN.left + MARGIN.right) * scope.venueNames.length
+        eventBoxWidth = 200
 
         # Adjust the scales / axis
         yScale.range([0, height]).domain([minTime, maxTime])
@@ -158,8 +158,8 @@ app.directive 'timetable', ['$window', 'Time', ($window, Time) ->
       resizeTimetable = ->
         # Update all widths and scales dependent on width
         width = $(element[0]).width() - MARGIN.left - MARGIN.right
-        eventBoxWidth = (width - 60) / scope.venueNames.length
-        xScale.rangeBands([60, width], 0)
+        width = (200 + MARGIN.left + MARGIN.right) * scope.venueNames.length
+        eventBoxWidth = 200
 
         # Update the size of the timeslots
         d3.select('div.timetable').style('width', width + MARGIN.left + MARGIN.right)
