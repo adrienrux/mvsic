@@ -6,7 +6,8 @@ html
     h1
       = "Your #{@festival.name} lineup"
     p
-      ' You created a
+      = "Hey #{@user.first_name}!"
+      '  You created a
       = link_to "lineup for #{@festival.name}", "http://mvsicio.herokuapp.com/schedules/#{@schedule.hashed_id}/"
       | . You have great taste in music!
     p

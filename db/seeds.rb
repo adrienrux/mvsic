@@ -259,3 +259,7 @@ end
 Tracker.where(subject: 'user_save_to_schedule').each do |tracker|
   tracker.update_attribute :count, rand(30)
 end
+
+User.where(first_name: 'James', last_name: 'Zhang', email: 'jamesfzhang@gmail.com', admin: true).first_or_create
+User.where(first_name: 'Divu', last_name: 'Jain', email: 'divanshuj@gmail.com', admin: true).first_or_create
+User.where(first_name: 'Han', last_name: 'Chen', email: 'chenhan22@gmail.com', admin: true).first_or_create

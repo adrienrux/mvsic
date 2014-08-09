@@ -14,11 +14,10 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals
 
   carousel = ->
     $scope.slides = [
-      { image: '/assets/wallpaper/hands.jpg', message: 'Nulla vitae elit libero, a pharetra augue.' }
-      { image: '/assets/wallpaper/microphone.jpg', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
-      { image: '/assets/wallpaper/vinyl.jpg', message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.' }
+      { image: '/assets/wallpaper/lights.jpg', message: 'Nulla vitae elit libero, a pharetra augue.' }
+      { image: '/assets/wallpaper/vinyl.jpg', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+      { image: '/assets/wallpaper/bubble.jpg', message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.' }
     ]
-    adjustHeight('.slideshow .slide img')
 
   $scope.openCard = (card) ->
     return if $scope.selectedFestival == card
