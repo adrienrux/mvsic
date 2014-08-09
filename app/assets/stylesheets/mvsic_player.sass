@@ -10,7 +10,7 @@
   padding: 1rem
   height: 5rem
   font-size: 1.4rem
-  background: $sea
+  background: $sea-opaque
 
   &.displayed
     display: block
@@ -52,18 +52,11 @@
     display: inline-block
     margin: 0 2rem 0 0
     position: relative
-    top: 3px
+    top: 6px
     .playstate
-      padding: 5px 15px
+      @include button
       width: 70px
-      background-color: $white
-      border-radius: 2px
-      color: $slate
-      cursor: pointer
       font-size: 11px
-      text-align: center
-      text-decoration: none
-      text-transform: uppercase
 
       &:hover
         background-color: $cloud

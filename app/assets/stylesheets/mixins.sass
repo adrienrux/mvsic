@@ -2,17 +2,7 @@
   -moz-box-sizing: border-box
   box-sizing: border-box
 
-@mixin link
-  @include transition(0.3s)
-  cursor: pointer
-  color: $river
-  border: none
-  text-decoration: underline
-  &:hover
-    color: $sea
-
 @mixin white-link
-  @include link
   color: $white
   border-bottom: 2px solid transparent
   letter-spacing: 1px
@@ -21,30 +11,26 @@
     color: $white
     border-bottom-color: $white
 
-@mixin button($color, $background)
-  @include transition(0.3s)
-  margin: 0 0.4rem
-  padding: 0.4rem 1.2rem
-
-  border: 2px solid $color
-  border-radius: 0.4rem
-
-  color: $color
-  background: transparent
-
-  font-family: $sans-serif
-  font-size: 1.6rem
-  font-weight: 300
-  letter-spacing: 1px
+@mixin button
+  display: inline-block
+  position: relative
+  bottom: 4px
+  font-size: 1.4rem
+  line-height: 2rem
+  margin-right: 5px
+  padding: 2px 15px
+  background-color: $white
+  border: 2px solid transparent
+  border-radius: 2px
+  color: $slate
   cursor: pointer
-  &:hover
-    background: $background
-  &.saved
-    background: $green
-  &.saving
-    background: transparent
-  &.error
-    background: $sunflower
+  font-size: 11px
+  outline: none
+  text-align: center
+  text-decoration: none
+  text-transform: uppercase
+  &:hover, &.playing
+    background-color: $cloud
 
 @mixin transition($time)
   -webkit-transition: $time ease-in-out

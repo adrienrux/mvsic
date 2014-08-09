@@ -1,9 +1,13 @@
-.schedule-view
+.schedule-view style="background-image: url(/assets/wallpaper/{{ schedule.festival.background_image }});"
   .festival-wrapper
     .festival-pane.animated.fadeInUp
       a.festival-name ng-href="/festivals/{{schedule.festival.slug}}"
         | {{ schedule.festival.name }}
-      .ion-social-twitter
+      .festival-links
+        a ng-href="{{ tweetHref }}" target="_blank"
+          i.icon.ion-social-twitter
+        a ng-href="{{ schedule.festival.website }}" target="_blank"
+          i.icon.ion-earth
       .festival-info
         .festival-location
           | {{ schedule.festival.location }}

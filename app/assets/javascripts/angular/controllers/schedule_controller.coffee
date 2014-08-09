@@ -5,6 +5,8 @@ app.controller 'ScheduleController', ['$http', '$scope', '$routeParams', 'Time',
   $http.get("/api/schedules/#{hashed_id}.json").success (data) ->
     $scope.schedule = data
     $scope.eventsByDay = groupEventsByDay(data)
+    tweet = "Here's my #{data.festival.current_state} for @#{data.festival.twitter_handle} via @mvsicio #{window.location.href}"
+    $scope.tweetHref = "https://twitter.com/intent/tweet?text=#{encodeURI(tweet)}"
 
   groupEventsByDay = (schedule) ->
     _(schedule.schedule_events_attributes).chain()

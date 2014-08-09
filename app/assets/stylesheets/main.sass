@@ -68,11 +68,6 @@ nav.top-nav
   margin: 0
   height: 100%
 
-a.button
-  @include transition(0.3s)
-  @include button($white, $green-opaque)
-  text-transform: uppercase
-
 .animated.delay
   @include animation-delay(2s)
 
@@ -142,22 +137,11 @@ a.button
       resize: none
 
     .buttons
-      margin: 1rem 0
+      margin: 1rem 0 0 0
       text-align: right
 
       .button
-        font-size: 1.4rem
+        @include button
         padding: 4px 20px
-        background-color: $white
-        border-radius: 2px
-        border: 2px solid $slate
-        color: $slate
-        cursor: pointer
-        display: inline-block
-        margin: 0 0 0 5px
-        outline: none
-        text-align: center
-        text-decoration: none
-        text-transform: uppercase
-        &:hover
-          background-color: $cloud
+        border-color: $slate
+        margin: 0 0 0 0.5rem
