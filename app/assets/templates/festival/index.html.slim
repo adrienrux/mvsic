@@ -1,9 +1,8 @@
-.pane.header
+.pane
   .slideshow
     carousel interval="5000"
-      slide.slide ng-repeat="slide in slides" active="slide.active"
-        img ng-src="{{ slide.image }}"
-        div.carousel-caption
+      slide.slide ng-repeat="slide in slides" active="slide.active" ng-style="{ backgroundImage: 'url(' + slide.image + ')' }"
+        .carousel-caption
           h1 MVSIC
           h2
             | {{ slide.message }}
