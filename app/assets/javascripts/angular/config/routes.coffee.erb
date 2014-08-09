@@ -12,6 +12,12 @@ app.config ['$routeProvider', '$logProvider', '$locationProvider', '$httpProvide
     .when '/',
       controller: 'FestivalsController'
       templateUrl: '<%= asset_path("festival/index.html") %>'
+    .when '/about',
+      controller: 'FestivalsController'
+      templateUrl: '<%= asset_path("festival/index.html") %>'
+    .when '/festivals',
+      controller: 'FestivalsController'
+      templateUrl: '<%= asset_path("festival/index.html") %>'
     .when '/festivals/:festival_slug/',
       controller: 'FestivalController'
       templateUrl: '<%= asset_path("festival/show.html") %>'

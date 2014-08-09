@@ -1,19 +1,18 @@
-.pane
-  .slideshow
-    carousel interval="5000"
-      slide.slide ng-repeat="slide in slides" active="slide.active" ng-style="{ backgroundImage: 'url(' + slide.image + ')' }"
-        .carousel-caption
-          h1 MVSIC
-          h2
-            | {{ slide.message }}
-          .button.cta Browse Festivals
+.pane#slideshow
+  carousel interval="5000"
+    slide.slide ng-repeat="slide in slides" active="slide.active" ng-style="{ backgroundImage: 'url(' + slide.image + ')' }"
+      .carousel-caption
+        h1 MVSIC
+        h2
+          | {{ slide.message }}
+        .button.festivals-cta Browse Festivals
 
-.pane#dim
+.pane#upcoming-festivals
   .festival-cards
     h1 Upcoming Festivals
     .cards-row  ng-repeat="festivalRow in festivalList"
-      .card ng-repeat="festival in festivalRow" ng-click="openCard(festival)" ng-class="{'main': selectedFestival == festival, 'visible': visibleFestival == festival}"
-        .name
+      .card ng-repeat="festival in festivalRow"
+        a.name ng-href="/festivals/{{festival.slug}}"
           | {{ festival.name }}
         .info
           .location
@@ -24,14 +23,33 @@
             | See {{ festival.current_state }}
         .top-artists
           .label Top Artists
-          .artist ng-repeat="artist in festival.top_artists | orderBy:'play_count':true" ng-click="playArtist(artist)"
-            | {{ artist.name }} {{ artist.play_count }}
+          .artist ng-repeat="artist in festival.top_artists | orderBy:'play_count':true"
+            span ng-click="playArtist(artist)"
+              | {{ artist.name }}
+
+.pane#about
+  .message
+    .container
+      .heading Our story
+      .text
+        | We love festivals, after parties, and all things MVSIC. Whether your just attended your first rave or are an aficionado of sound, we want to build the tools and community to help you discover new artists, experiences, and take it up to the next level.
+      .text
+        ' It's going to be a long journey and we'd love to hear about what music and community mean to you. Check out
+        a.festivals-cta.link href="/festivals" upcoming festivals
+        '  and
+        a.feedback-cta.link reach out
+        |  even if it's just to say hello.
+      .text.signature &mdash;MVSIC team
 
 javascript:
   $(function(){
-    setTimeout(function() {
-      $('.cta').on('click', function(event) {
-        $('html, body').animate({ scrollTop: $('.festival-cards').offset().top + 'px' });
+    setTimeout(function(){
+      $('.festivals-cta').on('click', function(event) {
+        $('html, body').animate({ scrollTop: $('#upcoming-festivals').offset().top + 'px' });
+      });
+
+      $('.about-cta').on('click', function(event) {
+        $('html, body').animate({ scrollTop: $('#about').offset().top + 'px' });
       });
     }, 1000);
   });

@@ -1,4 +1,4 @@
-.schedule-view style="background-image: url(/assets/wallpaper/{{ schedule.festival.background_image }});"
+.schedule-view style="background-image: url({{ schedule.festival.background_image }});"
   .festival-wrapper
     .festival-pane.animated.fadeInUp
       a.festival-name ng-href="/festivals/{{schedule.festival.slug}}"
@@ -17,9 +17,9 @@
         | Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Maecenas sed diam eget risus varius blandit sit amet non magna. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
 
   .events-wrapper
-    .events-pane
-      #event-list
-        .day.animated.fadeInUp ng-repeat="day in eventsByDay"
+    .events-pane.animated.fadeInUp
+      .artist-list
+        .day ng-repeat="day in eventsByDay"
           .label
             | {{day.date}}
           .event ng-repeat="event in day.events"

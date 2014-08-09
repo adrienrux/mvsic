@@ -2,15 +2,6 @@
   -moz-box-sizing: border-box
   box-sizing: border-box
 
-@mixin white-link
-  color: $white
-  border-bottom: 2px solid transparent
-  letter-spacing: 1px
-  text-decoration: none
-  &:hover
-    color: $white
-    border-bottom-color: $white
-
 @mixin button
   display: inline-block
   position: relative
@@ -24,7 +15,6 @@
   border-radius: 2px
   color: $slate
   cursor: pointer
-  font-size: 11px
   outline: none
   text-align: center
   text-decoration: none
@@ -32,7 +22,17 @@
   &:hover, &.playing
     background-color: $cloud
 
-@mixin transition($time)
+@mixin link
+  @include transition
+  cursor: pointer
+  color: $white
+  text-decoration: underline
+  &:hover
+    color: $slate
+    background-color: $white
+    text-decoration: none
+
+@mixin transition($time: 0.3s)
   -webkit-transition: $time ease-in-out
   -moz-transition: $time ease-in-out
   -o-transition: $time ease-in-out
@@ -49,21 +49,3 @@
   -moz-animation-delay: $time
   -o-animation-delay: $time
   animation-delay: $time
-
-@mixin input-colors($focus, $invalid, $placeholder)
-  ::-webkit-input-placeholder
-    color: $placeholder
-  :-moz-placeholder
-    color: $placeholder
-  ::-moz-placeholder
-    color: $placeholder
-  :-ms-input-placeholder
-    color: $placeholder
-  &:focus
-    border-color: $focus
-    + label
-      color: $green
-  &:invalid
-    border-color: $invalid
-    + label
-      color: $invalid

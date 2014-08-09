@@ -1,4 +1,4 @@
-app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals', 'MvsicPlayer', ($http, $timeout, $scope, Festivals, MvsicPlayer) ->
+app.controller 'FestivalsController', ['$http', '$timeout', '$scope', '$location', '$anchorScroll', 'Festivals', 'MvsicPlayer', ($http, $timeout, $scope, $location, $anchorScroll, Festivals, MvsicPlayer) ->
   groupBy = (array, size) ->
     lists = _.chain(array).groupBy((el, i) ->
       Math.floor(i/size)
@@ -15,20 +15,26 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals
   carousel = ->
     $scope.slides = [
       { image: '/assets/wallpaper/lights.jpg', message: 'Nulla vitae elit libero, a pharetra augue.' }
-      { image: '/assets/wallpaper/vinyl.jpg', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
-      { image: '/assets/wallpaper/bubble.jpg', message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.' }
+      { image: '/assets/wallpaper/microphone.jpg', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+      { image: '/assets/wallpaper/vinyl.jpg', message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.' }
     ]
 
-  $scope.openCard = (card) ->
-    return if $scope.selectedFestival == card
-
-    $scope.visibleFestival = null
-    $timeout ->
-      $scope.selectedFestival = card
-    , 100
-    $timeout ->
-      $scope.visibleFestival = card
-    , 300
+  anchorScroll = ->
+    if $location.$$path.match(/about/)
+      $timeout ->
+        $location.hash('about')
+        $anchorScroll()
+        $location.hash('')
+    else if $location.$$path.match(/festivals\/?$/)
+      $timeout ->
+        $location.hash('upcoming-festivals')
+        $anchorScroll()
+        $location.hash('')
+    else
+      $timeout ->
+        $location.hash('slideshow')
+        $anchorScroll()
+        $location.hash('')
 
   $scope.playArtist = (artist) ->
     $scope.$emit('selectArtist', artist)
@@ -38,4 +44,5 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', 'Festivals
     _(artists).each((artist) -> artist.play_count = data.count)
 
   carousel()
+  anchorScroll()
 ]

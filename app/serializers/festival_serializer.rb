@@ -12,10 +12,10 @@ class FestivalSerializer < ActiveModel::Serializer
   end
 
   def background_image
-    file_names = Dir.entries('app/assets/images/wallpaper').select do |name|
+    file_names = Dir.entries('app/assets/images/wallpaper/random').select do |name|
       name.match /\.[je?pg|png]/
     end
 
-    file_names.sample
+    "/assets/wallpaper/random/#{file_names.sample}"
   end
 end

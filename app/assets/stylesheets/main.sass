@@ -15,17 +15,7 @@ body
   font-size: 1.6rem
   height: 100%
 
-#mvsic-app
-
-#dim
-  position: relative
-  width: 100%
-  height: 100%
-  z-index: -10
-  background-color: $sea
-
-// NAV BAR
-nav.top-nav
+.top-nav
   @include transition(0.5s)
   position: fixed
   top: 0
@@ -47,7 +37,7 @@ nav.top-nav
     img
       height: 3rem
 
-  ul.links
+  .links
     display: inline-block
     position: relative
     top: 2rem
@@ -57,33 +47,50 @@ nav.top-nav
     li
       display: inline-block
       margin: 0
-      padding: 0 2rem
+      padding: 0.5rem 0
       a
-        @include white-link
         font-size: 1.4rem
         font-weight: 400
+        padding: 0 1rem
+        border-radius: 2px
+        text-decoration: none
 
-// CONTENT
 #content
   margin: 0
   height: 100%
 
-.animated.delay
-  @include animation-delay(2s)
+.pane
+  display: table
+  margin: 0 auto
+  padding: 0
+  height: 100%
+  width: 100%
+  text-align: center
+
+  font-family: $sans-serif
+  font-size: 2rem
+  line-height: 2.4rem
+  text-align: center
+  color: $black
+
+.button
+  @include button
+
+.link
+  @include link
 
 .modal
+  @include animation-delay(0.3s)
   display: none
   position: fixed
-  top: 50%
+  top: 40%
+
   left: 50%
   margin: 0
   padding: 0
   z-index: 30
-  -webkit-animation-delay: 0.3s
-  -moz-animation-delay: 0.3s
-  -o-animation-delay: 0.3s
-  animation-delay: 0.3s
-  width: 500px
+  min-width: 340px
+  max-width: 500px
 
   &.show
     display: block
@@ -94,11 +101,11 @@ nav.top-nav
 
   &#submit-email-modal
     input[type="text"]
-      width: 232px
+      width: 162px
 
     input.user-email
       border-top: none
-      width: 462px
+      width: 302px
 
   .container
     position: relative
@@ -113,7 +120,7 @@ nav.top-nav
     text-align: left
 
     .error
-      color: $sunflower
+      color: $river
 
     .title
       font-size: 2rem
@@ -126,7 +133,7 @@ nav.top-nav
 
       &.half
         display: inline-block
-        width: 230px
+        width: 140px
 
     input[type="email"], input[type="text"], textarea
       outline: none
@@ -145,3 +152,34 @@ nav.top-nav
         padding: 4px 20px
         border-color: $slate
         margin: 0 0 0 0.5rem
+        font-size: 1.2rem
+
+#about
+  background-image: url(/assets/wallpaper/hands.jpg)
+  background-size: cover
+  .message
+    vertical-align: middle
+    display: table-cell
+    margin: 0
+    background-color: $black-opaque
+    border-radius: 4px
+    color: $white
+    font-size: 2rem
+    line-height: 4rem
+    text-align: left
+
+    .container
+      max-width: 700px
+      margin: 0 auto
+      padding: 8rem 2rem
+
+    .heading
+      font-size: 3rem
+      margin: 0 0 2rem 0
+
+    .text
+      margin: 1rem 0
+
+    .signature
+      text-align: right
+      margin: 2rem 0

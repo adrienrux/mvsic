@@ -3,23 +3,23 @@ nav.top-nav.animated.fadeInUp
     img src="/assets/logo/logo-large-white.png" alt="MVSIC logo"
   ul.links
     li
-      = link_to 'Feedback', '#', class: 'feedback-link'
+      = link_to 'Feedback', '#', class: 'feedback-cta link'
     li
-      = link_to 'About', '#', class: 'about-link'
+      = link_to 'About', '/about', class: 'about-cta link'
     li
-      = link_to 'Blog', 'http://mvsicio.tumblr.com'
+      = link_to 'Blog', 'http://mvsicio.tumblr.com', class: 'link'
     li.social
-      = link_to 'Twitter', 'https://twitter.com/mvsicio'
+      = link_to 'Twitter', 'https://twitter.com/mvsicio', class: 'link'
 
 #feedback-form.modal.animated.fadeInUp
   .container
     .title We'd love to hear from you!
     form method='post' action="//forms.brace.io/#{feedback_email_address}"
-      p Hi there! Please tell us what you like, don't like, want to see more of. Or, just say hello :)
+      p Hi there! Please tell us what you like, don't like, want to see more of. Or just say hello :)
       p
         | &mdash;MVSIC team
-      input type='text' name='name' placeholder='Your name (so we can address you like a friend)'
-      input type='email' name='_replyto' placeholder='Your email (so we can get back to you)'
+      input type='text' name='name' placeholder='Your name'
+      input type='email' name='_replyto' placeholder='Your email'
       textarea name='message' rows='4' placeholder='Your feedback. Thank you!'
       .buttons
         input.button type='submit' value='Send'
@@ -27,11 +27,15 @@ nav.top-nav.animated.fadeInUp
 
 javascript:
   $(function() {
-    $('.feedback-link').on('click', function(event) {
-      $('#feedback-form').show();
-    });
+    setTimeout(function(){
+      $('.feedback-cta').on('click', function(event) {
+        event.preventDefault();
+        $('#feedback-form').show();
+      });
 
-    $('.cancel-feedback').on('click', function(event) {
-      $('#feedback-form').hide();
-    })
+      $('.cancel-feedback').on('click', function(event) {
+        event.preventDefault();
+        $('#feedback-form').hide();
+      });
+    }, 1000);
   });

@@ -3,63 +3,29 @@
 
 .schedule-view
   .events-pane
-    .sort-toggles
-      margin: 2rem 0
+    .sort-toggles, .view-toggles
+      margin: 2rem 2rem 1rem 0
       .label
         display: inline-block
         color: $white
         letter-spacing: 1px
         text-transform: uppercase
       .toggles
-        margin-left: 20px
-        display: inline-block
+        margin: 0 0 0 2rem
         .toggle
           color: $white-opaque-medium
           cursor: pointer
           display: inline-block
-          margin: 0 20px
+          margin: 0 2rem 0 0
           text-transform: uppercase
           &:hover, &.selected
             color: $white
 
-    #artist-list
-      margin: 2rem 0 1rem 0
-      .event
-        position: relative
-        margin: 10px 0
-        width: 100%
-        background-color: $white-opaque
-        border-radius: 0.2rem
-        color: $white
-        cursor: pointer
-        padding: 1rem
-        text-align: left
-        border: 2px solid transparent
-        &:hover
-          background-color: transparent
-          border-color: $white
-        &.selected
-          background-color: $white
-          border-color: $white
-          color: $slate
-          .button
-            border-color: $slate
-
-        .name, .playcount, .helper
-          display: inline-block
-          margin: 0 10px 0 0
-          font-size: 2.4rem
-          line-height: 3rem
-        .name
-          margin-left: 10px
-        .playcount
-          color: $sunflower
-          font-size: 1.6rem
-        .helper
-          position: absolute
-          right: 20px
-          top: 12px
-          font-size: 1.6rem
+    .view-toggles
+      margin: 0 0 4rem 0
+      .toggles
+        display: inline-block
+        margin: 0 0 0 2rem
 
   #timetable
     float: left
@@ -70,8 +36,8 @@
       width: 100%
 
     .event-wrapper
-      @include transition(0.3s)
-      background-color: $white-opaque
+      @include transition
+      background-color: $white-opaque-light
       border-radius: 0.2rem
       color: $white
       padding: 1rem
@@ -93,7 +59,7 @@
           border-color: $slate
 
       button
-        @include transition(0.3s)
+        @include transition
         position: absolute
         bottom: 8px
         right: 8px
@@ -110,7 +76,7 @@
         text-transform: uppercase
 
         &:hover
-          @include transition(0.3s)
+          @include transition
           background-color: $cloud
 
       .name
@@ -125,35 +91,18 @@
         text-transform: uppercase
 
       .playcount
-        color: $sunflower
+        color: $river
         font-size: 1.6rem
+        i
+          margin: 0 0 0 0.5rem
 
-  .view-toggles
-    margin: 0 0 4rem 0
-    .label
-      display: inline-block
-      color: $white
-      letter-spacing: 1px
-      text-transform: uppercase
-    .toggles
-      margin-left: 20px
-      display: inline-block
-      .toggle
-        color: $white-opaque-medium
-        cursor: pointer
-        display: inline-block
-        margin: 0 20px
-        text-transform: uppercase
-        &:hover, &.selected
-          color: $white
-
-  div#save-button
+  #save-button
     position: absolute
-    top: 0
-    right: 0
+    top: 0.2rem
+    right: 2rem
 
-    button#save
-      @include transition(0.3s)
+    #save
+      @include transition
       font-size: 1.4rem
       padding: 4px 20px
       background-color: $white
@@ -180,8 +129,8 @@
 
   .saved
     &#save-button
-      @include transition(0.3s)
+      @include transition
       bottom: 10%
     &#schedule
-      @include transition(0.3s)
+      @include transition
       height: 71%

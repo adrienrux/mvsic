@@ -1,4 +1,4 @@
-.schedule-view ng-show="festival" style="background-image: url(/assets/wallpaper/{{ festival.background_image }});"
+.schedule-view ng-show="festival" style="background-image: url({{ festival.background_image }});"
   .festival-wrapper
     .festival-pane.animated.fadeInUp
       a.festival-name ng-href="/festivals/{{festival.slug}}"
@@ -17,7 +17,7 @@
         | Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Maecenas sed diam eget risus varius blandit sit amet non magna. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
 
   .events-wrapper
-    .events-pane
+    .events-pane.animated.fadeInUp
       .sort-toggles
         .label Sort artists by:
         .toggles
@@ -30,13 +30,14 @@
           .toggles
             .toggle.day ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}" {{dayDisplay(day)}}
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
-        #artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
+        .artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
             .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" play
             .name
               | {{ event.artist.name }}
             .playcount
-              | {{ event.artist.play_count }} &hearts;
+              | {{ event.artist.play_count }}
+              i.icon.ion-play
             .helper ng-if="event.helperText"
               | {{ event.helperText }}
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
