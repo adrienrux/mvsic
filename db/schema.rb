@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20140809152738) do
 
   create_table "artists", force: true do |t|
     t.string "name"
-    t.string "soundcloud_track_url"
     t.string "soundcloud_url"
+    t.string "soundcloud_track_url"
   end
 
   create_table "events", force: true do |t|
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20140809152738) do
   create_table "festivals", force: true do |t|
     t.string   "name"
     t.string   "location"
+    t.string   "website"
+    t.string   "twitter_handle"
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
@@ -58,16 +60,14 @@ ActiveRecord::Schema.define(version: 20140809152738) do
   add_index "schedule_events", ["schedule_id"], name: "index_schedule_events_on_schedule_id", using: :btree
 
   create_table "schedules", force: true do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.datetime "deleted_at"
-    t.integer  "festival_id"
     t.string   "hashed_id"
+    t.integer  "festival_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
   end
 
   add_index "schedules", ["festival_id"], name: "index_schedules_on_festival_id", using: :btree
-  add_index "schedules", ["hashed_id"], name: "index_schedules_on_hashed_id", using: :btree
   add_index "schedules", ["user_id"], name: "index_schedules_on_user_id", using: :btree
 
   create_table "trackers", force: true do |t|

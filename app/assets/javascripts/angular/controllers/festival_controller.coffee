@@ -2,8 +2,6 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
   ($http, $location, $scope, $routeParams, $timeout, Festivals, Time, MvsicPlayer, localStorageService) ->
     signedUp = false
     $scope.saving = false
-    $scope.sort = 'artist.play_count'
-    $scope.saveMessage = 'Save Schedule'
     $scope.email = localStorageService.get('email')
     $scope.eventList = []
     $scope.newSchedule = {
@@ -24,6 +22,15 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     setupFestival = (data) ->
       $scope.festival = data
+      $scope.saveMessage = "Save #{data.current_state}"
+      tweet = "Find your favorite artists and create a #{data.current_state} for @#{data.twitter_handle} via @mvsicio #{window.location.href}"
+      $scope.tweetHref = "https://twitter.com/intent/tweet?text=#{encodeURI(tweet)}"
+
+      if data.current_state is 'schedule'
+        $scope.sort = 'day'
+      else
+        $scope.sort = 'artist.play_count'
+
       $scope.days = _(data.events).chain()
         .pluck('start_time')
         .compact()

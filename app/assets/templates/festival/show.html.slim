@@ -1,8 +1,13 @@
-#new-schedule ng-show="festival"
+.schedule-view ng-show="festival" style="background-image: url(/assets/wallpaper/{{ festival.background_image }});"
   .festival-wrapper
     .festival-pane.animated.fadeInUp
-      .festival-name
+      a.festival-name ng-href="/festivals/{{festival.slug}}"
         | {{ festival.name }}
+      .festival-links
+        a ng-href="{{ tweetHref }}" target="_blank"
+          i.icon.ion-social-twitter
+        a ng-href="{{ festival.website }}" target="_blank"
+          i.icon.ion-earth
       .festival-info
         .festival-location
           | {{ festival.location }}
@@ -16,9 +21,9 @@
       .sort-toggles
         .label Sort artists by:
         .toggles
+          .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="days.length" Set Time
           .toggle ng-click="sort = 'artist.play_count'" ng-class="{'selected': sort == 'artist.play_count'}" Popularity
           .toggle ng-click="sort = 'artist.name'" ng-class="{'selected': sort == 'artist.name'}" Name
-          .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="days.length" Set Time
       #timetable
         .view-toggles ng-if="sort == 'day'"
           .label Select Day:
@@ -36,12 +41,13 @@
               | {{ event.helperText }}
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
         button#save ng-click="openModal()"
-          | {{saveMessage}}
+          | {{ saveMessage }}
 #save-schedule-success-modal.modal.animated.fadeInUp ng-class="{'show': showSuccessModal}"
   .container
-    .title Lineup Saved
+    .title
+      | {{ festival.current_state }} Saved
     p
-      ' Nice choices! We'll email you the lineup you selected for
+      ' Nice choices! We'll email you the {{ festival.current_state }} you selected for
       span.festival-name
         | {{ festival.name }}
       '  at
@@ -54,12 +60,13 @@
       a.button.exit ng-href="/schedules/{{newSchedule.hashed_id}}" Okay
 #submit-email-modal.modal.animated.fadeInUp ng-class="{'show': showSignUpModal}"
   .container
-    .title Save your lineup
+    .title
+      | Save your {{ festival.current_state }}
     p
-      ' To save the lineup you have created for
+      ' To save the {{ festival.current_state }} you have created for
       span.festival-name
         | {{ festival.name }}
-      |  we need your email address. We'll send you the lineup and promise not to do spam you ever.
+      |  we need your email address. We'll send you the {{ festival.current_state }} and promise not to do spam you ever.
     p
       | &mdash; MVSIC team
     .col.half
@@ -71,5 +78,5 @@
     p.error
       | {{ saveError }}
     .buttons
-      .button.exit ng-click="betaSignup()" Save my lineup
-      .button.exit ng-click="showSignUpModal = false; saveMessage = 'Save Schedule'" Cancel
+      .button.exit ng-click="betaSignup()" Save my {{ festival.current_state }}
+      .button.exit ng-click="showSignUpModal = false; saveMessage = 'Save ' + festival.current_state" Cancel

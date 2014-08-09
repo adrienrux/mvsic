@@ -1,6 +1,6 @@
 class Api::SchedulesController < Api::BaseController
   before_filter :get_schedule, only: [:show, :update]
-  before_filter :get_user
+  before_filter :get_user, only: [:create]
 
   def create
     @schedule = Schedule.new(permitted_params.merge(user: @user))

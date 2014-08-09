@@ -1,61 +1,8 @@
 @import "variables"
 @import "mixins"
 
-#new-schedule
-  background-color: $sea
-  clear: both
-  font-family: $sans-serif
-  padding-bottom: 3rem
-  width: 100%
-  min-height: 100%
-
-  &:after
-    clear: both
-    content: ''
-    display: table
-
-  .festival-wrapper
-    padding: 8rem 2rem 2rem 2rem
-    background-color: $sunflower
-
-  .festival-pane
-    position: relative
-    height: 200px
-    color: $white
-    width: 960px
-    margin: 0 auto
-
-    .festival-name
-      @include animation-delay(0.5s)
-      font-size: 4rem
-      font-weight: 400
-
-    .festival-info
-      position: absolute
-      bottom: 2rem
-      text-align: left
-
-      .festival-location
-        @include animation-delay(1s)
-        font-size: 1.8rem
-        font-weight: 300
-        letter-spacing: 1px
-        text-transform: uppercase
-
-    .festival-description
-      position: absolute
-      top: 1rem
-      right: 2rem
-      max-width: 50rem
-
-  .events-wrapper
-    color: $white
-
+.schedule-view
   .events-pane
-    width: 960px
-    margin: 0 auto
-    position: relative
-
     .sort-toggles
       margin: 2rem 0
       .label
@@ -81,7 +28,7 @@
         position: relative
         margin: 10px 0
         width: 100%
-        background-color: $white-opaque
+        background-color: $black-opaque
         border-radius: 0.2rem
         color: $white
         cursor: pointer

@@ -10,4 +10,17 @@ class Festival < ActiveRecord::Base
   def slug
     "#{name.parameterize}-#{start_date.year}"
   end
+
+  def current_state
+    if events.pluck(:start_time).compact.empty?
+      # True if there all start_date values are nil
+      'lineup'
+    else
+      'schedule'
+    end
+  end
+
+  def top_artists
+    events.map(&:artist).sort_by{ |a| a.count :user_play }.reverse.first(3)
+  end
 end

@@ -20,7 +20,8 @@
             | {{ festival.location.split(',')[0] }}
           .date
             | {{ festival.start_date }}
-          a.festival-link ng-href="/festivals/{{festival.slug}}" See Lineup
+          a.festival-link ng-href="/festivals/{{festival.slug}}"
+            | See {{ festival.current_state }}
         .top-artists
           .label Top Artists
           .artist ng-repeat="artist in festival.top_artists | orderBy:'play_count':true" ng-click="playArtist(artist)"

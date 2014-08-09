@@ -14,6 +14,9 @@ app.factory 'Time', () ->
     hours = if hours then hours else 12
     strTime = "#{hours}:#{minutes}"
 
+  formatFullDate = (dat) ->
+
+
   {
     format12Hour: format12Hour
     formatAMPM: formatAMPM

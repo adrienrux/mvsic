@@ -1,7 +1,6 @@
 app.controller 'ScheduleCreateController', ['$http', '$scope', '$routeParams', '$timeout', 'Time', ($http, $scope, $routeParams, $timeout, Time) ->
   festival_id = $routeParams.festival_id
   $scope.saving = false
-  $scope.saveMessage = 'Save Schedule'
   $scope.eventList = []
   $scope.newSchedule = {
     schedule_events_attributes: []
@@ -9,6 +8,7 @@ app.controller 'ScheduleCreateController', ['$http', '$scope', '$routeParams', '
 
   $http.get("/api/festivals/#{festival_id}.json").success (data) ->
     $scope.festival = data
+    $scope.saveMessage = "Save #{data.current_state}"
     $scope.days = _(data.venues).chain()
       .pluck('events')
       .flatten()

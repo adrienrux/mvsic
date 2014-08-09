@@ -1,8 +1,9 @@
-#schedule-show
+.schedule-view
   .festival-wrapper
     .festival-pane.animated.fadeInUp
-      .festival-name
+      a.festival-name ng-href="/festivals/{{schedule.festival.slug}}"
         | {{ schedule.festival.name }}
+      .ion-social-twitter
       .festival-info
         .festival-location
           | {{ schedule.festival.location }}
@@ -22,10 +23,8 @@
               .button.play ng-click="$emit('selectArtist', event.artist)" play
               .name
                 | {{ event.artist.name }}
-              .playcount
-                | {{ event.artist.play_count }} &hearts;
-            .info
               .location
-                | {{event.venue.name}}
+                | {{ event.venue.name }}
+            .info
               .settime ng-show="event.start_time"
-                | {{timeDisplay(event.start_time)}}
+                | {{ timeDisplay(event.start_time) }} - {{ timeDisplay(event.end_time) }}

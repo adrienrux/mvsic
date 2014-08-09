@@ -1,13 +1,14 @@
 @import "variables"
 @import "mixins"
 
-#schedule-show
-  background-color: $sea
+.schedule-view
   clear: both
   font-family: $sans-serif
   padding-bottom: 3rem
   width: 100%
   min-height: 100%
+  background-attachment: fixed
+  background-size: cover
 
   &:after
     clear: both
@@ -16,19 +17,26 @@
 
   .festival-wrapper
     padding: 8rem 2rem 2rem 2rem
-    background-color: $sunflower
+    background-color: $black-opaque
 
   .festival-pane
     position: relative
-    height: 200px
+    height: 300px
     color: $white
     width: 960px
     margin: 0 auto
 
     .festival-name
       @include animation-delay(0.5s)
+      color: $white
       font-size: 4rem
       font-weight: 400
+
+    .festival-links
+      a
+        color: $white
+        font-size: 2rem
+        margin: 0 1rem 0 0
 
     .festival-info
       position: absolute
@@ -71,7 +79,7 @@
           position: relative
           margin: 10px 0
           width: 100%
-          background-color: $white-opaque
+          background-color: $black-opaque
           border-radius: 0.2rem
           color: $white
           padding: 1rem
@@ -80,24 +88,21 @@
 
           .name
             display: inline-block
-            margin: 0 10px
+            margin: 0 1rem
             font-size: 2.4rem
             line-height: 3rem
-          .playcount
+          .location
             display: inline-block
-            color: $sunflower
             font-size: 1.6rem
           .info
             position: absolute
-            right: 20px
-            top: 15px
-            .location, .settime
+            right: 2rem
+            top: 1.5rem
+            .settime
               display: inline-block
-              margin: 0 20px 0 0
+              margin: 0
               font-size: 1.6rem
               text-transform: uppercase
-            .settime
-              margin: 0
           .button
             display: inline-block
             position: relative
