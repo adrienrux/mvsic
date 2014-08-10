@@ -14,9 +14,9 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', '$location
 
   carousel = ->
     $scope.slides = [
-      { image: '/assets/wallpaper/lights.jpg', message: 'Nulla vitae elit libero, a pharetra augue.' }
-      { image: '/assets/wallpaper/microphone.jpg', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
-      { image: '/assets/wallpaper/vinyl.jpg', message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.' }
+      { image: '/assets/wallpaper/lights.jpg', message: 'Create and share custom lineups' }
+      { image: '/assets/wallpaper/microphone.jpg', message: 'Explore upcoming festivals through curated tracks' }
+      { image: '/assets/wallpaper/vinyl.jpg', message: 'A quest for a community of music lovers' }
     ]
 
   anchorScroll = ->

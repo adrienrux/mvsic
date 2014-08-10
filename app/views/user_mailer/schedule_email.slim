@@ -4,11 +4,21 @@ html
     meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
   body
     h1
-      = "Your #{@festival.name} lineup"
+      = "Your #{@festival.name} #{@festival.current_state}"
     p
-      = "Hey #{@user.first_name}!"
-      '  You created a
-      = link_to "lineup for #{@festival.name}", "http://mvsicio.herokuapp.com/schedules/#{@schedule.hashed_id}/"
-      | . You have great taste in music!
+      = "Hey #{@user.first_name},"
     p
-      | Thanks for joining the MVSIC beta.
+      = "Welcome to MVSIC! You created a #{@festival.current_state} for #{@festival.name}."
+      = if @festival.current_state == 'lineup' then " Your lineup will automatically turn into a schedule once set times are announced."
+      |  You can find it 
+      = link_to "here", "http://mvsicio.herokuapp.com/schedules/#{@schedule.hashed_id}/"
+      | .
+    p
+      | This is our first step toward building a community by and for music lovers, 
+      | and we'd love to hear about what music and community mean to you. You can reach us at mviscio@gmail.com, or tweet us
+      = link_to "@MVSICio", "https://twitter.com/MVSICio"
+      | .
+    p
+      | Best,
+      br
+      | The MVSIC Team
