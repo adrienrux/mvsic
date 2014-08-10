@@ -15,7 +15,7 @@ class BetaController < ApplicationController
 
   # POST /beta/feedback
   def feedback
-    UserMailer.feedback_email(params[:name], params[:email], params[:message])
+    UserMailer.feedback_email(params[:name], params[:email], params[:message]).deliver
     render json: { success: true }
   end
 
