@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @schedule = schedule
     @festival = schedule.festival
     @user = user
-    subject = "Here's your Schedule for #{schedule.festival.name}!"
+    subject = "Here's your #{schedule.festival.current_state} for #{schedule.festival.name}!"
     mail(to: @user.email, subject: subject)
   end
 end

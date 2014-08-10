@@ -27,8 +27,8 @@
               .button.play ng-click="$emit('selectArtist', event.artist)" play
               .name
                 | {{ event.artist.name }}
+            .info
               .location
                 | {{ event.venue.name }}
-            .info
               .settime ng-show="event.start_time"
                 | {{ timeDisplay(event.start_time) }} - {{ timeDisplay(event.end_time) }}
