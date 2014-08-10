@@ -4,11 +4,8 @@
 .schedule-view
   clear: both
   font-family: $sans-serif
-  padding-bottom: 3rem
   width: 100%
   min-height: 100%
-  background-attachment: fixed
-  background-size: cover
 
   &:after
     clear: both
@@ -17,13 +14,17 @@
 
   .festival-wrapper
     padding: 8rem 2rem 2rem 2rem
+    background-attachment: fixed
+    background-size: cover
+    background-position: 0 -350px
     background-color: $black-opaque
 
   .festival-pane
     position: relative
     height: 300px
     color: $white
-    max-width: 960px
+    max-width: 96rem
+    min-height: 30rem
     margin: 0 auto
 
     .festival-name
@@ -61,10 +62,13 @@
 
   .events-wrapper
     color: $white
+    background-color: $river
+    padding: 2rem 0 4rem 0
 
   .events-pane
     @include animation-delay(1s)
-    max-width: 960px
+    max-width: 96rem
+    min-height: 36rem
     margin: 0 auto
     position: relative
 
@@ -76,11 +80,11 @@
       margin: 0 0 0 2rem
 
     .artist-list
-      margin: 2rem 0 1rem 0
+      margin: 0 0 1rem 0
       .event
         position: relative
         margin: 1rem 2rem
-        background-color: $black-opaque
+        background-color: $white-opaque-light
         border-radius: 0.2rem
         color: $white
         cursor: pointer
@@ -92,11 +96,13 @@
         &:hover
           background-color: transparent
           border-color: $white
+          .helper
+            display: block
         &.selected
           background-color: $white
           border-color: $white
           color: $slate
-          .button
+          .button, .playcount, .helper, .location
             border-color: $slate
         .name, .playcount, .helper, .location
           display: inline-block
@@ -109,18 +115,20 @@
           font-size: 1.2rem
         .playcount
           display: none
-          color: $river
+          color: $cloud
           i
             margin: 0 0 0 0.5rem
-        .helper, .info
+        .helper
+          display: none
           position: absolute
-          right: 2rem
-          top: 1.5rem
-          font-size: 1.2rem
+          right: 1rem
+          top: 1rem
+          font-size: 3rem
         .info
           position: absolute
           right: 2rem
           top: 1.5rem
+          font-size: 1.2rem
           .settime
             display: inline-block
             margin: 0

@@ -1,5 +1,5 @@
-.schedule-view ng-show="festival" style="background-image: url({{ festival.background_image }});"
-  .festival-wrapper
+.schedule-view ng-show="festival"
+  .festival-wrapper style="background-image: url({{ festival.background_image }});"
     .festival-pane.animated.fadeInUp
       a.festival-name ng-href="/festivals/{{festival.slug}}"
         | {{ festival.name }}
@@ -38,8 +38,8 @@
             .playcount
               | {{ event.artist.play_count }}
               i.icon.ion-play
-            .helper ng-if="event.helperText"
-              | {{ event.helperText }}
+            .helper
+              i.icon ng-class="{'ion-minus-round': event.selected, 'ion-plus-round': !event.selected}"
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
         button#save ng-click="openModal()"
           | {{ saveMessage }}

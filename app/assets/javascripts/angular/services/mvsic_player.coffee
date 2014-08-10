@@ -16,7 +16,6 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
     resolve = "http://api.soundcloud.com/resolve.json?url=#{trackUrl}&client_id=#{CLIENT_ID}&callback=?"
     $.getJSON(resolve)
       .success (response) ->
-        debugger
         SC.stream "#{response.stream_url}", { useHTML5Audio: true, preferFlash: false }, (sound) ->
           unless sound.errors
             playlist["#{artist.id}"] = {
@@ -90,9 +89,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
         getTrack(artist)
 
     play: ->
-      currentTrack['sound'].play({whileplaying: ->
-        $rootScope.$apply()
-      })
+      currentTrack.sound.play()
 
     pause: ->
       currentTrack.sound.pause()
