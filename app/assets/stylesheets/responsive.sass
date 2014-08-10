@@ -28,14 +28,20 @@
 
   .schedule-view
     .festival-pane
+      .festival-name
+        font-size: 3rem
       .festival-info
         position: absolute
         bottom: 2rem
         margin: 0
+        font-size: 1.8rem
+        .festival-date
+          font-size: 1.8rem
       .festival-description
         position: absolute
         top: 1rem
         right: 2rem
+        font-size: 1.6rem
         max-width: 46rem
         margin: 0
 
@@ -53,6 +59,17 @@
             display: inline-block
             position: relative
             top: 0.2rem
+
+  #mvsic-player
+    .info
+      .separator, .track
+        display: inline-block
+
+    .controls
+      position: relative
+      top: 6px
+    .seek
+      display: inline-block
 
 @media screen and (min-width: 960px)
   #upcoming-festivals
