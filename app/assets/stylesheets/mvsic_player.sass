@@ -46,17 +46,18 @@
       &:hover
         border-bottom-color: $white
 
-  .label
+  .error
     color: $cloud
     font-size: 1.2rem
     letter-spacing: 1px
     text-transform: uppercase
+    position: relative
+    top: 0.3rem
 
   .controls
     display: inline-block
     position: absolute
     right: 0
-    top: 1.5rem
     margin: 0 2rem 0 0
     .playstate
       @include button
@@ -80,7 +81,6 @@
   .seek
     display: none
     position: relative
-    top: 0.2rem
     height: 0.5rem
     width: 30rem
     background: $white-opaque-medium

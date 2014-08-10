@@ -38,7 +38,7 @@ body
       height: 3rem
 
   .links
-    display: inline-block
+    display: none
     position: relative
     top: 2rem
     right: 1rem
@@ -91,6 +91,7 @@ body
   z-index: 30
   min-width: 340px
   max-width: 500px
+  font-size: 1.4rem
 
   &.show
     display: block
@@ -114,16 +115,15 @@ body
     margin-top: -50%
     padding: 20px
     border: none
-    border-radius: 5px
-    color: #34495e
-    background-color: #ffffff
+    border-radius: 4px
+    color: $slate
+    background-color: $white
     text-align: left
 
     .error
       color: $river
 
     .title
-      font-size: 2rem
       margin: 0 0 2rem
       text-transform: uppercase
 
@@ -154,6 +154,16 @@ body
         margin: 0 0 0 0.5rem
         font-size: 1.2rem
 
+h1
+  font-size: 3rem
+  font-weight: 300
+  line-height: 4rem
+
+h2
+  font-size: 2.4rem
+  font-weight: 300
+  line-height: 3rem
+
 #about
   background-image: url(/assets/wallpaper/hands.jpg)
   background-size: cover
@@ -164,8 +174,8 @@ body
     background-color: $black-opaque
     border-radius: 4px
     color: $white
-    font-size: 2rem
-    line-height: 4rem
+    font-size: 1.8rem
+    line-height: 3rem
     text-align: left
 
     .container
@@ -173,9 +183,9 @@ body
       margin: 0 auto
       padding: 8rem 2rem
 
-    .heading
-      font-size: 3rem
+    h2
       margin: 0 0 2rem 0
+      text-align: center
 
     .text
       margin: 1rem 0

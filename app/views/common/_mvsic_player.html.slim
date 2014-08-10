@@ -6,11 +6,11 @@
       | //
     a.track ng-href="{{currentTrack.permalink_url}}" target="_blank"
       | {{ currentTrack.title }}
-  .controls
+  .controls ng-if="!currentTrack.error"
     .playstate.button ng-click="mvsicPlayer.togglePause()" ng-class="{play: !currentTrack.sound.playState, pause: currentTrack.sound.playState}"
       .pause Pause
       .play Play
-  .seek ng-click="updatePosition($event)"
+  .seek ng-click="updatePosition($event)" ng-if="!currentTrack.error"
     .played ng-style="{width: mvsicPlayer.currentTime() / mvsicPlayer.totalDuration() * 100 + '%'}"
-  .label ng-if="currentTrack.error"
+  .error.label ng-if="currentTrack.error"
     | Sorry, an error occured. Please pick another artist.

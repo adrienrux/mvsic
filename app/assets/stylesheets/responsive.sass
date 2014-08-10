@@ -1,8 +1,32 @@
+@media screen and (max-width: 480px)
+  .link
+    &:hover
+      color: $white
+      background-color: transparent
+      text-decoration: underline
+
 @media screen and (min-width: 544px)
+  h1
+    font-size: 4rem
+    line-height: 5rem
+
+  h2
+    font-size: 3rem
+    line-height: 4rem
+
   .top-nav
     .links
+      display: inline-block
       li
         padding: 0.5rem 1rem
+
+  #slideshow .slide .carousel-caption
+    .button
+      font-size: 1.8rem
+
+  #upcoming-festivals .festival-cards .card
+    .top-artists
+      display: block
 
   .modal
     &#submit-email-modal
@@ -62,12 +86,13 @@
 
   #mvsic-player
     .info
+      top: 0.2rem
       .separator, .track
         display: inline-block
 
     .controls
       position: relative
-      top: 6px
+      top: 0.2rem
     .seek
       display: inline-block
 

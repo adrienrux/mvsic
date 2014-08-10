@@ -10,13 +10,14 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
   currentTrack = {}
 
   getTrack = (artist) ->
-    $http.post('/track.json', {artist_id: artist.id, subject: 'user_play'}).success (response) ->
+    $http.post('/track.json', { artist_id: artist.id, subject: 'user_play' }).success (response) ->
       $rootScope.$broadcast('updateArtistCount', {artist_id: artist.id, count: response.count})
     trackUrl = artist.soundcloud_track_url
-    resolve = "http://api.soundcloud.com/resolve.json?url=#{trackUrl}&client_id=#{CLIENT_ID}"
-    $.get(resolve)
+    resolve = "http://api.soundcloud.com/resolve.json?url=#{trackUrl}&client_id=#{CLIENT_ID}&callback=?"
+    $.getJSON(resolve)
       .success (response) ->
-        SC.stream "#{response.stream_url}", (sound) ->
+        debugger
+        SC.stream "#{response.stream_url}", { useHTML5Audio: true, preferFlash: false }, (sound) ->
           unless sound.errors
             playlist["#{artist.id}"] = {
               duration: response.duration
@@ -38,7 +39,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
             mvsicPlayer.play()
           else
             broadcastError(artist)
-      .error (data) ->
+      .error (data, status, headers, config) ->
         broadcastError(artist)
 
   broadcastError = (artist) ->
