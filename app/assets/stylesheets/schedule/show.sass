@@ -81,6 +81,11 @@
 
     .artist-list
       margin: 0 0 1rem 0
+      .day .event
+        cursor: default
+        &:hover
+          background-color: $white-opaque-light
+          border-color: transparent
       .event
         position: relative
         margin: 1rem 2rem
@@ -104,6 +109,7 @@
           color: $slate
           .button, .playcount, .helper, .location
             border-color: $slate
+            color: $slate
         .name, .playcount, .helper, .location
           display: inline-block
           margin: 0 1rem 0 0

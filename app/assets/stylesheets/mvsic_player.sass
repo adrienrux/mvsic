@@ -30,6 +30,12 @@
       letter-spacing: 1px
       text-transform: uppercase
 
+    .artist, .track
+      color: $white
+      text-decoration: none
+      &:hover
+        color: $cloud
+
     .artist, .separator
       color: $white
       margin: 0 1rem 0 0
@@ -38,13 +44,7 @@
       display: none
 
     .track
-      @include transition
       display: none
-      color: $white
-      border-bottom: 1px solid transparent
-      text-decoration: none
-      &:hover
-        border-bottom-color: $white
 
   .error
     color: $cloud
