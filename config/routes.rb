@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :beta do
     post :signup
+    post :feedback
   end
 
   post 'track', controller: :tracker, action: :update

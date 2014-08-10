@@ -1,7 +1,7 @@
 class BetaController < ApplicationController
 
-  before_filter :mailchimp
-  before_filter :create_user
+  before_filter :mailchimp, only: [:signup]
+  before_filter :create_user, only: [:signup]
 
   # POST /beta/signup
   def signup
@@ -11,6 +11,12 @@ class BetaController < ApplicationController
     rescue Gibbon::MailChimpError => e
       render json: { error: e.name, status: e.code }, status: e.code
     end
+  end
+
+  # POST /beta/feedback
+  def feedback
+    UserMailer.feedback_email(params[:name], params[:email], params[:message])
+    render json: { success: true }
   end
 
   private

@@ -14,13 +14,13 @@ nav.top-nav.animated.fadeInUp
 #feedback-form.modal.animated.fadeInUp
   .container
     .title We'd love to hear from you!
-    form method='post' action="//forms.brace.io/#{feedback_email_address}"
+    form
       p Hi there! Please tell us what you like, don't like, want to see more of. Or just say hello :)
       p
         | &mdash;MVSIC team
-      input type='text' name='name' placeholder='Your name'
-      input type='email' name='_replyto' placeholder='Your email'
-      textarea name='message' rows='4' placeholder='Your feedback. Thank you!'
+      input#user-name type='text' name='name' placeholder='Your name'
+      input#user-email type='email' name='_replyto' placeholder='Your email'
+      textarea#user-message name='message' rows='4' placeholder='Your feedback. Thank you!'
       .buttons
         input.button type='submit' value='Send'
         .button.cancel-feedback Cancel
@@ -31,6 +31,23 @@ javascript:
       $('.feedback-cta').on('click', function(event) {
         event.preventDefault();
         $('#feedback-form').show();
+      });
+
+      $('#feedback-form').on('click', '.button[type="submit"]', function(event) {
+        $.ajax({
+          url: '/beta/feedback',
+          data: {
+            name: $('#user-name').val(),
+            email: $('#user-email').val(),
+            message: $('#user-message').val()
+          },
+          type: 'post',
+          success: function(){
+            setTimeout(function() {
+              $('#feedback-form').hide();
+            }, 1000);
+          }
+        });
       });
 
       $('.cancel-feedback').on('click', function(event) {
