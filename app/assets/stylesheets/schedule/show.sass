@@ -81,11 +81,12 @@
 
     .artist-list
       margin: 0 0 1rem 0
-      .day .event
-        cursor: default
-        &:hover
-          background-color: $white-opaque-light
-          border-color: transparent
+      .day
+        .event
+          cursor: default
+          &:hover
+            background-color: $white-opaque-light
+            border-color: transparent
       .event
         position: relative
         margin: 1rem 2rem
@@ -117,12 +118,8 @@
           line-height: 2rem
         .name
           margin-left: 10px
-          font-size: 1.8rem
-          position: relative
-          bottom: 0.8rem
         .button
-          font-size: 1.6rem
-          padding: 1rem 2rem
+          font-size: 1.2rem
         .playcount
           display: none
           color: $cloud
@@ -132,12 +129,12 @@
           display: none
           position: absolute
           right: 1rem
-          top: 1.6rem
+          top: 1rem
           font-size: 3rem
         .info
           position: absolute
-          left: 11rem
-          top: 3.3rem
+          right: 2rem
+          top: 1.4rem
           font-size: 1.2rem
           .settime
             margin: 0
