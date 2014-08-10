@@ -32,7 +32,12 @@ app.directive 'timetable', ['Time', (Time) ->
         scope.filteredEvents = filterEventsByDay(scope.events, scope.day)
         scope.venueNames = _(scope.filteredEvents).chain().pluck('venue').pluck('name').uniq().value()
         minTime = _(scope.filteredEvents).chain().pluck('start_time').map((t) -> Date.parse(t)).min().value()
+        minDate = new Date(minTime)        
+        minTime = minDate.setMinutes(Math.floor(minDate.getMinutes() / 15) * 15)
+
         maxTime = _(scope.filteredEvents).chain().pluck('end_time').map((t) -> Date.parse(t)).max().value()
+        maxDate = new Date(maxTime)
+        maxTime = maxDate.setMinutes(Math.ceil(maxDate.getMinutes() / 15) * 15)
 
         timeslots = calculateTimeslots(minTime, maxTime)
         height = (timeslots.length * ROW_HEIGHT)
@@ -155,6 +160,8 @@ app.directive 'timetable', ['Time', (Time) ->
 
   # Helper Methods
   calculateTimeslots = (minTime, maxTime) ->
+
+
     blocks = Math.ceil((maxTime - minTime) / MILLISECONDS_PER_BLOCK)
     timeslots = []
     _(blocks).times((i) -> timeslots.push({time: minTime + i * MILLISECONDS_PER_BLOCK}))
