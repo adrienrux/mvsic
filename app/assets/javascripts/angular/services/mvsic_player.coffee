@@ -90,6 +90,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
 
     play: ->
       currentTrack.sound.play()
+      $rootScope.$apply()
 
     pause: ->
       currentTrack.sound.pause()
