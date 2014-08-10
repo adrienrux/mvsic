@@ -45,7 +45,12 @@ javascript:
           success: function(){
             setTimeout(function() {
               $('#feedback-form').hide();
+              $('.feedback-cta').text('Thank you!')
             }, 300);
+
+            setTimeout(function() {
+              $('.feedback-cta').text('Feedback')
+            }, 5000);
           }
         });
       });
