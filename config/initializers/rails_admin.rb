@@ -1,20 +1,4 @@
 RailsAdmin.config do |config|
-
-  ### Popular gems integration
-
-  ## == Devise ==
-  # config.authenticate_with do
-  #   warden.authenticate! scope: :user
-  # end
-  # config.current_user_method(&:current_user)
-
-  ## == Cancan ==
-  # config.authorize_with :cancan
-
-  ## == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
-  ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.authorize_with do
     authenticate_or_request_with_http_basic('Site Message') do |username, password|
       username == 'divu' && password == 'isgettingmarried'
@@ -31,9 +15,28 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+  end
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+  config.model 'Event' do
+    edit do
+      field :festival
+      field :venue
+      field :artist
+      field :start_time
+      field :end_time
+    end
+  end
+
+  config.model 'Festival' do
+    edit do
+      field :name
+      field :location
+      field :website
+      field :twitter_handle
+      field :description
+      field :start_date
+      field :end_date
+      field :active
+    end
   end
 end
