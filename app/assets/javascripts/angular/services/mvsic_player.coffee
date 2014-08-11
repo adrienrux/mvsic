@@ -34,6 +34,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
               permalink_url: response.permalink_url
               error: false
             }
+            $rootScope.$apply()
             mvsicPlayer.play()
           else
             broadcastError(artist)
@@ -47,6 +48,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       sound: { playState: 0 }
       error: true
     }
+    $rootScope.$apply()
 
   mvsicPlayer =
     currentTime: ->
@@ -85,12 +87,14 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
           error: false
         }
         mvsicPlayer.play()
+        $rootScope.$apply()
       else
         getTrack(artist)
 
     play: ->
-      currentTrack.sound.play()
-      $rootScope.$apply()
+      currentTrack.sound.play
+        whileplaying: ->
+          $rootScope.$apply()
 
     pause: ->
       currentTrack.sound.pause()
