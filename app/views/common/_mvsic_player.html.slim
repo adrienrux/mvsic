@@ -1,11 +1,11 @@
 #mvsic-player ng-controller="MvsicPlayerController" ng-class="{displayed: mvsicPlayer.currentTrack().title}"
   .info ng-if="!mvsicPlayer.currentTrack().error"
     a.artist ng-href="{{mvsicPlayer.currentTrack().artistUrl}}" target="_blank"
-      | {{ mvsicPlayer.currentTrack().artistName }}
+      | {{ mvsicPlayer.currentTrack().artistName | 35 }}
     span.separator
       | //
     a.track ng-href="{{mvsicPlayer.currentTrack().permalink_url}}" target="_blank"
-      | {{ mvsicPlayer.currentTrack().title }}
+      | {{ mvsicPlayer.currentTrack().title | 35 }}
   .controls ng-if="!mvsicPlayer.currentTrack().error"
     .playstate.button ng-click="mvsicPlayer.togglePause()" ng-class="{play: !mvsicPlayer.currentTrack().sound.playState, pause: mvsicPlayer.currentTrack().sound.playState}"
       .pause Pause
