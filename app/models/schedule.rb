@@ -8,4 +8,12 @@ class Schedule < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :schedule_events, allow_destroy: true
+
+  after_create :increment_counter
+
+  def increment_counter
+    events.map(&:artist).each do |artist|
+      artist.increment :user_save_to_schedule
+    end
+  end
 end
