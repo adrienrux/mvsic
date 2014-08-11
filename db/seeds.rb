@@ -288,10 +288,14 @@ Artist.where(name: 'Zeds Dead').first_or_create.update_attributes(soundcloud_url
 Artist.where(name: 'Zomboy').first_or_create.update_attributes(soundcloud_url: 'https://soundcloud.com/zomboy', soundcloud_track_url: 'https://soundcloud.com/zomboy/fedde-le-grand-di-rect-where')
 
 Tracker.where(subject: 'user_play').each do |tracker|
-  if tracker.instance.soundcloud_url && tracker.instance.soundcloud_track_url
-    tracker.update_attribute :count, rand(10) + rand(100)
-  else
-    tracker.update_attribute :count, 0
+  begin
+    if tracker.instance.soundcloud_url && tracker.instance.soundcloud_track_url
+      tracker.update_attribute :count, rand(10) + rand(100)
+    else
+      tracker.update_attribute :count, 0
+    end
+  rescue Exception
+    next
   end
 end
 
