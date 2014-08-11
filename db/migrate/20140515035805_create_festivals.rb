@@ -8,6 +8,7 @@ class CreateFestivals < ActiveRecord::Migration
       t.text   :description
       t.date   :start_date
       t.date   :end_date
+      t.boolean :active
       t.timestamps
     end
   end

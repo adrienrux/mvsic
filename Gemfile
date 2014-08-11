@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'pg'
 gem 'rails', '~> 4.1.1'
+gem 'rails_admin', '~> 0.6.2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim', '~> 2.0.2'

@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140809152738) do
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

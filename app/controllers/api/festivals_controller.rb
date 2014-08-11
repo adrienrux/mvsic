@@ -5,7 +5,7 @@ class Api::FestivalsController < Api::BaseController
 
   # GET /api/festivals.json
   def index
-    @festivals = apply_params(Festival.after(Time.zone.now.beginning_of_day))
+    @festivals = apply_params(Festival.active.after(Time.zone.now.beginning_of_day))
     render json: @festivals
   end
 

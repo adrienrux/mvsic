@@ -4,6 +4,7 @@ class Festival < ActiveRecord::Base
   has_many :events
   has_many :schedules
 
+  scope :active, -> { where(active: true) }
   scope :after, -> (time) { where('start_date > ?', time) }
   scope :before, -> (time) { where('start_date < ?', time) }
 
