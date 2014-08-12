@@ -38,6 +38,7 @@ RailsAdmin.config do |config|
       field :end_date
       field :active
       field :show_schedule
+      field :image_file
     end
   end
 
