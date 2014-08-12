@@ -36,8 +36,8 @@
             .name
               | {{ event.artist.name }}
             .playcount
-              | {{ event.artist.play_count }}
               i.icon.ion-play
+              | {{ event.artist.play_count }}
             .helper
               i.icon ng-class="{'ion-minus-round': event.selected, 'ion-plus-round': !event.selected}"
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"
