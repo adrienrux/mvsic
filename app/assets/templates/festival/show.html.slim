@@ -21,7 +21,7 @@
       .sort-toggles
         .label Sort artists by:
         .toggles
-          .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="days.length" Set Time
+          .toggle ng-click="sort = 'day'" ng-class="{'selected': sort == 'day'}" ng-show="festival.show_schedule" Set Time
           .toggle ng-click="sort = 'artist.play_count'" ng-class="{'selected': sort == 'artist.play_count'}" Popularity
           .toggle ng-click="sort = 'artist.name'" ng-class="{'selected': sort == 'artist.name'}" Name
       #timetable

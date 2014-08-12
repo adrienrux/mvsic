@@ -1,5 +1,5 @@
 class FestivalSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :description, :start_date, :end_date, :slug, :current_state, :twitter_handle, :website, :background_image
+  attributes :id, :name, :location, :description, :start_date, :end_date, :slug, :current_state, :twitter_handle, :website, :background_image, :show_schedule
   has_many :top_artists
   has_many :events
 
@@ -8,7 +8,7 @@ class FestivalSerializer < ActiveModel::Serializer
   end
 
   def end_date
-    object.start_date.strftime '%B %-d, %Y'
+    object.end_date.strftime '%B %-d, %Y'
   end
 
   def background_image
