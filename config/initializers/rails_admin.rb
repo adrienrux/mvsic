@@ -18,6 +18,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Event' do
+    list do
+      items_per_page 100
+    end
+
     edit do
       field :festival
       field :venue
@@ -51,6 +55,7 @@ RailsAdmin.config do |config|
       field :artist_name
       field :subject
       field :count
+      items_per_page 100
     end
 
     edit do
