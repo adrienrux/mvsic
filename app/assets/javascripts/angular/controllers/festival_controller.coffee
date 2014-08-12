@@ -26,7 +26,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       tweet = "Find your favorite artists and create a #{data.current_state} for @#{data.twitter_handle} via @mvsicio #{window.location.href}"
       $scope.tweetHref = "https://twitter.com/intent/tweet?text=#{encodeURI(tweet)}"
 
-      if data.current_state is 'schedule'
+      if data.show_schedule
         $scope.sort = 'day'
       else
         $scope.sort = 'artist.play_count'
