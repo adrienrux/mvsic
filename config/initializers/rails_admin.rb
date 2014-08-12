@@ -37,6 +37,7 @@ RailsAdmin.config do |config|
       field :start_date
       field :end_date
       field :active
+      field :show_schedule
     end
   end
 

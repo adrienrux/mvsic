@@ -12,6 +12,6 @@ class FestivalSerializer < ActiveModel::Serializer
   end
 
   def background_image
-    "/assets/wallpaper/festivals/#{image_file}"
+    "/assets/wallpaper/festivals/#{object.image_file}"
   end
 end
