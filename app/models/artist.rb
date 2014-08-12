@@ -5,7 +5,6 @@ class Artist < ActiveRecord::Base
   validates_uniqueness_of :name, case_sensitive: false
   has_many :events, lambda { order :start_time }
 
-  private
   def create_trackers
     Tracker.create(
       instance_class: self.class.to_s,

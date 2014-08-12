@@ -39,4 +39,26 @@ RailsAdmin.config do |config|
       field :active
     end
   end
+
+  config.model 'Tracker' do
+    object_label_method do
+      :artist_name
+    end
+
+    list do
+      field :artist_name
+      field :subject
+      field :count
+    end
+
+    edit do
+      field :artist_name
+      field :subject
+      field :count
+    end
+  end
+
+  def artist_name
+    self.instance.name
+  end
 end
