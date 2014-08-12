@@ -29,15 +29,21 @@
           .label Select Day:
           .toggles
             .toggle.day ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}" {{dayDisplay(day)}}
-        #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" ng-if="sort == 'day'"
+        .page-toggles ng-if="venueList.length > 4"
+          .toggles
+            .toggle ng-click="pageLeft()" ng-if="page > 0" <
+            .toggle
+              | {{page}}
+            .toggle ng-click="pageRight()" ng-if="(venueList.length - 4 - page) > 0" >
+        #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" venues="selectedVenues" ng-if="sort == 'day'"
         .artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
             .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" play
             .name
               | {{ event.artist.name }}
             .playcount
-              | {{ event.artist.play_count }}
               i.icon.ion-play
+              | {{ event.artist.play_count }}
             .helper
               i.icon ng-class="{'ion-minus-round': event.selected, 'ion-plus-round': !event.selected}"
       #save-button.animated.fadeInUp ng-class="{'saved': newSchedule.id}" ng-show="eventList.length"

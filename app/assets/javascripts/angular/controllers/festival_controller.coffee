@@ -45,14 +45,25 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         )
         .sortBy((t) -> t)
         .value()
-      $scope.selectedDay = $scope.days[0]
+        $scope.venueList = _(data.events).chain().pluck('venue').pluck('name').uniq().value()
+      $scope.page = 0
+      $scope.selectedVenues = $scope.venueList.slice($scope.page, $scope.page + 4)
       _($scope.newSchedule).extend({festival_id: data.id})
+      $scope.selectedDay = $scope.days[0]
 
     $scope.$on 'addEvent', (event, data) ->
       $scope.$apply($scope.selectEvent(data))
 
     $scope.$on 'removeEvent', (event, data) ->
       $scope.$apply($scope.deselectEvent(data))
+
+    $scope.pageLeft = ->
+      $scope.page -= 1
+      $scope.selectedVenues = $scope.venueList.slice($scope.page, $scope.page + 4)
+
+    $scope.pageRight = ->
+      $scope.page += 1
+      $scope.selectedVenues = $scope.venueList.slice($scope.page, $scope.page + 4)
 
     $scope.toggleSelectEvent = (e) ->
       $timeout ->
