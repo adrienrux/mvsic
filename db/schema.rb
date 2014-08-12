@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812020944) do
+ActiveRecord::Schema.define(version: 20140812023945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,11 @@ ActiveRecord::Schema.define(version: 20140812020944) do
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
+    t.boolean  "active", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",         default: false
     t.boolean  "show_schedule",  default: false
+    t.string   "image_file"
   end
 
   create_table "schedule_events", force: true do |t|
