@@ -11,7 +11,7 @@ html
       = "Welcome to MVSIC! You created a #{@festival.current_state} for #{@festival.name}."
       = if @festival.current_state == 'lineup' then " Your lineup will automatically turn into a schedule once set times are announced."
       |  You can find it 
-      = link_to "here", "http://mvsicio.io/schedules/#{@schedule.hashed_id}/"
+      = link_to "here", "http://mvsic.io/schedules/#{@schedule.hashed_id}/"
       | .
     p
       | This is our first step toward building a community by and for music lovers, 
