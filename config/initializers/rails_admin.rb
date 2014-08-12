@@ -59,7 +59,6 @@ RailsAdmin.config do |config|
     end
 
     edit do
-      field :artist_name
       field :subject
       field :count
     end
