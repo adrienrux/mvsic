@@ -10,8 +10,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
   currentTrack = {}
 
   getTrack = (artist) ->
-    $http.post('/track.json', { artist_id: artist.id, subject: 'user_play' }).success (response) ->
-      $rootScope.$broadcast('updateArtistCount', {artist_id: artist.id, count: response.count})
+    $http.post('/track.json', { artist_id: artist.id, subject: 'user_play' })
     trackUrl = artist.soundcloud_track_url
     resolve = "http://api.soundcloud.com/resolve.json?url=#{trackUrl}&client_id=#{CLIENT_ID}&callback=?"
     $.getJSON(resolve)

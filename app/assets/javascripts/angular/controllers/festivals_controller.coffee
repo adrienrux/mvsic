@@ -39,10 +39,6 @@ app.controller 'FestivalsController', ['$http', '$timeout', '$scope', '$location
   $scope.playArtist = (artist) ->
     $scope.$emit('selectArtist', artist)
 
-  $scope.$on 'updateArtistCount', (event, data) ->
-    artists = _($scope.festivalListFull).chain().pluck('top_artists').flatten().where({id: data.artist_id}).value()
-    _(artists).each((artist) -> artist.play_count = data.count)
-
   carousel()
   anchorScroll()
 ]

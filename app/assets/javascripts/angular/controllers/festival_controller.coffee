@@ -113,10 +113,6 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
     $scope.playArtist = (artist) ->
       $scope.$emit('selectArtist', artist)
 
-    $scope.$on 'updateArtistCount', (event, data) ->
-      artists = _($scope.festival.events).chain().pluck('artist').flatten().where({id: data.artist_id}).value()
-      _(artists).each((artist) -> artist.play_count = data.count)
-
     $scope.betaSignup = ->
       if re.test($scope.email)
         $http.post('/beta/signup.json',
