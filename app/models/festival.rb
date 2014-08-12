@@ -22,6 +22,6 @@ class Festival < ActiveRecord::Base
   end
 
   def top_artists
-    events.map(&:artist).sort_by{ |a| a && a.count :user_play }.reverse.first(3)
+    events.map(&:artist).sort_by{ |a| a && a.count(:user_play) }.reverse.first(3)
   end
 end
