@@ -5,7 +5,7 @@ class Tracker < ActiveRecord::Base
   end
 
   def instance
-    instance_class.constantize.find(instance_id)
+    instance_class.constantize.find(instance_id) rescue nil
   end
 
   def self.for(obj, subject)

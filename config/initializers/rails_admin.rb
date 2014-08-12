@@ -65,6 +65,6 @@ RailsAdmin.config do |config|
   end
 
   def artist_name
-    self.instance.name
+    self.instance && self.instance.name
   end
 end
