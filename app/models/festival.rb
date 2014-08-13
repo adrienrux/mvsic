@@ -30,7 +30,7 @@ class Festival < ActiveRecord::Base
       artists << { id: a_id, play_count: plays }
     end
 
-    top = artists.sort_by { |a| a[:play_count] }.reverse.last(3)
+    top = artists.sort_by { |a| a[:play_count] }.last(3)
     Artist.where(id: top.map { |a| a[:id] })
   end
 end
