@@ -133,7 +133,6 @@ app.directive 'timetable', ['Time', (Time) ->
             "
               <div class='name'>#{e.artist.name}</div>
               <div class='venue'>#{venue_name}</div>
-              <div class='playcount'>&hearts; #{e.artist.play_count}</div>
             "
           ).on('click', (e) ->
             box = d3.select(this)
