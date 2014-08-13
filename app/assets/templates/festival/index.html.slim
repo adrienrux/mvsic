@@ -18,7 +18,7 @@
           .location
             | {{ festival.location.split(',')[0] }}
           .date
-            | {{ festival.start_date }}
+            | {{ festival.timestamp }}
           a.festival-link ng-href="/festivals/{{festival.slug}}"
             | See {{ festival.current_state }}
         .top-artists
