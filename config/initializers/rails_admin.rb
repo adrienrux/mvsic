@@ -18,12 +18,8 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Artist' do
-    object_label_method do
-      :play_count
-      :schedule_count
-    end
-
     list do
+      items_per_page 100
       field :name
       field :play_count
       field :schedule_count
@@ -33,6 +29,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Event' do
+    object_label_method do
+      :event_label
+    end
+
     list do
       items_per_page 100
     end
@@ -61,11 +61,29 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Venue' do
+    object_label_method do
+      :venue_label
+    end
+  end
+
   def play_count
     self.count('user_play')
   end
 
   def schedule_count
     self.count('user_save_to_schedule')
+  end
+
+  def event_label
+    if self.start_time && self.end_time
+      "#{self.festival.name}: #{self.artist.name} (#{self.start_time.strftime('%-m/%-d/%Y %H:%I')})"
+    else
+      "#{self.festival.name}: #{self.artist.name}"
+    end
+  end
+
+  def venue_label
+    "#{self.festival.name}: #{self.name}"
   end
 end
