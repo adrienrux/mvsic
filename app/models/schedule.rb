@@ -13,7 +13,7 @@ class Schedule < ActiveRecord::Base
 
   def increment_counter
     events.map(&:artist).each do |artist|
-      artist.increment :user_save_to_schedule
+      artist.increment! :user_save_to_schedule
     end
   end
 end
