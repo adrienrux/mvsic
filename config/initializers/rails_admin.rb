@@ -45,26 +45,4 @@ RailsAdmin.config do |config|
       field :image_file
     end
   end
-
-  config.model 'Tracker' do
-    object_label_method do
-      :artist_name
-    end
-
-    list do
-      field :artist_name
-      field :subject
-      field :count
-      items_per_page 100
-    end
-
-    edit do
-      field :subject
-      field :count
-    end
-  end
-
-  def artist_name
-    self.instance && self.instance.name
-  end
 end

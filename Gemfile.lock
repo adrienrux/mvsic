@@ -139,6 +139,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    redis (3.1.0)
     remotipart (1.2.1)
     rspec-core (2.14.8)
     rspec-expectations (2.14.5)
@@ -212,6 +213,7 @@ DEPENDENCIES
   rails (~> 4.1.1)
   rails_12factor
   rails_admin (~> 0.6.2)
+  redis
   rspec-rails (~> 2.14.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -359,11 +359,6 @@ Artist.where('name ILIKE ?', 'Zedd').first_or_create.update_attributes(name: 'Ze
 Artist.where('name ILIKE ?', 'Zeds Dead').first_or_create.update_attributes(name: 'Zeds Dead', soundcloud_url: 'https://soundcloud.com/zedsdead', soundcloud_track_url: 'https://soundcloud.com/zedsdead/hadouken')
 Artist.where('name ILIKE ?', 'Zomboy').first_or_create.update_attributes(name: 'Zomboy', soundcloud_url: 'https://soundcloud.com/zomboy', soundcloud_track_url: 'https://soundcloud.com/zomboy/fedde-le-grand-di-rect-where')
 
-Tracker.destroy_all
-Artist.all.each do |artist|
-  artist.create_trackers
-end
-
 User.where(first_name: 'James', last_name: 'Zhang', email: 'jamesfzhang@gmail.com', admin: true).first_or_create
 User.where(first_name: 'Divu', last_name: 'Jain', email: 'divanshuj@gmail.com', admin: true).first_or_create
 User.where(first_name: 'Han', last_name: 'Chen', email: 'chenhan22@gmail.com', admin: true).first_or_create
