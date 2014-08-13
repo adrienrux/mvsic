@@ -22,6 +22,15 @@ class Festival < ActiveRecord::Base
   end
 
   def top_artists
-    events.map(&:artist).sort_by{ |a| a && a.count(:user_play) }.reverse.first(3)
+    artists = []
+
+    events.pluck(:artist_id).each do |a_id|
+      # Go straight into redis instead of iterating over Artist instances
+      plays = $redis.get("artist-#{a_id}-user_play").to_i
+      artists << { id: a_id, play_count: plays }
+    end
+
+    top = artists.sort_by { |a| a[:play_count] }.reverse.last(3)
+    Artist.where(id: top.map { |a| a[:id] })
   end
 end
