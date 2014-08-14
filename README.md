@@ -41,6 +41,16 @@ Ask James for Mailchimp's API key and add it like so to `.env`:
 
 `MAILCHIMP_API_KEY: '123456'`
 
-7) Start server
+7) Start redis
+
+If you don't have redis, install it first via homebrew
+
+`brew install redis`
+
+Once it's installed, start it
+
+`redis-server &`
+
+8) Start server
 
 `bundle exec rails s`
