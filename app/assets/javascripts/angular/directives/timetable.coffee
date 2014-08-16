@@ -49,7 +49,7 @@ app.directive 'timetable', ['Time', (Time) ->
 
         timeslots = calculateTimeslots(minTime, maxTime)
         height = (timeslots.length * ROW_HEIGHT)
-        scope.width = (200 + MARGIN.left + MARGIN.right) * scope.filteredVenueNames.length
+        scope.width = (EVENT_BOX_WIDTH + 10) * scope.filteredVenueNames.length + 60
 
         # Adjust the scales / axis
         yScale.range([0, height]).domain([minTime, maxTime])
