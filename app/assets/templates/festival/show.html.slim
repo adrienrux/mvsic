@@ -29,12 +29,11 @@
           .label Select Day:
           .toggles
             .toggle.day ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{'selected': selectedDay == day}" {{dayDisplay(day)}}
-        .page-toggles ng-if="venueList.length > 4"
-          .toggles
-            .toggle ng-click="pageLeft()" ng-if="page > 0" <
-            .toggle
-              | {{page}}
-            .toggle ng-click="pageRight()" ng-if="(venueList.length - 4 - page) > 0" >
+          .page-toggles.left ng-if="venueList.length > 4 && page > 0"
+            .toggles
+              .button ng-click="pageLeft()" <
+          .page-toggles.right ng-if="venueList.length > 4 && (venueList.length - 4 - page) > 0"
+              .button ng-click="pageRight()" >
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" venues="selectedVenues" ng-if="sort == 'day'"
         .artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"

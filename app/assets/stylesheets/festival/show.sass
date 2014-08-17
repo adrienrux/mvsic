@@ -3,7 +3,7 @@
 
 .schedule-view
   .events-pane
-    .sort-toggles, .view-toggles, .page-toggles
+    .sort-toggles, .view-toggles
       margin: 1rem 2rem 1rem 0
       .label
         display: inline-block
@@ -21,11 +21,21 @@
           &:hover, &.selected
             color: $white
 
-    .view-toggles, .page-toggles
-      margin: 0 0 4rem 0
+    .view-toggles
+      margin: 0 0 5rem 0
       .toggles
         display: inline-block
         margin: 0 0 0 2rem
+
+      .page-toggles
+        position: absolute
+        top: 5.2em
+
+        .button
+          line-height: 1.4rem
+
+        &.right
+          right: 0
 
   #timetable
     width: 100%
