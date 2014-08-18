@@ -28,6 +28,9 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
       if data.show_schedule
         $scope.sort = 'day'
+        $scope.venueList = _(data.events).chain().pluck('venue').pluck('name').uniq().value()
+        $scope.page = 0
+        $scope.selectedVenues = $scope.venueList.slice($scope.page, $scope.page + 4)
       else
         $scope.sort = 'artist.play_count'
 
@@ -45,9 +48,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         )
         .sortBy((t) -> t)
         .value()
-        $scope.venueList = _(data.events).chain().pluck('venue').pluck('name').uniq().value()
-      $scope.page = 0
-      $scope.selectedVenues = $scope.venueList.slice($scope.page, $scope.page + 4)
+
       _($scope.newSchedule).extend({festival_id: data.id})
       $scope.selectedDay = $scope.days[0]
 
