@@ -35,6 +35,20 @@
           .page-toggles.right ng-if="venueList.length > 4 && (venueList.length - 4 - page) > 0"
               .button ng-click="pageRight()" >
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" venues="selectedVenues" ng-if="sort == 'day'"
+        .artist-list.mobile-list.fadeInUp ng-if="sort == 'day'"
+          div.event ng-repeat="event in festival.events | orderBy:'start_time':false | filter:dayFilter" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
+            .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" play
+            .name
+              | {{ event.artist.name }}
+              .playcount
+                i.icon.ion-play
+                | {{ event.artist.play_count }}
+            .time
+              | {{ timeDisplay(event.start_time) }} - {{ timeDisplay(event.end_time) }}
+            .venue
+              | Stage: {{ event.venue.name }}
+            .helper
+              i.icon ng-class="{'ion-minus-round': event.selected, 'ion-plus-round': !event.selected}"
         .artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"
           div.event ng-repeat="event in festival.events | orderBy:sort:true" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
             .button.play ng-click="playArtist(event.artist); $event.stopPropagation()" play

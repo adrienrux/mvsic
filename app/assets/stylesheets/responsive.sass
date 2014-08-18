@@ -2,11 +2,18 @@
 @import "mixins"
 
 @media screen and (max-width: 480px)
+  #directive, .page-toggles
+    display: none
+
   .link
     &:hover
       color: $white
       background-color: transparent
       text-decoration: underline
+
+@media screen and (min-width: 480px)
+  #directive, .page-toggles
+    display: none
 
 @media screen and (min-width: 544px)
   h1
@@ -84,7 +91,10 @@
           .name
             font-size: 2rem
             line-height: 2.4rem
-          .name, .playcount
+          .time, .venue
+            font-size: 1.4rem
+            line-height: 1.4rem
+          .name, .playcount, .time, .venue
             display: inline-block
             position: relative
             top: 0.2rem
@@ -104,6 +114,12 @@
       display: inline-block
 
 @media screen and (min-width: 960px)
+  .mobile-list
+    display: none
+
+  #directive, .page-toggles
+    display: block
+
   #upcoming-festivals
     .festival-cards
       .cards-row
