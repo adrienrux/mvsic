@@ -44,9 +44,9 @@
                 i.icon.ion-play
                 | {{ event.artist.play_count }}
             .time
-              | {{ timeDisplay(event.start_time) }} - {{ timeDisplay(event.end_time) }}
+              | {{ eventTimeDisplay(event.start_time, event.end_time) }}
             .venue
-              | Stage: {{ event.venue.name }}
+              | Venue: {{ event.venue.name }}
             .helper
               i.icon ng-class="{'ion-minus-round': event.selected, 'ion-plus-round': !event.selected}"
         .artist-list ng-if="sort == 'artist.play_count' || sort == 'artist.name'"

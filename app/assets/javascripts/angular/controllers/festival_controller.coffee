@@ -169,6 +169,13 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
       time = Time.formatAMPM(new Date(date))
       "#{day}, #{time}"
 
+    $scope.eventTimeDisplay = (startTime, endTime) ->
+      start = Time.formatAMPM(new Date(startTime))
+      end = Time.formatAMPM(new Date(endTime))
+      UTCDate = new Date(startTime).toUTCString()
+      day = UTCDate.substr(0,3)
+      "#{day} #{start} - #{end}"
+
     $scope.dayFilter = (event) ->
       $scope.dayDisplay(new Date($scope.selectedDay)) == $scope.dayDisplay(new Date(event.start_time))
 ]
