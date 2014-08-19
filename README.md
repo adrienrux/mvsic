@@ -54,3 +54,9 @@ Once it's installed, start it
 8) Start server
 
 `bundle exec rails s`
+
+### Use production database dump
+
+Run this and replace 'jameszhang' with your username
+
+`pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jameszhang -d mvsic_development db/2014-08-19.dump`
