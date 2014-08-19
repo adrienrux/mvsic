@@ -49,7 +49,7 @@ app.directive 'timetable', ['Time', (Time) ->
 
         timeslots = calculateTimeslots(minTime, maxTime)
         height = (timeslots.length * ROW_HEIGHT)
-        scope.width = (EVENT_BOX_WIDTH + 10) * scope.filteredVenueNames.length + 60
+        scope.width = (EVENT_BOX_WIDTH) * scope.filteredVenueNames.length + 60
 
         # Adjust the scales / axis
         yScale.range([0, height]).domain([minTime, maxTime])
@@ -104,7 +104,13 @@ app.directive 'timetable', ['Time', (Time) ->
           .style('height', ROW_HEIGHT + "px")
           .style('left', "0px")
           .style('width', scope.width + "px")
-          .style('border-top', '1px dotted rgba(255, 255, 255, 0.1)')
+          .style('border-top', (t) ->
+            minutes = new Date(t.time).getMinutes()
+            if minutes
+              '1px dotted rgba(255, 255, 255, 0.1)'
+            else
+              '1px dotted rgba(255, 255, 255, 0.6)'
+          )
           .transition().duration(250).style('opacity', 1)
 
         timeslotList.append('text')
@@ -137,18 +143,23 @@ app.directive 'timetable', ['Time', (Time) ->
             venue_name = if e.venue then e.venue.name
             "
               <div class='name'>#{e.artist.name}</div>
+              <div class='time'>#{findTime(e.start_time)} - #{findTime(e.end_time)}</div>
+              <div class='helper'><i class='icon ion-plus-round'></i></div>
             "
           ).on('click', (e) ->
             box = d3.select(this)
+            icon = box.select('.helper .icon')
             originalEvent = _(scope.events).findWhere({id: e.id})
             if originalEvent.selected
               removeEventFromSchedule(e)
               originalEvent.selected = false
               box.attr('class', 'event-wrapper')
+              icon.attr('class', 'icon ion-plus-round')
             else
               addEventToSchedule(e)
               originalEvent.selected = true
               box.attr('class', 'event-wrapper selected')
+              icon.attr('class', 'icon ion-minus-round')
           )
 
         eventBoxes
@@ -195,6 +206,10 @@ app.directive 'timetable', ['Time', (Time) ->
             venue_name = if e.venue then e.venue.name
             "
               <div class='name'>#{e.artist.name}</div>
+              <div class='time'>#{findTime(e.start_time)} - #{findTime(e.end_time)}</div>
+              <div class='helper'>
+              <i class='icon ion-plus-round'></i>
+              </div>
             "
           ).on('click', (e) ->
             box = d3.select(this)
@@ -203,10 +218,12 @@ app.directive 'timetable', ['Time', (Time) ->
               removeEventFromSchedule(e)
               originalEvent.selected = false
               box.attr('class', 'event-wrapper')
+              icon.attr('class', 'icon ion-plus-round')
             else
               addEventToSchedule(e)
               originalEvent.selected = true
               box.attr('class', 'event-wrapper selected')
+              icon.attr('class', 'icon ion-minus-round')
           )
           .append('button')
           .on('click', (e) ->

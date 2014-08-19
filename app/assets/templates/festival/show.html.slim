@@ -34,6 +34,7 @@
               .button ng-click="pageLeft()" <
           .page-toggles.right ng-if="venueList.length > 4 && (venueList.length - 4 - page) > 0"
               .button ng-click="pageRight()" >
+              | more venues
         #directive.animated.fadeInUp timetable="" festival="festival" day="selectedDay" venues="selectedVenues" ng-if="sort == 'day'"
         .artist-list.mobile-list.fadeInUp ng-if="sort == 'day'"
           div.event ng-repeat="event in festival.events | orderBy:'start_time':false | filter:dayFilter" ng-class="{'selected': event.selected}" ng-click="toggleSelectEvent(event)"
