@@ -140,7 +140,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         updateSchedule()
 
     $scope.playArtist = (artist) ->
-      $scope.$emit('selectArtist', artist)
+      MvsicPlayer.load(artist)
 
     $scope.betaSignup = ->
       if re.test($scope.email)

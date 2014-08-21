@@ -17,47 +17,28 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
     $.getJSON(resolve)
       .success (response) ->
         SC.stream "#{response.stream_url}", { useHTML5Audio: true, preferFlash: false }, (sound) ->
-          unless sound.errors
-            artistCache["#{artist.id}"] = {
-              duration: response.duration
-              sound: sound
-              title: response.title
-              permalink_url: response.permalink_url
-            }
-            currentTrack = {
-              artistId: artist.id
-              artistName: artist.name
-              artistUrl: artist.soundcloud_url
-              duration: response.duration
-              sound: sound
-              title: response.title
-              permalink_url: response.permalink_url
-              error: false
-            }
-            $rootScope.$apply()
-            mvsicPlayer.play()
-          else
-            broadcastError(artist)
-      .error (data, status, headers, config) ->
-        broadcastError(artist)
-
-  broadcastError = (artist) ->
-    currentTrack = {
-      artistName: artist.name
-      title: "Error 404 - Could not find track."
-      sound: { playState: 0 }
-      error: true
-    }
-    $rootScope.$apply()
+          artistCache["#{artist.id}"] = {
+            duration: response.duration
+            sound: sound
+            title: response.title
+            permalink_url: response.permalink_url
+          }
+          if !_(currentTrack['sound']).isEmpty()
+            currentTrack['sound'].stop()
+          currentTrack = {
+            artistId: artist.id
+            artistName: artist.name
+            artistUrl: artist.soundcloud_url
+            duration: response.duration
+            sound: sound
+            title: response.title
+            permalink_url: response.permalink_url
+            error: false || sound._html5_
+          }
+          $rootScope.$apply(mvsicPlayer.currentTrack = currentTrack)
+          mvsicPlayer.play()
 
   mvsicPlayer =
-    currentTime: ->
-      if currentTrack && currentTrack.sound
-        currentTrack.sound.position
-
-    currentTrack: ->
-      currentTrack
-
     currentDuration: ->
       if currentTrack && currentTrack.sound
         currentTrack.sound.duration
@@ -73,7 +54,8 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       mvsicPlayer.play()
 
     load: (artist) ->
-      if !_(currentTrack['sound']).isEmpty() && currentTrack['sound'].playState
+      mvsicPlayer.loading = true
+      if !_(currentTrack['sound']).isEmpty()
         currentTrack['sound'].stop()
       if track = artistCache["#{artist.id}"]
         currentTrack = {
@@ -86,8 +68,8 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
           permalink_url: track.permalink_url
           error: false
         }
+        mvsicPlayer.currentTrack = currentTrack
         mvsicPlayer.play()
-        $rootScope.$apply()
       else
         getTrack(artist)
 
@@ -103,9 +85,10 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       mvsicPlayer.load(mvsicPlayer.artistList[nextIndex])
 
     play: ->
+      mvsicPlayer.loading = false
       currentTrack.sound.play
         whileplaying: ->
-          $rootScope.$apply()
+          $rootScope.$apply(mvsicPlayer.currentTime = currentTrack.sound.position)
         onfinish: ->
           mvsicPlayer.playNext()
 
@@ -119,9 +102,6 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
         currentTrack.sound.playState = 0
       else if !currentTrack.error
         mvsicPlayer.play()
-
-  $rootScope.$on 'selectArtist', (event, artist) ->
-    mvsicPlayer.load(artist)
 
   mvsicPlayer
 

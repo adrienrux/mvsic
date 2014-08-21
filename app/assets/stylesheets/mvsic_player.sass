@@ -75,7 +75,11 @@
         .play
           display: block
 
-      .pause, .play
+      &.loading
+        .loading
+          display: block
+
+      .pause, .play, .loading
         display: none
 
   .seek

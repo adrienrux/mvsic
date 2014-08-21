@@ -24,7 +24,7 @@
             | {{day.date}}
           .event ng-repeat="event in day.events"
             .artist
-              .button.play ng-click="$emit('selectArtist', event.artist)" play
+              .button.play ng-click="playArtist(event.artist)" play
               .name
                 | {{ event.artist.name }}
             .info

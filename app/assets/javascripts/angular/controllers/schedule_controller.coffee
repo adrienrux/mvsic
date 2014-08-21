@@ -27,6 +27,9 @@ app.controller 'ScheduleController', ['$http', '$scope', '$routeParams', 'Time',
       )
       .value()
 
+  $scope.playArtist = (artist) ->
+    MvsicPlayer.load(artist)
+
   $scope.timeDisplay = (date) ->
     Time.formatAMPM(new Date(date))
 ]
