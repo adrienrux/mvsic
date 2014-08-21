@@ -104,7 +104,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
 
     play: ->
       currentTrack.sound.play
-        whileplaying: =>
+        whileplaying: ->
           $rootScope.$apply()
         onfinish: ->
           mvsicPlayer.playNext()
