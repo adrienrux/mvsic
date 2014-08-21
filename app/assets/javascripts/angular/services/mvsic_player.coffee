@@ -6,8 +6,9 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       client_id: CLIENT_ID
     })
 
-  playlist = {}
+  artistCache = {}
   currentTrack = {}
+  artistList = []
 
   getTrack = (artist) ->
     $http.post('/track.json', { artist_id: artist.id, subject: 'user_play' })
@@ -17,7 +18,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       .success (response) ->
         SC.stream "#{response.stream_url}", { useHTML5Audio: true, preferFlash: false }, (sound) ->
           unless sound.errors
-            playlist["#{artist.id}"] = {
+            artistCache["#{artist.id}"] = {
               duration: response.duration
               sound: sound
               title: response.title
@@ -74,7 +75,7 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
     load: (artist) ->
       if !_(currentTrack['sound']).isEmpty() && currentTrack['sound'].playState
         currentTrack['sound'].stop()
-      if track = playlist["#{artist.id}"]
+      if track = artistCache["#{artist.id}"]
         currentTrack = {
           artistId: artist.id
           artistName: artist.name
@@ -90,10 +91,23 @@ app.factory 'MvsicPlayer', ['$http', '$timeout', '$rootScope', '$window', ($http
       else
         getTrack(artist)
 
+    playNext: ->
+      return unless mvsicPlayer.artistList.length > 1
+      a = _.findWhere(mvsicPlayer.artistList, id: currentTrack.artistId)
+      index = _.indexOf(mvsicPlayer.artistList, a)
+
+      if index is (mvsicPlayer.artistList.length - 1) or index is -1
+        nextIndex = 0
+      else
+        nextIndex = index + 1
+      mvsicPlayer.load(mvsicPlayer.artistList[nextIndex])
+
     play: ->
       currentTrack.sound.play
         whileplaying: ->
           $rootScope.$apply()
+        onfinish: ->
+          mvsicPlayer.playNext()
 
     pause: ->
       currentTrack.sound.pause()
