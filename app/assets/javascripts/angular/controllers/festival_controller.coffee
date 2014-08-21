@@ -49,7 +49,9 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .sortBy((t) -> t)
         .value()
 
-      _($scope.newSchedule).extend({festival_id: data.id})
+      MvsicPlayer.artistList = _.map(data.events, (e) -> e.artist)
+
+      _($scope.newSchedule).extend(festival_id: data.id)
       $scope.selectedDay = $scope.days[0]
 
     $scope.$on 'addEvent', (event, data) ->
@@ -111,6 +113,18 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
     $scope.notDestroyed = (item) ->
       item._destroy != 1
+
+    $scope.sortBy = (order) ->
+      artistList = _.clone(MvsicPlayer.artistList)
+
+      if order is 'day'
+        $scope.sort = 'day'
+      if order is 'artist.play_count'
+        $scope.sort = 'artist.play_count'
+        MvsicPlayer.artistList = _.sortBy(artistList, (a) -> a.play_count).reverse()
+      if order is 'artist.name'
+        $scope.sort = 'artist.name'
+        MvsicPlayer.artistList = _.sortBy(artistList, (a) -> a.name).reverse()
 
     $scope.openModal = ->
       $scope.email = localStorageService.get('email')
