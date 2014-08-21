@@ -57,6 +57,14 @@ Once it's installed, start it
 
 ### Use production database dump
 
+Capture database backup
+
+`heroku pgbackups:capture`
+
+Download it
+
+`curl -o latest.dump `heroku pgbackups:url``
+
 Run this and replace 'jameszhang' with your username
 
-`pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jameszhang -d mvsic_development db/2014-08-19.dump`
+`pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jameszhang -d mvsic_development latest.dump`
