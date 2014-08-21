@@ -77,7 +77,7 @@ RailsAdmin.config do |config|
 
   def event_label
     if self.start_time && self.end_time
-      "#{self.festival.name}: #{self.artist.name} (#{self.start_time.strftime('%-m/%-d/%Y %H:%I')})"
+      "#{self.festival.name}: #{self.artist.name} (#{self.start_time.strftime('%-m/%-d/%Y %l:%M %p')})"
     else
       "#{self.festival.name}: #{self.artist.name}"
     end
