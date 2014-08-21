@@ -4,6 +4,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
     $scope.saving = false
     $scope.email = localStorageService.get('email')
     $scope.eventList = []
+    $scope.allEvents = []
     $scope.newSchedule = {
       schedule_events_attributes: []
     }
@@ -49,7 +50,8 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
         .sortBy((t) -> t)
         .value()
 
-      MvsicPlayer.artistList = _.map(data.events, (e) -> e.artist)
+      $scope.allEvents = data.events
+      MvsicPlayer.artistList = _.map($scope.allEvents, (e) -> e.artist)
 
       _($scope.newSchedule).extend(festival_id: data.id)
       $scope.selectedDay = $scope.days[0]
@@ -119,6 +121,7 @@ app.controller 'FestivalController', ['$http', '$location', '$scope', '$routePar
 
       if order is 'day'
         $scope.sort = 'day'
+        MvsicPlayer.artistList = _.map(_.sortBy($scope.allEvents, (e) -> e.start_time), (e) -> e.artist)
       if order is 'artist.play_count'
         $scope.sort = 'artist.play_count'
         MvsicPlayer.artistList = _.sortBy(artistList, (a) -> a.play_count).reverse()
