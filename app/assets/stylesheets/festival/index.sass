@@ -1,63 +1,57 @@
 @import "variables"
 @import "mixins"
 
-#slideshow
-  height: 100%
+#hero
   position: relative
+  background-image: url(/assets/wallpaper/crowd.jpg)
+  background-repeat: no-repeat
+  background-size: cover
+  background-attachment: fixed
+  height: 100%
+  color: $white
 
-  .carousel, .carousel-inner
-    height: 100%
+  .message
+    display: table-cell
+    vertical-align: middle
+    text-align: center
 
-  .carousel-control
-    @include transition
-    cursor: pointer
+    h1
+      margin-bottom: 0
 
-    &.left, &.right
-      background-image: none
-      background-repeat: none
-      filter: none
+  .cards
+    margin: 0 auto
+    padding: 2rem
+    text-align: center
+    vertical-align: top
 
-    .icon-next, .icon-prev
-      font-size: 80px
+    .card
+      @include animation-delay(0.75s)
+      display: block
+      margin: 1rem
+      padding: 2rem 1rem
 
-  .carousel-indicators
-    bottom: 60px
-
-    li
-      @include transition
-      margin: 3px
-      height: 14px
-      width: 14px
-      border: 2px solid $white-opaque-light
-      border-radius: 14px
-      background-color: transparent
-
-      &:hover
-        border-color: transparent
-        background-color: $white-opaque-light
-
-      &.active
-        margin: 3px
-        height: 14px
-        width: 14px
-        border-color: $white
-        background-color: $white
-
-  .slide
-    background-repeat: no-repeat
-    background-size: cover
-    background-attachment: fixed
-    height: 100%
-    min-height: 600px
-    .carousel-caption
-      text-shadow: none
-      top: 30%
-      line-height: 3rem
-
-    .button
+      // background-color: $white
       border-radius: 4px
-      margin: 20px auto
-      padding: 1rem 3rem
+      color: $white
+
+      &.delay
+        @include animation-delay(1.5s)
+
+      .title
+        font-size: 2rem
+        line-height: 2.4rem
+
+      .text
+        margin: 1rem 0
+        font-size: 1.6rem
+        font-weight: 300
+        line-height: 2.4rem
+
+  .button
+    @include animation-delay(2.25s)
+    border-radius: 4px
+    margin: 0px auto
+    padding: 1.5rem 3rem
 
 #upcoming-festivals
   position: relative

@@ -1,11 +1,17 @@
-.pane#slideshow
-  carousel interval="3000"
-    slide.slide ng-repeat="slide in slides" active="slide.active" ng-style="{ backgroundImage: 'url(' + slide.image + ')' }"
-      .carousel-caption
-        h1 MVSIC
-        h2
-          | {{ slide.message }}
-        .button.festivals-cta Browse Festivals
+.pane#hero
+  .message
+    h1.animated.fadeInUp MVSIC
+    .cards
+      .card.animated.fadeInUp
+        .title 1. Discover amazing festivals
+        .text
+          | We handpick tracks for each artist at upcoming festivals.
+          br
+          | All you have to do is press play.
+      .card.animated.fadeInUp.delay
+        .title 2. Save &amp; share schedules
+        .text Share the artists you want to see by creating a custom lineup.
+    .button.festivals-cta.animated.fadeInUp See Upcoming Festivals
 
 .pane#upcoming-festivals
   .festival-cards

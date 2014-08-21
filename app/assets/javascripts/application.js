@@ -18,6 +18,5 @@
 //= require turbolinks
 //= require underscore-min
 //= require_tree ./vendor
-//= require_tree ./vendor/bootstrap-custom
 //= require_tree ./angular
 //= require_tree ./internal

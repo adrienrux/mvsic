@@ -1,7 +1,6 @@
 window.app = angular.module('app', [
   'ngResource',
   'ngRoute',
-  'ui.bootstrap',
   'LocalStorageModule'
 ]);
 
