@@ -5,7 +5,7 @@ class Api::FestivalsController < Api::BaseController
 
   # GET /api/festivals.json
   def index
-    @festivals = apply_params(Festival.active.after(Time.zone.now.beginning_of_day))
+    @festivals = Festival.active
     render json: @festivals, each_serializer: FestivalSeedSerializer
   end
 
